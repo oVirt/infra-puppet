@@ -3,5 +3,5 @@ node default {
 }
 
 node 'jenkins.ekohl.nl' inherits default {
-  include ovirt_infra::jenkins
+  include ovirt_infra::jenkins-slave
 }
