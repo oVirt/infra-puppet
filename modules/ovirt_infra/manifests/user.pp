@@ -28,6 +28,7 @@ define ovirt_infra::user (
           "set spec[user = '${name}']/host_group/host ALL",
           "set spec[user = '${name}']/host_group/command ALL",
           "set spec[user = '${name}']/host_group/command/runas_user root",
+          "set spec[user = '${name}']/host_group/command/tag PASSWD",
         ],
       }
     }
