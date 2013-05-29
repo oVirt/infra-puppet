@@ -1,3 +1,4 @@
+# Define an ovirt_infra user
 define ovirt_infra::user (
     $key = undef,
     $sudo = true,
@@ -9,7 +10,7 @@ define ovirt_infra::user (
   }
 
   if ($key != undef) {
-    ssh_authorized_key {"key-$name":
+    ssh_authorized_key {"key-${name}":
       key     => $key,
       type    => 'ssh-rsa',
       user    => $name,
@@ -18,22 +19,21 @@ define ovirt_infra::user (
 
   case $sudo {
     true: {
-      augeas { "Allow sudo $name":
+      augeas { "Allow sudo ${name}":
         context => '/files/etc/sudoers',
         changes => [
-          "set spec[user = '$name']/user $name",
-          "set spec[user = '$name']/host_group/host ALL",
-          "set spec[user = '$name']/host_group/command ALL",
-          "set spec[user = '$name']/host_group/command/runas_user root",
-          "set spec[user = '$name']/host_group/command/tag NOPASSWD",
+          "set spec[user = '${name}']/user ${name}",
+          "set spec[user = '${name}']/host_group/host ALL",
+          "set spec[user = '${name}']/host_group/command ALL",
+          "set spec[user = '${name}']/host_group/command/runas_user root",
         ],
       }
     }
     default: {
-      augeas { "Disallow sudo $name":
+      augeas { "Disallow sudo ${name}":
         context => '/files/etc/sudoers',
         changes => [
-          "clear spec[user = '$name']/user $name",
+          "clear spec[user = '${name}']/user ${name}",
         ],
       }
     }
