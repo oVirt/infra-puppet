@@ -3,10 +3,12 @@ define ovirt_infra::user (
     $key = undef,
     $sudo = true,
     $ensure = present,
+    $password = undef,
 ) {
   user { $name:
     ensure     => $ensure,
     managehome => true,
+    password   => $password,
   }
 
   if ($key != undef) {
