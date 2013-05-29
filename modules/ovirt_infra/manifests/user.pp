@@ -33,7 +33,7 @@ define ovirt_infra::user (
       augeas { "Disallow sudo ${name}":
         context => '/files/etc/sudoers',
         changes => [
-          "clear spec[user = '${name}']/user ${name}",
+          "rm spec[user = '${name}']/user ${name}",
         ],
       }
     }
