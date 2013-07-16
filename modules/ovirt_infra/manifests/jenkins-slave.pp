@@ -1,5 +1,13 @@
 class ovirt_infra::jenkins-slave {
-  package {'java-1.7.0-openjdk-devel':
+  $packages = ['autoconf', 'automake', 'make', 'puppet', 'java',
+    'gettext-devel', 'python2-devel', 'java-1.7.0-openjdk-devel',
+    'python-pep8', 'python-pip', 'maven', 'wget', 'python-nose',
+    'ethtool', 'pyflakes', 'python-ethtool', 'libvirt',
+    'libvirt-python', 'python-pthreading', 'm2crypto', 'psmisc',
+    'python-netaddr', 'maven-compiler-plugin', 'maven-enforcer-plugin',
+    'maven-install-plugin', 'maven-jar-plugin', 'maven-javadoc-plugin',
+    'maven-source-plugin', 'maven-surefire-provider-junit4', 'maven-local']
+  package {$packages:
     ensure => installed,
   }
 
