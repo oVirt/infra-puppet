@@ -1,14 +1,23 @@
 class ovirt_infra::jenkins-slave {
   $packages = ['autoconf', 'automake', 'make', 'puppet',
     'gettext-devel', 'python-devel', 'java-1.7.0-openjdk-devel',
-    'python-pep8', 'python-pip', 'maven', 'wget', 'python-nose',
+    'python-pep8', 'python-pip', 'wget', 'python-nose',
     'ethtool', 'pyflakes', 'python-ethtool', 'libvirt',
     'libvirt-python', 'python-pthreading', 'm2crypto', 'psmisc',
-    'python-netaddr', 'maven-compiler-plugin', 'maven-enforcer-plugin',
-    'maven-install-plugin', 'maven-jar-plugin', 'maven-javadoc-plugin',
-    'maven-source-plugin', 'maven-surefire-provider-junit', 'maven-local']
+    'python-netaddr', 'genisoimage', 'python-dmidecode',
+    'gcc', 'rpm-build']
   package {$packages:
     ensure => installed,
+  }
+
+  case $::osfamily {
+    RedHat: {
+      package{['maven', 'maven-compiler-plugin', 'maven-enforcer-plugin',
+        'maven-install-plugin', 'maven-jar-plugin', 'maven-javadoc-plugin',
+        'maven-source-plugin', 'maven-surefire-provider-junit', 'maven-local']:
+        ensure => installed,
+      }
+    }
   }
 
   user {'jenkins':
