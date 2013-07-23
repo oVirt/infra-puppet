@@ -45,6 +45,7 @@ class ovirt_infra::jenkins-slave {
       'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/command[4] /usr/bin/livecd-creator',
       'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/command[5] /usr/bin/yum',
       'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/command[6] /usr/sbin/setenforce',
+      'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/command[7] "/bin/rm -rf /etc/pki/ovirt-engine /usr/share/ovirt-engine"',
     ],
   }
 
