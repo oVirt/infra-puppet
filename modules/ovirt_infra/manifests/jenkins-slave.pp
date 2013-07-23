@@ -46,6 +46,9 @@ class ovirt_infra::jenkins-slave {
       'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/command[5] /usr/bin/yum',
       'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/command[6] /usr/sbin/setenforce',
       'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/command[7] "/bin/rm -rf /etc/pki/ovirt-engine /usr/share/ovirt-engine"',
+      'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/command[8] "/usr/bin/cp * /etc/yum.repos.d/"',
+      'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/command[8] /bin/engine*',
+      'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/command[9] "/bin/sed -i * /etc/yum.repos.d/ovirt-nightly.repo"',
     ],
   }
 
