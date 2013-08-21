@@ -51,31 +51,23 @@ class ovirt_infra::jenkins-slave {
       user    => 'jenkins';
   }
 
-  augeas { 'vdsm unit test':
+  augeas { 'jenkins full sudo':
     context => '/files/etc/sudoers',
     changes => [
-      'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/name VDSMUT',
-      'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/command[1] /bin/mount',
-      'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/command[2] /bin/umount',
-      'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/command[3] /usr/bin/ksflatten',
-      'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/command[4] /usr/bin/livecd-creator',
-      'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/command[5] /usr/bin/yum',
-      'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/command[6] /usr/sbin/setenforce',
-      'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/command[7] "/bin/rm -rf /etc/pki/ovirt-engine /usr/share/ovirt-engine"',
-      'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/command[8] "/usr/bin/cp * /etc/yum.repos.d/"',
-      'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/command[8] /bin/engine*',
-      'set Cmnd_Alias[alias/name = "VDSMUT"]/alias/command[9] "/bin/sed -i * /etc/yum.repos.d/ovirt-nightly.repo"',
+      # cleanup before creating the entry
+      'rm spec[user = "jenkins"]',
+      'set spec[user = "jenkins"]/user jenkins',
+      'set spec[user = "jenkins"]/host_group/host ALL',
+      'set spec[user = "jenkins"]/host_group/command ALL',
+      'set spec[user = "jenkins"]/host_group/command/runas_user root',
+      'set spec[user = "jenkins"]/host_group/command/tag NOPASSWD',
     ],
   }
 
-  augeas { 'jenkins VDSMUT':
+  augeas { 'remove vdsm unit test leftovers':
     context => '/files/etc/sudoers',
     changes => [
-      'set spec[user = "jenkins"]/user jenkins',
-      'set spec[user = "jenkins"]/host_group/host ALL',
-      'set spec[user = "jenkins"]/host_group/command VDSMUT',
-      'set spec[user = "jenkins"]/host_group/command/runas_user root',
-      'set spec[user = "jenkins"]/host_group/command/tag NOPASSWD',
+      'rm Cmnd_Alias[alias/name = "VDSMUT"]',
     ],
   }
 
@@ -84,6 +76,14 @@ class ovirt_infra::jenkins-slave {
     changes => [
       'set Defaults[type=":jenkins"]/type :jenkins',
       'clear Defaults[type=":jenkins"]/requiretty/negate',
+    ],
+  }
+
+  augeas { 'root !requiretty':
+    context => '/files/etc/sudoers',
+    changes => [
+      'set Defaults[type=":root"]/type :root',
+      'clear Defaults[type=":root"]/requiretty/negate',
     ],
   }
 }
