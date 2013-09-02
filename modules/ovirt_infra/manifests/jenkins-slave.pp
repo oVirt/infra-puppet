@@ -14,8 +14,7 @@ class ovirt_infra::jenkins-slave {
     Fedora: {
       package{['maven', 'maven-compiler-plugin', 'maven-enforcer-plugin',
         'maven-install-plugin', 'maven-jar-plugin', 'maven-javadoc-plugin',
-        'maven-source-plugin', 'maven-surefire-provider-junit', 'maven-local',
-        'maven-surefire-provider-junit4']:
+        'maven-source-plugin', 'maven-surefire-provider-junit', 'maven-local']:
         ensure => installed,
       }
     }
