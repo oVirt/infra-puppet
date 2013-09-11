@@ -1,0 +1,15 @@
+# The location to use for storing cached Git repos
+:cachedir: '<%= @homedir %>/.cache/r10k'
+
+# A list of git repositories to create
+:sources:
+  # This will clone the git repository and instantiate an environment per
+  # branch in /etc/puppet/environments
+  :plops:
+    remote: 'git://gerrit.ovirt.org/infra-puppet'
+    basedir: '/etc/puppet/environments'
+
+# This directory will be purged of any directory that doesn't map to a
+# git branch
+:purgedirs:
+  - '/etc/puppet/environments'
