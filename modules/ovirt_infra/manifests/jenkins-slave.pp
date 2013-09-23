@@ -5,7 +5,10 @@ class ovirt_infra::jenkins-slave {
     'ethtool', 'pyflakes', 'python-ethtool', 'libvirt',
     'libvirt-python', 'python-pthreading', 'm2crypto', 'psmisc',
     'python-netaddr', 'genisoimage', 'python-dmidecode',
-    'gcc', 'rpm-build', 'git', 'python-ordereddict']
+    'gcc', 'rpm-build', 'git', 'python-ordereddict',
+    'jakarta-commons-logging', 'junit4']
+
+
   package {$packages:
     ensure => installed,
   }
