@@ -5,8 +5,7 @@ class ovirt_infra::jenkins-slave {
     'ethtool', 'pyflakes', 'python-ethtool', 'libvirt',
     'libvirt-python', 'python-pthreading', 'm2crypto', 'psmisc',
     'python-netaddr', 'genisoimage', 'python-dmidecode',
-    'gcc', 'rpm-build', 'git', 'python-ordereddict',
-    'jakarta-commons-logging', 'junit4']
+    'gcc', 'rpm-build', 'git', 'python-ordereddict']
 
 
   package {$packages:
@@ -18,6 +17,11 @@ class ovirt_infra::jenkins-slave {
       package{['maven', 'maven-compiler-plugin', 'maven-enforcer-plugin',
         'maven-install-plugin', 'maven-jar-plugin', 'maven-javadoc-plugin',
         'maven-source-plugin', 'maven-surefire-provider-junit', 'maven-local']:
+        ensure => installed,
+      }
+    }
+    CentOS: {
+      packages {['jakarta-commons-logging', 'junit4']:
         ensure => installed,
       }
     }
