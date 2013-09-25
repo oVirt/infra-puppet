@@ -21,7 +21,7 @@ class ovirt_infra::jenkins-slave {
       }
     }
     CentOS: {
-      packages {['jakarta-commons-logging', 'junit4']:
+      package {['jakarta-commons-logging', 'junit4']:
         ensure => installed,
       }
     }
