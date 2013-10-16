@@ -6,7 +6,7 @@ class ovirt_infra::jenkins-slave {
     'libvirt-python', 'python-pthreading', 'm2crypto', 'psmisc',
     'python-netaddr', 'genisoimage', 'python-dmidecode',
     'gcc', 'rpm-build', 'git', 'python-ordereddict', 'libtool',
-    'python-kitchen']
+    'python-kitchen', 'python-cpopen']
 
 
   package {$packages:
