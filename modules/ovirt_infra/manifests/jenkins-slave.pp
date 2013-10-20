@@ -6,7 +6,7 @@ class ovirt_infra::jenkins-slave {
     'libvirt-python', 'python-pthreading', 'm2crypto', 'psmisc',
     'python-netaddr', 'genisoimage', 'python-dmidecode',
     'gcc', 'rpm-build', 'git', 'python-ordereddict', 'libtool',
-    'python-kitchen', 'python-cpopen']
+    'python-kitchen', 'python-cpopen', 'postgresql-jdbc', 'apache-commons-collections']
 
 
   package {$packages:
@@ -17,7 +17,8 @@ class ovirt_infra::jenkins-slave {
     Fedora: {
       package{['maven', 'maven-compiler-plugin', 'maven-enforcer-plugin',
         'maven-install-plugin', 'maven-jar-plugin', 'maven-javadoc-plugin',
-        'maven-source-plugin', 'maven-surefire-provider-junit', 'maven-local']:
+        'maven-source-plugin', 'maven-surefire-provider-junit', 'maven-local',
+        'maven-dependency-plugin', 'maven-antrun-plugin', 'maven-compiler-plugin']:
         ensure => installed,
       }
     }
