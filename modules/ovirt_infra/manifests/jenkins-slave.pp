@@ -18,7 +18,7 @@ class ovirt_infra::jenkins-slave {
       package{['maven', 'maven-compiler-plugin', 'maven-enforcer-plugin',
         'maven-install-plugin', 'maven-jar-plugin', 'maven-javadoc-plugin',
         'maven-source-plugin', 'maven-surefire-provider-junit', 'maven-local',
-        'maven-dependency-plugin', 'maven-antrun-plugin', 'maven-compiler-plugin']:
+        'maven-dependency-plugin', 'maven-antrun-plugin']:
         ensure => installed,
       }
     }
