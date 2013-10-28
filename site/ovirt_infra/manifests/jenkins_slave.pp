@@ -7,7 +7,7 @@ class ovirt_infra::jenkins_slave {
     'python-netaddr', 'genisoimage', 'python-dmidecode',
     'gcc', 'rpm-build', 'git', 'python-ordereddict', 'libtool',
     'python-kitchen', 'python-cpopen', 'postgresql-jdbc',
-    'python-lxml', 'python-inotify', 'python-ply']
+    'python-lxml', 'python-inotify', 'python-ply', 'tmpwatch']
 
 
   package {$packages:
@@ -59,6 +59,14 @@ class ovirt_infra::jenkins_slave {
       mode   => '0700',
       owner  => 'jenkins',
       group  => 'jenkins';
+  }
+
+  cron {
+    'cleanup':
+      command => "tmpwatch -a 12 /tmp",
+      user    => root,
+      hour    => 0,
+      minute  => 0,
   }
 
   ssh_authorized_key {
