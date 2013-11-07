@@ -10,7 +10,7 @@ class ovirt_infra::jenkins-slave {
 
 
   package {$packages:
-    ensure => installed,
+    ensure => latest,
   }
 
   case $::operatingsystem {
@@ -19,12 +19,12 @@ class ovirt_infra::jenkins-slave {
         'maven-install-plugin', 'maven-jar-plugin', 'maven-javadoc-plugin',
         'maven-source-plugin', 'maven-surefire-provider-junit', 'maven-local',
         'maven-dependency-plugin', 'maven-antrun-plugin']:
-        ensure => installed,
+        ensure => latest,
       }
     }
     CentOS: {
       package {['jakarta-commons-logging', 'junit4']:
-        ensure => installed,
+        ensure => latest,
       }
     }
   }
