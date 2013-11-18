@@ -15,19 +15,32 @@ class ovirt_infra::jenkins_slave {
     ensure => latest,
   }
 
-  case $::operatingsystem {
-    Fedora: {
-      package{['maven', 'maven-compiler-plugin', 'maven-enforcer-plugin',
-        'maven-install-plugin', 'maven-jar-plugin', 'maven-javadoc-plugin',
-        'maven-source-plugin', 'maven-surefire-provider-junit', 'maven-local',
-        'maven-dependency-plugin', 'maven-antrun-plugin']:
-        ensure => latest,
+  case $::osfamily {
+    RedHat: {
+      case $::operatingsystem {
+        Fedora: {
+          package{['maven', 'maven-compiler-plugin', 'maven-enforcer-plugin',
+            'maven-install-plugin', 'maven-jar-plugin', 'maven-javadoc-plugin',
+            'maven-source-plugin', 'maven-surefire-provider-junit', 'maven-local',
+            'maven-dependency-plugin', 'maven-antrun-plugin']:
+            ensure => latest,
+          }
+        }
+        default: {
+          include epel
+
+          Package {
+            require => Class['epel'],
+          }
+
+          package {['jakarta-commons-logging', 'junit4']:
+            ensure => latest,
+          }
+        }
       }
     }
-    CentOS: {
-      package {['jakarta-commons-logging', 'junit4']:
-        ensure => latest,
-      }
+    default: {
+      fail("Unsupport osfamily ${::osfamily}")
     }
   }
 
