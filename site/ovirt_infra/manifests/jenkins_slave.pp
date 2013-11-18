@@ -1,4 +1,4 @@
-class ovirt_infra::jenkins-slave {
+class ovirt_infra::jenkins_slave {
   $packages = ['autoconf', 'automake', 'make', 'puppet',
     'gettext-devel', 'python-devel', 'java-1.7.0-openjdk-devel',
     'python-pep8', 'python-pip', 'wget', 'python-nose',
