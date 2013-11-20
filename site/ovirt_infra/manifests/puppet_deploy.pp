@@ -12,12 +12,12 @@ class ovirt_infra::puppet_deploy (
 
   file {"${homedir}/bin":
     ensure => directory,
-    user   => $username,
+    owner  => $username,
   }
 
   file {$update:
     content => "#!/bin/sh\nscl enable ruby193 '${r10k} deploy environment'",
-    user    => $username,
+    owner   => $username,
     mode    => '0755',
   }
 
