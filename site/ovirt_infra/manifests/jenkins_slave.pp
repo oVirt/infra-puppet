@@ -7,8 +7,7 @@ class ovirt_infra::jenkins_slave {
     'python-netaddr', 'genisoimage', 'python-dmidecode',
     'gcc', 'rpm-build', 'git', 'python-ordereddict', 'libtool',
     'python-kitchen', 'python-cpopen', 'postgresql-jdbc',
-    'apache-commons-collections', 'python-lxml', 'python-inotify',
-    'python-ply']
+    'python-lxml', 'python-inotify', 'python-ply']
 
 
   package {$packages:
@@ -22,7 +21,8 @@ class ovirt_infra::jenkins_slave {
           package{['maven', 'maven-compiler-plugin', 'maven-enforcer-plugin',
             'maven-install-plugin', 'maven-jar-plugin', 'maven-javadoc-plugin',
             'maven-source-plugin', 'maven-surefire-provider-junit', 'maven-local',
-            'maven-dependency-plugin', 'maven-antrun-plugin']:
+            'maven-dependency-plugin', 'maven-antrun-plugin',
+            'apache-commons-collections']:
             ensure => latest,
           }
         }
