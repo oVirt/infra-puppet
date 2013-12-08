@@ -1,0 +1,14 @@
+[Unit]
+Description=Running jnlp to connect slaves to jenkins
+After=network.target
+
+[Service]
+Type=simple
+User=jenkins
+Group=jenkins
+ExecStart=su -c "/usr/bin/java -jar /home/jenkins/slave.jar -jnlpUrl <%= @jnlpurl %> -secret <%= @secret_key %> &" jenkins
+ExecStop=pkill -9 -f 'jnlp'
+
+[Install]
+WantedBy=multi-user.target
+
