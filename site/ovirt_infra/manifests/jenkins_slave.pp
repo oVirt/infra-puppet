@@ -76,7 +76,7 @@ class ovirt_infra::jenkins_slave {
       'set spec[user = "jenkins"]/user jenkins',
       'set spec[user = "jenkins"]/host_group/host ALL',
       'set spec[user = "jenkins"]/host_group/command ALL',
-      'set spec[user = "jenkins"]/host_group/command/runas_user root',
+      'set spec[user = "jenkins"]/host_group/command/runas_user ALL',
       'set spec[user = "jenkins"]/host_group/command/tag NOPASSWD',
     ],
   }
