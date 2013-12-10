@@ -16,7 +16,7 @@ class ovirt_infra::puppet_deploy (
   }
 
   file {$update:
-    content => "#!/bin/sh\nscl enable ruby193 '${r10k} deploy environment'",
+    content => "#!/bin/sh\nscl enable ruby193 '${r10k} -v debug deploy environment -p'",
     owner   => $username,
     mode    => '0755',
   }
