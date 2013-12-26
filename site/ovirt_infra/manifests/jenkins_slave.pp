@@ -7,7 +7,8 @@ class ovirt_infra::jenkins_slave {
     'python-netaddr', 'genisoimage', 'python-dmidecode',
     'gcc', 'rpm-build', 'git', 'python-ordereddict', 'libtool',
     'python-kitchen', 'python-cpopen', 'postgresql-jdbc',
-    'python-lxml', 'python-inotify', 'python-ply', 'tmpwatch']
+    'python-lxml', 'python-inotify', 'python-ply', 'tmpwatch',
+    'dosfstools']
 
 
   package {$packages:
