@@ -1,3 +1,13 @@
+# == Class: ovirt_infra::jenkins_slave
+#
+# This class makes sure the host has all that's needed to be a jenkins slave
+#
+# === Parameters
+#
+# [*packages*]
+#
+# List of packages to be installed
+#
 class ovirt_infra::jenkins_slave {
   $packages = ['autoconf', 'automake', 'make', 'puppet',
     'gettext-devel', 'python-devel', 'java-1.7.0-openjdk-devel',
@@ -8,7 +18,7 @@ class ovirt_infra::jenkins_slave {
     'gcc', 'rpm-build', 'git', 'python-ordereddict', 'libtool',
     'python-kitchen', 'python-cpopen', 'postgresql-jdbc',
     'python-lxml', 'python-inotify', 'python-ply', 'tmpwatch',
-    'dosfstools']
+    'dosfstools', 'rpmdevtools']
 
 
   package {$packages:
@@ -64,7 +74,7 @@ class ovirt_infra::jenkins_slave {
 
   cron {
     'cleanup':
-      command => "tmpwatch -a 12 /tmp",
+      command => 'tmpwatch -a 12 /tmp',
       user    => root,
       hour    => 0,
       minute  => 0,
