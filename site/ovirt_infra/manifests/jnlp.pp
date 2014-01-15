@@ -10,6 +10,19 @@ class ovirt_infra::jnlp (
     $my_nofiles = 64000
   } else {
     $my_nofiles = $nofiles
+
+  exec {
+    'download slave.jar':
+      cwd     => '/home/jenkins',
+      command => 'wget -N http://jenkins.ovirt.org/jnlpJars/slave.jar -O /home/jenkins/slave.jar',
+      creates => '/home/jenkins/slave.jar',
+  }
+
+  file {'/lib/systemd/system/jnlp.service' :
+    ensure  => file,
+    mode    => '0600',
+    content => template('ovirt_infra/jnlp.erb'),
+    require => Exec['download slave.jar'],
   }
 
   service {'jnlp' :
