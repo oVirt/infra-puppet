@@ -18,7 +18,7 @@ class ovirt_infra::jenkins_slave {
     'gcc', 'rpm-build', 'git', 'python-ordereddict', 'libtool',
     'python-kitchen', 'python-cpopen', 'postgresql-jdbc',
     'python-lxml', 'python-inotify', 'python-ply', 'tmpwatch',
-    'dosfstools', 'rpmdevtools', 'libnl']
+    'dosfstools', 'rpmdevtools', 'libnl', 'log4j']
 
 
   package {$packages:
