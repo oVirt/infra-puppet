@@ -37,6 +37,7 @@ class ovirt_infra::jenkins_slave {
             ensure => latest,
           }
         }
+        ## CentOS machines
         default: {
           include epel
 
@@ -46,6 +47,13 @@ class ovirt_infra::jenkins_slave {
 
           package {['jakarta-commons-logging', 'junit4']:
             ensure => latest,
+          }
+
+          yumrepo{'jpackage':
+            descr      => 'JPackage 5.0, for Red Hat Enterprise Linux 5',
+            mirrorlist => 'http://www.jpackage.org/mirrorlist.php?dist=redhat-el-5.0&type=free&release=5.0',
+            gpgcheck   => 1,
+            enabled    => 1,
           }
         }
       }
