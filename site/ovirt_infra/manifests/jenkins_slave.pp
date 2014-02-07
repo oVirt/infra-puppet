@@ -55,6 +55,12 @@ class ovirt_infra::jenkins_slave {
             gpgcheck   => 1,
             enabled    => 1,
           }
+          yumrepo{'jpackage-generic':
+            descr      => 'JPackage 5.0, for Red Hat Enterprise Linux 5',
+            mirrorlist => 'http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=5.0',
+            gpgcheck   => 1,
+            enabled    => 1,
+          }
         }
       }
     }
