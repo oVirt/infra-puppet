@@ -45,7 +45,8 @@ class ovirt_infra::jenkins_slave {
             require => Class['epel'],
           }
 
-          package {['jakarta-commons-logging', 'junit4']:
+          package {['apache-commons-logging', 'junit4', 'dom4j', 'ant',
+            'jakarta-commons-collections']:
             ensure => latest,
           }
 
