@@ -49,17 +49,27 @@ class ovirt_infra::jenkins_slave {
             ensure => latest,
           }
 
+          file {'/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage':
+            owner  => root,
+            group  => root,
+            mode   => '0444',
+            source => 'puppet:///modules/ovirt_infra/jpackage.repo.gpg.key',
+          }
           yumrepo{'jpackage':
-            descr      => 'JPackage 5.0, for Red Hat Enterprise Linux 5',
-            mirrorlist => 'http://www.jpackage.org/mirrorlist.php?dist=redhat-el-5.0&type=free&release=5.0',
+            descr      => 'JPackage 6.0, for Red Hat Enterprise Linux 5',
+            mirrorlist => 'http://www.jpackage.org/mirrorlist.php?dist=redhat-el-5.0&type=free&release=6.0',
             gpgcheck   => 1,
             enabled    => 1,
+            gpgkey     => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage',
+            require    => File['/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage'],
           }
           yumrepo{'jpackage-generic':
-            descr      => 'JPackage 5.0, for Red Hat Enterprise Linux 5',
-            mirrorlist => 'http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=5.0',
+            descr      => 'JPackage 6.0, for Red Hat Enterprise Linux 5',
+            mirrorlist => 'http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=6.0',
             gpgcheck   => 1,
             enabled    => 1,
+            gpgkey     => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage',
+            require    => File['/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage'],
           }
         }
       }
