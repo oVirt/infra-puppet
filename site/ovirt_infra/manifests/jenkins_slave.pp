@@ -18,7 +18,7 @@ class ovirt_infra::jenkins_slave {
     'gcc', 'rpm-build', 'git', 'python-ordereddict', 'libtool',
     'python-kitchen', 'python-cpopen', 'postgresql-jdbc',
     'python-lxml', 'python-inotify', 'python-ply', 'tmpwatch',
-    'dosfstools', 'rpmdevtools', 'libnl', 'log4j', 'yum-utils']
+    'dosfstools', 'rpmdevtools', 'libnl', 'log4j', 'yum-utils', 'mock']
 
 
   package {$packages:
@@ -84,6 +84,11 @@ class ovirt_infra::jenkins_slave {
     default: {
       fail("Unsupport osfamily ${::osfamily}")
     }
+  }
+
+  group {'mock':
+    ensure  => present,
+    members => ['jenkins'],
   }
 
   user {'jenkins':
