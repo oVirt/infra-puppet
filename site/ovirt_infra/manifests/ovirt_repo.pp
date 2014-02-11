@@ -1,7 +1,18 @@
-class ovirt_infra::ovirt_repo($flavour='default') {
+# == Class: ovirt_infra::ovirt_repo
+#
+# This class creates the repo file for the oVirt project
+#
+# === Parameters
+#
+# [*flavour*]
+#
+# Which flavour of repo to create (stable, nightly...)
+#
+class ovirt_infra::ovirt_repo($flavour='stable') {
   case $::operatingsystem {
     'CentOS': {
       case $flavour {
+        'stable':     { $flavour_url = 'stable/rpm/EL' }
         'stable-3.3': { $flavour_url = '3.3/rpm/EL' }
         'stable-3.2': { $flavour_url = '3.2/rpm/EL' }
         'nightly':    { $flavour_url = 'nightly/rpm/EL' }
@@ -10,6 +21,7 @@ class ovirt_infra::ovirt_repo($flavour='default') {
     }
     'Fedora': {
       case $flavour {
+        'stable':     { $flavour_url = "stable/rpm/${::operatingsystem}" }
         'stable-3.3': { $flavour_url = "3.3/rpm/${::operatingsystem}" }
         'stable-3.2': { $flavour_url = "3.2/rpm/${::operatingsystem}" }
         'nightly':    { $flavour_url = "nightly/rpm/${::operatingsystem}" }

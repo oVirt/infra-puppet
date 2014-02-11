@@ -18,8 +18,11 @@ class ovirt_infra::jenkins_slave {
     'gcc', 'rpm-build', 'git', 'python-ordereddict', 'libtool',
     'python-kitchen', 'python-cpopen', 'postgresql-jdbc',
     'python-lxml', 'python-inotify', 'python-ply', 'tmpwatch',
-    'dosfstools', 'rpmdevtools', 'libnl', 'log4j', 'yum-utils', 'mock']
+    'dosfstools', 'rpmdevtools', 'libnl', 'log4j', 'yum-utils', 'mock',
+    'jasperreports-server',
+  ]
 
+  include ovirt_infra::ci_tools_repo
 
   package {$packages:
     ensure => latest,
@@ -71,12 +74,6 @@ class ovirt_infra::jenkins_slave {
             enabled    => 1,
             gpgkey     => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage',
             require    => File['/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage'],
-          }
-          yumrepo{'ci-tools':
-            descr      => 'Some custom packages and ci tools',
-            baseurl    => 'http://resources.ovirt.org/repos/ci-tools/EL/6',
-            gpgcheck   => 0,
-            enabled    => 1,
           }
         }
       }
