@@ -72,6 +72,12 @@ class ovirt_infra::jenkins_slave {
             gpgkey     => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage',
             require    => File['/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage'],
           }
+          yumrepo{'ci-tools':
+            descr      => 'Some custom packages and ci tools',
+            baseurl    => 'http://resources.ovirt.org/repos/ci-tools/EL/6',
+            gpgcheck   => 0,
+            enabled    => 1,
+          }
         }
       }
     }
