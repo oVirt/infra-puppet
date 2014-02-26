@@ -116,6 +116,18 @@ class ovirt_infra::jenkins_slave {
       user    => 'jenkins';
   }
 
+  class {'limits':
+    config    => {
+      '*' => {
+        'nofile' => {
+          'soft' => '10240',
+          'hard' => '15360',
+        },
+      },
+    },
+    use_hiera => false,
+  }
+
   augeas { 'jenkins full sudo':
     context => '/files/etc/sudoers',
     changes => [

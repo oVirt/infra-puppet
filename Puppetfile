@@ -1,5 +1,6 @@
 forge "forge.puppetlabs.org"
 
+mod "erwbgy/limits", "0.3.1"
 mod "puppetlabs/concat", "1.0.0"
 mod "puppetlabs/ntp", "2.0.1"
 mod "puppetlabs/stdlib", "4.1.0"
