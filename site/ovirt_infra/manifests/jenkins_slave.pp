@@ -120,12 +120,15 @@ class ovirt_infra::jenkins_slave {
     config    => {
       '*' => {
         'nofile' => {
-          'soft' => '10240',
-          'hard' => '15360',
+          'soft' => '64000',
+          'hard' => '96000',
         },
       },
     },
     use_hiera => false,
+  }
+  sysctl { 'fs.file-max':
+    value => '64000',
   }
 
   augeas { 'jenkins full sudo':
