@@ -34,8 +34,8 @@ class ovirt_infra::jenkins_slave {
         Fedora: {
           package{['maven', 'maven-compiler-plugin', 'maven-enforcer-plugin',
             'maven-install-plugin', 'maven-jar-plugin', 'maven-javadoc-plugin',
-            'maven-source-plugin', 'maven-surefire-provider-junit', 'maven-local',
-            'maven-dependency-plugin', 'maven-antrun-plugin',
+            'maven-source-plugin', 'maven-surefire-provider-junit',
+            'maven-local', 'maven-dependency-plugin', 'maven-antrun-plugin',
             'apache-commons-collections']:
             ensure => latest,
           }
@@ -156,6 +156,13 @@ class ovirt_infra::jenkins_slave {
     changes => [
       'set Defaults[type=":jenkins"]/type :jenkins',
       'clear Defaults[type=":jenkins"]/requiretty/negate',
+    ],
+  }
+
+  augeas { 'allow passing HOME through':
+    context => '/files/etc/sudoers',
+    changes => [
+      'rm Defaults[always_set_home]',
     ],
   }
 
