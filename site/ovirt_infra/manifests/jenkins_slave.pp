@@ -84,8 +84,9 @@ class ovirt_infra::jenkins_slave {
   }
 
   user {'jenkins':
-    ensure => present,
-    groups => ['mock'],
+    ensure  => present,
+    groups  => ['mock'],
+    require => Package['mock'],
   }
 
   file {
