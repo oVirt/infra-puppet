@@ -100,6 +100,13 @@ class ovirt_infra::jenkins_slave {
       mode   => '0700',
       owner  => 'jenkins',
       group  => 'jenkins';
+    ## as a file so we can use skip_if_unavailable options
+    '/etc/yum.repos.d/gluster.repo':
+      ensure => present,
+      mode   => '0664',
+      owner  => 'root',
+      group  => 'root',
+      source => 'puppet:///modules/ovirt_infra/gluster.repo';
   }
 
   cron {
