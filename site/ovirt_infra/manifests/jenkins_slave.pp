@@ -39,6 +39,9 @@ class ovirt_infra::jenkins_slave {
             'apache-commons-collections', 'apr-util']:
             ensure => latest,
           }
+          file {'/etc/yum.repos.d/gluster.repo':
+            ensure => absent,
+          }
         }
         ## CentOS machines
         default: {
@@ -63,8 +66,17 @@ class ovirt_infra::jenkins_slave {
             owner  => root,
             group  => root,
             mode   => '0444',
-            source => 'puppet:///modules/ovirt_infra/jpackage.repo.gpg.key',
+            source => 'puppet:///modules/ovirt_infra/jpackage.repo.gpg.key';
           }
+          ## Use a file resource instead of yumrepo because skip_if_unavailable is not supported yet
+          file {'/etc/yum.repos.d/gluster.repo':
+            ensure => present,
+            mode   => '0664',
+            owner  => 'root',
+            group  => 'root',
+            source => 'puppet:///modules/ovirt_infra/gluster.epel.repo';
+          }
+
           yumrepo{'jpackage':
             descr      => 'JPackage 6.0, for Red Hat Enterprise Linux 5',
             mirrorlist => 'http://www.jpackage.org/mirrorlist.php?dist=redhat-el-5.0&type=free&release=6.0',
@@ -108,24 +120,17 @@ class ovirt_infra::jenkins_slave {
     require => Package['mock'],
   }
 
-  file {
-    '/home/jenkins':
-      ensure => directory,
-      mode   => '0700',
-      owner  => 'jenkins',
-      group  => 'jenkins';
-    '/home/jenkins/.ssh':
-      ensure => directory,
-      mode   => '0700',
-      owner  => 'jenkins',
-      group  => 'jenkins';
-    ## as a file so we can use skip_if_unavailable options
-    '/etc/yum.repos.d/gluster.repo':
-      ensure => present,
-      mode   => '0664',
-      owner  => 'root',
-      group  => 'root',
-      source => 'puppet:///modules/ovirt_infra/gluster.repo';
+  file {'/home/jenkins':
+    ensure => directory,
+    mode   => '0700',
+    owner  => 'jenkins',
+    group  => 'jenkins';
+  }
+  file {'/home/jenkins/.ssh':
+    ensure => directory,
+    mode   => '0700',
+    owner  => 'jenkins',
+    group  => 'jenkins';
   }
 
   cron {
