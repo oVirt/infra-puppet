@@ -36,7 +36,7 @@ class ovirt_infra::jenkins_slave {
             'maven-install-plugin', 'maven-jar-plugin', 'maven-javadoc-plugin',
             'maven-source-plugin', 'maven-surefire-provider-junit',
             'maven-local', 'maven-dependency-plugin', 'maven-antrun-plugin',
-            'apache-commons-collections']:
+            'apache-commons-collections', 'apr-util']:
             ensure => latest,
           }
         }
