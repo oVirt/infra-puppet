@@ -49,7 +49,7 @@ class ovirt_infra::jenkins_slave {
           }
 
           package {['apache-commons-logging', 'junit4', 'dom4j', 'ant',
-            'jakarta-commons-collections', 'maven3']:
+            'apache-commons-collections', 'maven3']:
             ensure => latest,
           }
 
