@@ -49,8 +49,14 @@ class ovirt_infra::jenkins_slave {
           }
 
           package {['apache-commons-logging', 'junit4', 'dom4j', 'ant',
-            'apache-commons-collections', 'maven3']:
+            'apache-commons-collections']:
             ensure => latest,
+          }
+          ## Special maven3 specifying version as jpackage repos introduce a
+          ## new one that we don't want yet (and requires enabling devel
+          ## jpackage repos right now for deps
+          package {'maven3':
+            ensure => '3.0.3-4.jdk7'
           }
 
           file {'/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage':
