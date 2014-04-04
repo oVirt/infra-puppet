@@ -81,7 +81,20 @@ class ovirt_infra::jenkins_slave {
             gpgkey     => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage',
             require    => File['/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage'],
           }
-        }
+
+          ## On centos we need an extra selinux policy to allow slave spawned
+          ## processes (ex: engine-setup) to install rpms
+          file {'/usr/share/selinux/targeted/jenkins_slave.pp':
+            ensure => present,
+            owner  => 'root',
+            group  => 'root',
+            mode   => '0644',
+            source => 'puppet:///modules/ovirt_infra/jenkins_slave.selinux.el6';
+          }
+          selmodule {'jenkins_slave':
+            ensure      => present,
+            syncversion => true,
+          }
       }
     }
     default: {
