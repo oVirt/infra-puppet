@@ -107,6 +107,7 @@ class ovirt_infra::jenkins_slave {
             ensure      => present,
             syncversion => true,
           }
+        }
       }
     }
     default: {
