@@ -9,7 +9,7 @@
 # List of packages to be installed
 #
 class ovirt_infra::jenkins_slave {
-  $packages = ['autoconf', 'automake', 'make', 'puppet',
+  $packages = ['autoconf', 'automake', 'make',
     'gettext-devel', 'python-devel', 'java-1.7.0-openjdk-devel',
     'python-pip', 'wget', 'python-nose',
     'ethtool', 'pyflakes', 'python-ethtool', 'libvirt',
