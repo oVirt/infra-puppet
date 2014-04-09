@@ -12,6 +12,11 @@ class ovirt_infra::jnlp (
     $my_nofiles = $nofiles
   }
 
+  service {'jnlp' :
+    ensure  => running,
+    enable  => true,
+  }
+
   if $::operatingsystem == 'Fedora' {
     file {'/lib/systemd/system/jnlp.service' :
       ensure  => file,
@@ -24,14 +29,35 @@ class ovirt_infra::jnlp (
       refreshonly => true,
     }
 
-    service {'jnlp' :
-      ensure  => running,
-      enable  => true,
-    }
-
     File['/lib/systemd/system/jnlp.service']
       ~> Exec['refresh_systemd']
       ~> Service['jnlp']
+  } elsif $::operatingsystem == 'CentOS' and versioncmp($::operatingsystemrelease, '7.0') < 0 {
+    file {'/etc/init.d/jnlp' :
+      ensure  => file,
+      mode    => '0755',
+      content => template('ovirt_infra/jnlp.systemv.erb'),
+    }
+
+    file {'/var/log/jenkins/slave.log' :
+      ensure  => file,
+      owner   => 'jenkins',
+      group   => 'jenkins',
+      mode    => '0660',
+    }
+
+    file {'/var/log/jenkins/slave.error.log' :
+      ensure  => file,
+      owner   => 'jenkins',
+      group   => 'jenkins',
+      mode    => '0660',
+    }
+
+    File['/etc/init.d/jnlp']
+    ~> File['/var/log/jenkins/slave.log']
+    ~> File['/var/log/jenkins/slave.error.log']
+    ~> Service['jnlp']
+
   } else {
     notice("Unsupported operatingsystem ${::operatingsystem}")
   }

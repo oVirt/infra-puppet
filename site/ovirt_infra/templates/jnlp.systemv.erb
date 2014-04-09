@@ -1,0 +1,126 @@
+#!/bin/bash
+#
+# chkconfig: 320 20 80
+# description: Running jnlp to connect slaves to jenkins
+
+SLAVE_CMD="java -jar /home/jenkins/slave.jar -jnlpUrl <%= @jnlpurl %> -secret <%= @secret_key %>"
+LOG=/var/log/jenkins/slave.log
+ERR_LOG=/var/log/jenkins/slave.error.log
+
+function payload() {
+   while ! ${SLAVE_CMD} 2>${ERR_LOG} 1>${LOG}; do
+       echo "#######  Slave died, restarting in 10 seconds..." >> ${LOG}
+       sleep 10
+   done & disown
+
+   echo $! > $MY_PIDFILE
+ }
+
+function daemonize() {
+	exec 3>&-           # close stdin
+	exec 2>>$MY_ERRFILE # redirect stderr
+	exec 1>>$MY_LOGFILE # redirect stdout
+	echo $(date)" Daemonizing" >> $MY_LOGFILE
+}
+
+MY_PID=$$
+MY_PATH=$(readlink -f $0)
+MY_ROOT="/var/run"
+MY_NAME=$(basename $MY_PATH)
+MY_PIDFILE="$MY_ROOT/$MY_NAME.pid"
+MY_KILLFILE="$MY_ROOT/$MY_NAME.kill"
+MY_ERRFILE="$MY_ROOT/$MY_NAME.err"
+MY_LOGFILE="$MY_ROOT/$MY_NAME.log"
+
+CHILD_PID=""
+
+
+case $1 in
+	restart)
+		$0 stop
+		$0 start
+		;;
+	start)
+		if [ -f $MY_PIDFILE ]; then
+			echo "Daemon is already running."
+			exit 0
+		fi
+		$0 run &
+		echo "Daemon Started"
+		exec 3>&- # close stdin
+		exec 2>&- # close stderr
+		exec 1>&- # close stdout
+		exit 0
+		;;
+	stop)
+		echo -n "Terminating daemon... "
+		$0 stat 1>/dev/null 2>/dev/null
+		if [ $? -ne 0 ]; then
+			echo "process is not running"
+			exit 0
+		fi
+		touch $MY_KILLFILE
+		$0 status &>/dev/null
+		ECODE=$?
+		waitcount=0
+		if [ -z "$waitcountmax" ]; then
+			waitcountmax=30;
+		fi
+		while [ $ECODE -eq 0 ]; do
+			sleep 1
+			let waitcount=$waitcount+1
+			if [ $waitcount -lt $waitcountmax ]; then
+				$0 status &>/dev/null
+				ECODE=$?
+			else
+				ECODE=1
+			fi
+		done
+		$0 status &>/dev/null
+		if [ $? -eq 0 ]; then
+			PID=$(cat $MY_PIDFILE)
+			kill $PID
+			rm $MY_PIDFILE
+			rm $MY_KILLFILE
+			echo "Process Killed"
+			echo $(date)" Terminating daemon..." >> $MY_LOGFILE
+			exit 0;
+		else
+			echo "Process exited gracefully"
+		fi
+		;;
+	status)
+		if [ ! -f $MY_PIDFILE ]; then
+			echo "$MY_NAME is not running"
+			exit 1
+		fi
+		pgrep -l -f "$MY_NAME run" | grep -q -E "^$(cat $MY_PIDFILE) "
+		if [ $? -eq 0 ]; then
+			echo "$MY_NAME is running with PID "$($0 pid)
+			exit 0
+		else
+			echo "$MY_NAME is not running (PIDFILE mismatch)"
+			exit 1
+		fi
+		;;
+	pid)
+		if [ -f $MY_PIDFILE ]; then
+			cat $MY_PIDFILE
+		else
+			echo "No pidfile found"
+		fi
+		;;
+	run)
+		daemonize
+		payload
+		;;
+	help|?|--help|-h)
+		echo "Usage: $0 [ start | stop | restart | status ]"
+		exit 0
+		;;
+	*)
+		echo "Invalid argument"
+		echo
+		$0 help
+		;;
+esac
