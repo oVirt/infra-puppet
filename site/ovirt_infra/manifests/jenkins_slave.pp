@@ -52,7 +52,7 @@ class ovirt_infra::jenkins_slave {
           }
 
           package {['apache-commons-logging', 'junit4', 'dom4j', 'ant',
-            'apache-commons-collections']:
+            'apache-commons-collections', 'python-argparse']:
             ensure => latest,
           }
           ## Special maven3 specifying version as jpackage repos introduce a
