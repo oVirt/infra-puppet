@@ -11,7 +11,7 @@
 class ovirt_infra::jenkins_slave {
   $packages = ['autoconf', 'automake', 'make', 'puppet',
     'gettext-devel', 'python-devel', 'java-1.7.0-openjdk-devel',
-    'python-pep8', 'python-pip', 'wget', 'python-nose',
+    'python-pip', 'wget', 'python-nose',
     'ethtool', 'pyflakes', 'python-ethtool', 'libvirt',
     'libvirt-python', 'python-pthreading', 'm2crypto', 'psmisc',
     'python-netaddr', 'genisoimage', 'python-dmidecode',
@@ -26,6 +26,10 @@ class ovirt_infra::jenkins_slave {
 
   package {$packages:
     ensure => latest,
+  }
+
+  package {'python-pep8':
+    ensure => installed,
   }
 
   case $::osfamily {
