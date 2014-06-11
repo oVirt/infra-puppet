@@ -29,10 +29,6 @@ class ovirt_infra::jenkins_slave {
     ensure => latest,
   }
 
-  package {'python-pep8':
-    ensure => installed,
-  }
-
   case $::osfamily {
     RedHat: {
       case $::operatingsystem {
@@ -44,6 +40,10 @@ class ovirt_infra::jenkins_slave {
             'apache-commons-collections', 'apr-util']:
             ensure => latest,
           }
+          package {'python-pep8':
+            ensure => installed,
+          }
+
           file {'/etc/yum.repos.d/gluster.repo':
             ensure => absent,
           }
@@ -57,7 +57,7 @@ class ovirt_infra::jenkins_slave {
           }
 
           package {['apache-commons-logging', 'junit4', 'dom4j', 'ant',
-            'apache-commons-collections', 'python-argparse']:
+            'apache-commons-collections', 'python-argparse', 'python-pep8']:
             ensure => latest,
           }
           ## Special maven3 specifying version as jpackage repos introduce a
