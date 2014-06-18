@@ -20,7 +20,7 @@ class ovirt_infra::jenkins_slave {
     'python-lxml', 'python-inotify', 'python-ply', 'tmpwatch',
     'dosfstools', 'rpmdevtools', 'libnl', 'log4j', 'yum-utils', 'mock',
     'python-mock', 'jasperreports-server', 'pylint', 'yum', 'python-six',
-    'chrpath', 'sos',
+    'chrpath', 'sos', 'python-tox',
   ]
 
   include ovirt_infra::ci_tools_repo
