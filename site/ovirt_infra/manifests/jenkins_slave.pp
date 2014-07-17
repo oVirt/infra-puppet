@@ -10,8 +10,7 @@
 #
 class ovirt_infra::jenkins_slave {
   $packages = ['autoconf', 'automake', 'make',
-    'gettext-devel', 'python-devel', 'java-1.7.0-openjdk-devel',
-    'python-pip', 'wget', 'python-nose',
+    'gettext-devel', 'python-devel', 'python-pip', 'wget', 'python-nose',
     'ethtool', 'pyflakes', 'python-ethtool', 'libvirt',
     'libvirt-python', 'python-pthreading', 'm2crypto', 'psmisc',
     'python-netaddr', 'genisoimage', 'python-dmidecode',
@@ -38,7 +37,8 @@ class ovirt_infra::jenkins_slave {
             'maven-source-plugin', 'maven-surefire-provider-junit',
             'maven-local', 'maven-dependency-plugin', 'maven-antrun-plugin',
             'apache-commons-collections', 'apr-util',
-            'lorax', 'pykickstart', 'virt-install', 'libguestfs-tools']:
+            'java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk', 'lorax',
+            'pykickstart', 'virt-install', 'libguestfs-tools']:
             ensure => latest,
           }
           package {'python-pep8':
@@ -66,6 +66,10 @@ class ovirt_infra::jenkins_slave {
           ## jpackage repos right now for deps
           package {'maven3':
             ensure => '3.0.3-4.jdk7'
+          }
+          ## There's a bug on latest jdk that breaks the engine build
+          package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk']:
+            ensure => '1.7.0.55-2.4.7.1.el6_5';
           }
 
           file {'/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage':
