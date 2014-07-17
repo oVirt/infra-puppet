@@ -98,7 +98,7 @@ class ovirt_infra::jenkins_slave {
           yumrepo{'jpackage-generic':
             descr      => 'JPackage 6.0, for Red Hat Enterprise Linux 5',
             mirrorlist => 'http://resources.ovirt.org/repos/jpackage/generate_mirrors.cgi?dist=generic&type=free&release=6.0',
-            gpgcheck   => 1,
+            gpgcheck   => 0,
             enabled    => 1,
             gpgkey     => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage',
             require    => File['/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage'],
