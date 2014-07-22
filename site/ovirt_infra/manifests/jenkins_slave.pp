@@ -28,100 +28,109 @@ class ovirt_infra::jenkins_slave {
     ensure => latest,
   }
 
-  case $::osfamily {
-    RedHat: {
-      case $::operatingsystem {
-        Fedora: {
-          package{['maven', 'maven-compiler-plugin', 'maven-enforcer-plugin',
-            'maven-install-plugin', 'maven-jar-plugin', 'maven-javadoc-plugin',
-            'maven-source-plugin', 'maven-surefire-provider-junit',
-            'maven-local', 'maven-dependency-plugin', 'maven-antrun-plugin',
-            'apache-commons-collections', 'apr-util',
-            'java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk', 'lorax',
-            'pykickstart', 'virt-install', 'libguestfs-tools']:
-            ensure => latest,
-          }
-          package {'python-pep8':
-            ensure => installed,
-          }
-
-          file {'/etc/yum.repos.d/gluster.repo':
-            ensure => absent,
+  case "${::osfamily}-${::operatingsystem}" {
+    RedHat-Fedora: {
+      case $::operatingsystemrelease {
+        20: {
+          package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk',
+                    'java-1.7.0-openjdk-headless']:
+            ensure => '1.7.0.60-2.4.3.0.fc20';
           }
         }
-        ## CentOS machines
-        default: {
-          include epel
-
-          Package {
-            require => Class['epel'],
-          }
-
-          package {['apache-commons-logging', 'junit4', 'dom4j', 'ant',
-            'apache-commons-collections', 'python-argparse', 'python-pep8']:
-            ensure => latest,
-          }
-          ## Special maven3 specifying version as jpackage repos introduce a
-          ## new one that we don't want yet (and requires enabling devel
-          ## jpackage repos right now for deps
-          package {'maven3':
-            ensure => '3.0.3-4.jdk7'
-          }
-          ## There's a bug on latest jdk that breaks the engine build
+        19: {
           package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk']:
-            ensure => '1.7.0.55-2.4.7.1.el6_5';
-          }
-
-          file {'/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage':
-            owner  => root,
-            group  => root,
-            mode   => '0444',
-            source => 'puppet:///modules/ovirt_infra/jpackage.repo.gpg.key';
-          }
-          ## Use a file resource instead of yumrepo because skip_if_unavailable is not supported yet
-          file {'/etc/yum.repos.d/gluster.repo':
-            ensure => present,
-            mode   => '0664',
-            owner  => 'root',
-            group  => 'root',
-            source => 'puppet:///modules/ovirt_infra/gluster.epel.repo';
-          }
-
-          yumrepo{'jpackage':
-            descr      => 'JPackage 6.0, for Red Hat Enterprise Linux 5',
-            mirrorlist => 'http://resources.ovirt.org/repos/jpackage/generate_mirrors.cgi?dist=redhat-el-5.0&type=free&release=6.0',
-            gpgcheck   => 1,
-            enabled    => 1,
-            gpgkey     => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage',
-            require    => File['/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage'],
-          }
-          yumrepo{'jpackage-generic':
-            descr      => 'JPackage 6.0, for Red Hat Enterprise Linux 5',
-            mirrorlist => 'http://resources.ovirt.org/repos/jpackage/generate_mirrors.cgi?dist=generic&type=free&release=6.0',
-            gpgcheck   => 0,
-            enabled    => 1,
-            gpgkey     => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage',
-            require    => File['/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage'],
-          }
-
-          ## On centos we need an extra selinux policy to allow slave spawned
-          ## processes (ex: engine-setup) to install rpms
-          file {'/usr/share/selinux/targeted/jenkins_slave.pp':
-            ensure => present,
-            owner  => 'root',
-            group  => 'root',
-            mode   => '0644',
-            source => 'puppet:///modules/ovirt_infra/jenkins_slave.selinux.el6';
-          }
-          selmodule {'jenkins_slave':
-            ensure      => present,
-            syncversion => true,
+            ensure => 'latest';
           }
         }
       }
+      package {['maven', 'maven-compiler-plugin', 'maven-enforcer-plugin',
+                'maven-install-plugin', 'maven-jar-plugin',
+                'maven-javadoc-plugin', 'maven-source-plugin',
+                'maven-surefire-provider-junit', 'maven-local',
+                'maven-dependency-plugin', 'maven-antrun-plugin',
+                'apache-commons-collections', 'apr-util', 'lorax',
+                'pykickstart', 'virt-install', 'libguestfs-tools']:
+                  ensure => latest,
+      }
+      package {'python-pep8':
+        ensure => installed,
+      }
+
+      file {'/etc/yum.repos.d/gluster.repo':
+        ensure => absent,
+      }
+    }
+    ## CentOS machines
+    /^RedHat.*/: {
+      include epel
+
+      Package {
+        require => Class['epel'],
+      }
+
+      package {['apache-commons-logging', 'junit4', 'dom4j', 'ant',
+                'apache-commons-collections', 'python-argparse', 'python-pep8']:
+                  ensure => latest,
+      }
+      ## Special maven3 specifying version as jpackage repos introduce a
+      ## new one that we don't want yet (and requires enabling devel
+      ## jpackage repos right now for deps
+      package {'maven3':
+        ensure => '3.0.3-4.jdk7'
+      }
+      ## There's a bug on latest jdk that breaks the engine build
+      package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk']:
+        ensure => '1.7.0.55-2.4.7.1.el6_5';
+      }
+
+      file {'/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage':
+        owner  => root,
+        group  => root,
+        mode   => '0444',
+        source => 'puppet:///modules/ovirt_infra/jpackage.repo.gpg.key';
+      }
+      ## Use a file resource instead of yumrepo because skip_if_unavailable is not supported yet
+      file {'/etc/yum.repos.d/gluster.repo':
+        ensure => present,
+        mode   => '0664',
+        owner  => 'root',
+        group  => 'root',
+        source => 'puppet:///modules/ovirt_infra/gluster.epel.repo';
+      }
+
+      yumrepo{'jpackage':
+        descr      => 'JPackage 6.0, for Red Hat Enterprise Linux 5',
+        mirrorlist => 'http://resources.ovirt.org/repos/jpackage/generate_mirrors.cgi?dist=redhat-el-5.0&type=free&release=6.0',
+        gpgcheck   => 1,
+        enabled    => 1,
+        gpgkey     => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage',
+        require    => File['/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage'],
+      }
+      yumrepo{'jpackage-generic':
+        descr      => 'JPackage 6.0, for Red Hat Enterprise Linux 5',
+        mirrorlist => 'http://resources.ovirt.org/repos/jpackage/generate_mirrors.cgi?dist=generic&type=free&release=6.0',
+        gpgcheck   => 0,
+        enabled    => 1,
+        gpgkey     => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage',
+        require    => File['/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage'],
+      }
+
+      ## On centos we need an extra selinux policy to allow slave spawned
+      ## processes (ex: engine-setup) to install rpms
+      file {'/usr/share/selinux/targeted/jenkins_slave.pp':
+        ensure => present,
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0644',
+        source => 'puppet:///modules/ovirt_infra/jenkins_slave.selinux.el6';
+      }
+      selmodule {'jenkins_slave':
+        ensure      => present,
+        syncversion => true,
+      }
     }
     default: {
-      fail("Unsupport osfamily ${::osfamily}")
+      fail("Unsupported ${::osfamily}-${::operatingsystem}")
     }
   }
 
