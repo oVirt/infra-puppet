@@ -42,6 +42,9 @@ class ovirt_infra::jenkins_slave {
             ensure => 'latest';
           }
         }
+        default: {
+          fail("Unsupported ${::operatingsystem}-${::operatingsystemrelease}")
+        }
       }
       package {['maven', 'maven-compiler-plugin', 'maven-enforcer-plugin',
                 'maven-install-plugin', 'maven-jar-plugin',
