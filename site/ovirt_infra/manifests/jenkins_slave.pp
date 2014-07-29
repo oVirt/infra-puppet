@@ -62,6 +62,14 @@ class ovirt_infra::jenkins_slave {
       file {'/etc/yum.repos.d/gluster.repo':
         ensure => absent,
       }
+
+      yumrepo{'patternfly':
+        descr      => 'Copr repo for patternfly1 owned by patternfly',
+        baseurl    => 'http://copr-be.cloud.fedoraproject.org/results/patternfly/patternfly1/fedora-$releasever-$basearch/',
+        gpgcheck   => 0,
+        enabled    => 1,
+      }
+
     }
     ## CentOS machines
     /^RedHat.*/: {
@@ -116,6 +124,12 @@ class ovirt_infra::jenkins_slave {
         enabled    => 1,
         gpgkey     => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage',
         require    => File['/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage'],
+      }
+      yumrepo{'patternfly':
+        descr      => 'Copr repo for patternfly1 owned by patternfly',
+        baseurl    => 'http://copr-be.cloud.fedoraproject.org/results/patternfly/patternfly1/epel-$releasever-$basearch/',
+        gpgcheck   => 0,
+        enabled    => 1,
       }
 
       ## On centos we need an extra selinux policy to allow slave spawned
