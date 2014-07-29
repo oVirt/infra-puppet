@@ -39,7 +39,7 @@ class ovirt_infra::jenkins_slave {
         }
         19: {
           package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk']:
-            ensure => 'latest';
+            ensure => '1.7.0.25-2.3.10.3.fc19';
           }
         }
         default: {
