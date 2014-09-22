@@ -1,0 +1,7 @@
+# The user for Barak Korren
+class ovirt_infra::user::bkorren($password = undef) {
+  ovirt_infra::user {'bkorren':
+    key      => 'AAAAB3NzaC1yc2EAAAABIwAAAgEAroU7DSqobsO7H3UScxzOTLqbmUR3imi2SWgfd9SZ6tz6+P4Av/mJM0CaMaLVWwfXEhBq11fWr1Rlg3Ne7Nuycg1AlSvQozTTxqUscTmB7S7wxQ3G8sxiUpNW6fol3D3ErvXSawEGxKVEcDR+jpjx2kPB0kWRzUtWyXySy06pOV8nHB45Z+nav2f/ANmp7meIcuglNubcyPZQ5KTTbsxVd4Sg6f6gMaSDGrD7KNw1XvU3JtpcyjC7SgADCPjuoSrWIwoAK7hNVfIZRTJixQjCKzihCJlXfgr38h9QwRP5zfZ4wUmGBp67CU4u/KkhfKGqHPnw3rV5Trguq5aIQwd7vVgzlPHeTS9HnZhAXNktmBkxwK/lpYH93d9NnPamnH1xPLOvnzXKk7rojxXw6lFZ0CZfOw73qc1zhV077aEy9Hh11U6BvvZBqwyQHBAfb6Ub8YpVS6vQMTjJVPqCZVxucwezPJsvkYa40t4sLOLa5SP8AHlbWUT4VY8rnTmvuUZepP6+AT7L3yYtQ/lVmvy6l56KypoTeY0LwM+B8e9kkyBeM+633t1Uyd9W4jzCrOLYOVewmQUb4OKcNC1tbPr87X+nHY5ODPkrWYNX1PgjA+mcdXkhUZwKOK8oFh3Pcx3rhjOTWwt18Tp4FX/5Fw/KC6EXOjRz5+Ezr9y2rWuT6rE=',
+    password => $password,
+  }
+}

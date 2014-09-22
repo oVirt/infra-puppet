@@ -1,3 +1,5 @@
 .*.sw?
 Gemfile.lock
 modules/
+*~
+\#*
