@@ -14,4 +14,9 @@
 
 class ovirt_base {
   class { 'puppet': }
+
+  # Mainly for the CVE-2014-6271 secutiry bug
+  package{'bash':
+    ensure => 'latest',
+  }
 }
