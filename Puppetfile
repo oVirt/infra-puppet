@@ -1,11 +1,13 @@
 forge "forge.puppetlabs.org"
 
 mod "erwbgy/limits", "0.3.1"
-mod "puppetlabs/apache", "1.0.1"
-mod "puppetlabs/concat", "1.1.0"
-mod "puppetlabs/inifile", "1.0.3"
+mod "puppetlabs/apache",
+  :git => "https://github.com/puppetlabs/puppetlabs-apache.git",
+  :ref => 'd051887078363bb01a060f9c405f2875315d345c'
+mod "puppetlabs/concat", "1.1.1"
+mod "puppetlabs/inifile", "1.1.4"
 mod "puppetlabs/ntp", "3.0.3"
-mod "puppetlabs/stdlib", "4.1.0"
+mod "puppetlabs/stdlib", "4.3.2"
 mod "rtyler/jenkins", "0.2.4"
 mod "saz/ssh", "1.2.0"
 mod "saz/timezone", "1.2.0"
