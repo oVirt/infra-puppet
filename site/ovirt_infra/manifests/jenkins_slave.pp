@@ -14,7 +14,7 @@ class ovirt_infra::jenkins_slave {
     'ethtool', 'pyflakes', 'python-ethtool', 'libvirt',
     'libvirt-python', 'python-pthreading', 'm2crypto', 'psmisc',
     'python-netaddr', 'genisoimage', 'python-dmidecode',
-    'gcc', 'rpm-build', 'git', 'python-ordereddict', 'libtool',
+    'gcc', 'rpm-build', 'git', 'libtool',
     'python-kitchen', 'python-cpopen', 'postgresql-jdbc',
     'python-lxml', 'python-inotify', 'python-ply', 'tmpwatch',
     'dosfstools', 'rpmdevtools', 'libnl', 'log4j', 'yum-utils', 'mock',
@@ -28,9 +28,21 @@ class ovirt_infra::jenkins_slave {
     ensure => latest,
   }
 
+  if "${::osfamily}-${::operatingsystem}-${::operatingsystemrelease}" != 'RedHat-Fedora-21' {
+    package{'python-ordereddict':
+      ensure => latest,
+    }
+  }
+
   case "${::osfamily}-${::operatingsystem}" {
     RedHat-Fedora: {
       case $::operatingsystemrelease {
+        21: {
+          package {['java-1.8.0-openjdk-devel', 'java-1.8.0-openjdk',
+                    'java-1.8.0-openjdk-headless']:
+            ensure => latest;
+          }
+        }
         20: {
           package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk',
                     'java-1.7.0-openjdk-headless']:
