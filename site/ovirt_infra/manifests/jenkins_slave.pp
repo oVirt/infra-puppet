@@ -14,7 +14,7 @@ class ovirt_infra::jenkins_slave {
     'ethtool', 'pyflakes', 'python-ethtool', 'libvirt',
     'libvirt-python', 'python-pthreading', 'm2crypto', 'psmisc',
     'python-netaddr', 'genisoimage', 'python-dmidecode',
-    'gcc', 'rpm-build', 'git', 'libtool',
+    'gcc', 'rpm-build', 'git', 'libtool', 'libselinux-python',
     'python-kitchen', 'python-cpopen', 'postgresql-jdbc',
     'python-lxml', 'python-inotify', 'python-ply', 'tmpwatch',
     'dosfstools', 'rpmdevtools', 'libnl', 'log4j', 'yum-utils', 'mock',
