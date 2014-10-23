@@ -58,6 +58,8 @@ class ovirt_infra::jenkins_slave {
           fail("Unsupported ${::operatingsystem}-${::operatingsystemrelease}")
         }
       }
+
+      # Common to all fedoras
       package {['maven', 'maven-compiler-plugin', 'maven-enforcer-plugin',
                 'maven-install-plugin', 'maven-jar-plugin',
                 'maven-javadoc-plugin', 'maven-source-plugin',
@@ -76,42 +78,91 @@ class ovirt_infra::jenkins_slave {
       }
 
       yumrepo{'patternfly':
-        descr      => 'Copr repo for patternfly1 owned by patternfly',
-        baseurl    => 'http://copr-be.cloud.fedoraproject.org/results/patternfly/patternfly1/fedora-$releasever-$basearch/',
-        gpgcheck   => 0,
-        enabled    => 1,
+        descr    => 'Copr repo for patternfly1 owned by patternfly',
+        baseurl  => 'http://copr-be.cloud.fedoraproject.org/results/patternfly/patternfly1/fedora-$releasever-$basearch/',
+        gpgcheck => 0,
+        enabled  => 1,
       }
 
     }
     ## CentOS machines
     /^RedHat.*/: {
+      case $::operatingsystemmajrelease {
+        7: {
+          package {['maven', 'junit']:
+            ensure => latest,
+          }
+          ## There's a bug on latest jdk that breaks the engine build
+          package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk',
+                    'java-1.7.0-openjdk-headless']:
+            ensure => '1.7.0.55-2.4.7.2.el7_0';
+          }
+        }
+        default: {
+          ## Special maven3 specifying version as jpackage repos introduce a
+          ## new one that we don't want yet (and requires enabling devel
+          ## jpackage repos right now for deps
+          package {'maven3':
+            ensure => '3.0.3-4.jdk7'
+          }
+          ## There's a bug on latest jdk that breaks the engine build
+          package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk']:
+            ensure => '1.7.0.55-2.4.7.1.el6_5';
+          }
+          package {['python-argparse', 'junit4']:
+            ensure => latest,
+          }
+          ## On centos we need an extra selinux policy to allow slave spawned
+          ## processes (ex: engine-setup) to install rpms
+          file {'/usr/share/selinux/targeted/jenkins_slave.pp':
+            ensure => present,
+            owner  => 'root',
+            group  => 'root',
+            mode   => '0644',
+            source => 'puppet:///modules/ovirt_infra/jenkins_slave.selinux.el6';
+          }
+          selmodule {'jenkins_slave':
+            ensure      => present,
+            syncversion => true,
+          }
+          file {'/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage':
+            owner  => root,
+            group  => root,
+            mode   => '0444',
+            source => 'puppet:///modules/ovirt_infra/jpackage.repo.gpg.key';
+          }
+          yumrepo{'jpackage':
+            descr      => 'JPackage 6.0, for Red Hat Enterprise Linux 5',
+            mirrorlist => 'http://resources.ovirt.org/repos/jpackage/generate_mirrors.cgi?dist=redhat-el-5.0&type=free&release=6.0',
+            gpgcheck   => 1,
+            enabled    => 1,
+            gpgkey     => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage',
+            require    => File['/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage'],
+          }
+          yumrepo{'jpackage-generic':
+            descr      => 'JPackage 6.0, for Red Hat Enterprise Linux 5',
+            mirrorlist => 'http://resources.ovirt.org/repos/jpackage/generate_mirrors.cgi?dist=generic&type=free&release=6.0',
+            gpgcheck   => 0,
+            enabled    => 1,
+            gpgkey     => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage',
+            require    => File['/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage'],
+          }
+        }
+      }
+
+      # Common to all CentOS
+
       include epel
 
       Package {
         require => Class['epel'],
       }
 
-      package {['apache-commons-logging', 'junit4', 'dom4j', 'ant',
-                'apache-commons-collections', 'python-argparse', 'python-pep8']:
+      package {['apache-commons-logging', 'dom4j', 'ant',
+                'apache-commons-collections', 'python-pep8']:
                   ensure => latest,
       }
-      ## Special maven3 specifying version as jpackage repos introduce a
-      ## new one that we don't want yet (and requires enabling devel
-      ## jpackage repos right now for deps
-      package {'maven3':
-        ensure => '3.0.3-4.jdk7'
-      }
-      ## There's a bug on latest jdk that breaks the engine build
-      package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk']:
-        ensure => '1.7.0.55-2.4.7.1.el6_5';
-      }
 
-      file {'/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage':
-        owner  => root,
-        group  => root,
-        mode   => '0444',
-        source => 'puppet:///modules/ovirt_infra/jpackage.repo.gpg.key';
-      }
       ## Use a file resource instead of yumrepo because skip_if_unavailable is not supported yet
       file {'/etc/yum.repos.d/gluster.repo':
         ensure => present,
@@ -121,41 +172,11 @@ class ovirt_infra::jenkins_slave {
         source => 'puppet:///modules/ovirt_infra/gluster.epel.repo';
       }
 
-      yumrepo{'jpackage':
-        descr      => 'JPackage 6.0, for Red Hat Enterprise Linux 5',
-        mirrorlist => 'http://resources.ovirt.org/repos/jpackage/generate_mirrors.cgi?dist=redhat-el-5.0&type=free&release=6.0',
-        gpgcheck   => 1,
-        enabled    => 1,
-        gpgkey     => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage',
-        require    => File['/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage'],
-      }
-      yumrepo{'jpackage-generic':
-        descr      => 'JPackage 6.0, for Red Hat Enterprise Linux 5',
-        mirrorlist => 'http://resources.ovirt.org/repos/jpackage/generate_mirrors.cgi?dist=generic&type=free&release=6.0',
-        gpgcheck   => 0,
-        enabled    => 1,
-        gpgkey     => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage',
-        require    => File['/etc/pki/rpm-gpg/RPM-GPG-KEY-jpackage'],
-      }
       yumrepo{'patternfly':
-        descr      => 'Copr repo for patternfly1 owned by patternfly',
-        baseurl    => 'http://copr-be.cloud.fedoraproject.org/results/patternfly/patternfly1/epel-$releasever-$basearch/',
-        gpgcheck   => 0,
-        enabled    => 1,
-      }
-
-      ## On centos we need an extra selinux policy to allow slave spawned
-      ## processes (ex: engine-setup) to install rpms
-      file {'/usr/share/selinux/targeted/jenkins_slave.pp':
-        ensure => present,
-        owner  => 'root',
-        group  => 'root',
-        mode   => '0644',
-        source => 'puppet:///modules/ovirt_infra/jenkins_slave.selinux.el6';
-      }
-      selmodule {'jenkins_slave':
-        ensure      => present,
-        syncversion => true,
+        descr    => 'Copr repo for patternfly1 owned by patternfly',
+        baseurl  => 'http://copr-be.cloud.fedoraproject.org/results/patternfly/patternfly1/epel-$releasever-$basearch/',
+        gpgcheck => 0,
+        enabled  => 1,
       }
     }
     default: {
