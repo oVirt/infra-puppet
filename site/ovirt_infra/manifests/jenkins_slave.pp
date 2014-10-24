@@ -20,7 +20,7 @@ class ovirt_infra::jenkins_slave {
     'dosfstools', 'rpmdevtools', 'libnl', 'log4j', 'yum-utils', 'mock',
     'python-mock', 'jasperreports-server', 'pylint', 'yum', 'python-six',
     'chrpath', 'sos', 'python-tox', 'mailcap', 'rubygem-puppet-lint',
-    'rubygem-rspec-puppet',
+    'rubygem-rspec-puppet', 'createrepo',
   ]
 
   include ovirt_infra::ci_tools_repo
