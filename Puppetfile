@@ -7,6 +7,9 @@ mod "puppetlabs/apache",
 mod "puppetlabs/concat", "1.1.1"
 mod "puppetlabs/inifile", "1.1.4"
 mod "puppetlabs/ntp", "3.0.3"
+mod "puppetlabs/postgresql",
+  :git => "https://github.com/david-caro/puppetlabs-postgresql.git",
+  :ref => '53048211d02b1e758eb7b9c89aedb132566eaa72'
 mod "puppetlabs/stdlib", "4.3.2"
 mod "rtyler/jenkins", "0.2.4"
 mod "saz/ssh", "1.2.0"

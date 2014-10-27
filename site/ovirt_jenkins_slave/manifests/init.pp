@@ -18,6 +18,7 @@ class ovirt_jenkins_slave (
   # Requirements for non packaging jobs
   include ovirt_jenkins_slave::vdsm_test_runner
   include ovirt_jenkins_slave::engine_test_runner
+  include ovirt_jenkins_slave::engine_dao_test_runner
   include ovirt_jenkins_slave::puppet_test_runner
   # packaging jobs requirements
   include ovirt_jenkins_slave::mock_builder
