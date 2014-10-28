@@ -1,13 +1,13 @@
 forge "forge.puppetlabs.org"
 
 mod "erwbgy/limits", "0.3.1"
-mod "puppetlabs/apache",
+mod "apache",
   :git => "https://github.com/puppetlabs/puppetlabs-apache.git",
   :ref => 'd051887078363bb01a060f9c405f2875315d345c'
 mod "puppetlabs/concat", "1.1.1"
 mod "puppetlabs/inifile", "1.1.4"
 mod "puppetlabs/ntp", "3.0.3"
-mod "puppetlabs/postgresql",
+mod "postgresql",
   :git => "https://github.com/david-caro/puppetlabs-postgresql.git",
   :ref => '53048211d02b1e758eb7b9c89aedb132566eaa72'
 mod "puppetlabs/stdlib", "4.3.2"
