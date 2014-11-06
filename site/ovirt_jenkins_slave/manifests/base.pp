@@ -6,7 +6,7 @@
 # === Parameters
 #
 class ovirt_jenkins_slave::base {
-  package {'tmpwatch':
+  package {['tmpwatch', 'rpm']:
     ensure => latest,
   }
   case "${::osfamily}-${::operatingsystem}" {
