@@ -51,9 +51,13 @@ class ovirt_jenkins_slave::base {
           }
         }
         default: {
+          $java_version = $::operatingsystemrelease ? {
+            6.6     => '1.7.0.65-2.5.1.2.el6_5',
+            default => '1.7.0.55-2.4.7.1.el6_5',
+          }
           ## There's a bug on latest jdk that breaks the engine build
           package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk']:
-            ensure => '1.7.0.55-2.4.7.1.el6_5';
+            ensure => $java_version;
           }
           ## On centos we need an extra selinux policy to allow slave spawned
           ## processes (ex: engine-setup) to install rpms
