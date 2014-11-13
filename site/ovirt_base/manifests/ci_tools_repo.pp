@@ -1,8 +1,8 @@
-# == Class: ovirt_infra::ci_tools_repo
+# == Class: ovirt_base::ci_tools_repo
 #
 # This class creates the repo file for the CI Tools
 #
-class ovirt_infra::ci_tools_repo() {
+class ovirt_base::ci_tools_repo() {
   case $::operatingsystem {
     'CentOS': { $flavour_url = 'EL' }
     'Fedora': { $flavour_url = 'fedora' }
