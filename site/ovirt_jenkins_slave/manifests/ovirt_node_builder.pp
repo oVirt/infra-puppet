@@ -27,28 +27,14 @@ class ovirt_jenkins_slave::ovirt_node_builder () {
   include ovirt_package::autoconf
   include ovirt_package::pykickstart
 
-  case $::operatingsystem {
-    'CentOS': {
-      include ovirt_package::lorax
-      package {['python-imgcreate',
-                'squashfs-tools',
-                'syslinux',
-                'pyparted',
-                'mkisofs',
-                'isomd5sum',
-                'hfsplus-tool',
-                'syslinux-extlinux',
-                'dumpet',
-                ]:
+  case "${::operatingsystem}-${::operatingsystemrelease}" {
+    'Fedora-20': {
+      package {$packages:
         ensure => latest,
       }
     }
     default: {
-      #TBD
+      #TBD only fedora 20 for now
     }
-  }
-
-  package {$packages:
-    ensure => latest,
   }
 }

@@ -22,5 +22,6 @@ class ovirt_jenkins_slave (
   include ovirt_jenkins_slave::puppet_test_runner
   include ovirt_jenkins_slave::ovirt_optimizer_test_runner
   # packaging jobs requirements
+  include ovirt_jenkins_slave::ovirt_node_builder
   include ovirt_jenkins_slave::mock_builder
 }
