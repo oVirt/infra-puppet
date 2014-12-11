@@ -8,7 +8,9 @@
 class ovirt_jenkins_slave::mock_builder (
   $mock_user='jenkins',
 ) {
-  $packages = ['yum-utils', 'mock', 'python-mock', 'yum', ]
+  $packages = ['yum-utils', 'mock', 'yum', ]
+
+  include ovirt_package::python_mock
 
   package {$packages:
     ensure => latest,

@@ -6,7 +6,7 @@
 #
 class ovirt_jenkins_slave::vdsm_test_runner {
   $packages = [
-    'python-devel', 'python-pip', 'wget', 'python-nose', 'ethtool', 'pyflakes',
+    'python-pip', 'wget', 'python-nose', 'ethtool', 'pyflakes',
     'python-ethtool', 'libvirt', 'libvirt-python', 'python-pthreading',
     'm2crypto', 'psmisc', 'python-netaddr', 'genisoimage', 'python-dmidecode',
     'libtool', 'libselinux-python', 'python-kitchen', 'python-cpopen',
@@ -15,6 +15,7 @@ class ovirt_jenkins_slave::vdsm_test_runner {
   ]
 
   include ovirt_jenkins_slave::make_builder
+  include ovirt_package::python_devel
 
   package {$packages:
     ensure => latest,
@@ -29,8 +30,10 @@ class ovirt_jenkins_slave::vdsm_test_runner {
   case "${::osfamily}-${::operatingsystem}" {
     RedHat-Fedora: {
 
+      include ovirt_package::pykickstart
+
       # Common to all fedoras
-      package {['pykickstart', 'virt-install', 'libguestfs-tools']:
+      package {['virt-install', 'libguestfs-tools']:
                   ensure => latest,
       }
     }

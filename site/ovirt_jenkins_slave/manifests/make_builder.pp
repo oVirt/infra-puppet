@@ -6,7 +6,10 @@
 # === Parameters
 #
 class ovirt_jenkins_slave::make_builder {
-  $packages = ['autoconf', 'automake', 'make', 'gettext-devel',]
+  $packages = ['make', 'gettext-devel',]
+
+  include ovirt_package::autoconf
+  include ovirt_package::automake
 
   package {$packages:
     ensure => latest,

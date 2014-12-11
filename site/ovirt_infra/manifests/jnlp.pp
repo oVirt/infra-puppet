@@ -10,6 +10,7 @@ class ovirt_infra::jnlp (
     $my_nofiles = 64000
   } else {
     $my_nofiles = $nofiles
+  }
 
   exec {
     'download slave.jar':
@@ -26,8 +27,8 @@ class ovirt_infra::jnlp (
   }
 
   service {'jnlp' :
-    ensure  => running,
-    enable  => true,
+    ensure => running,
+    enable => true,
   }
 
   if $::operatingsystem == 'Fedora' {
@@ -53,17 +54,17 @@ class ovirt_infra::jnlp (
     }
 
     file {'/var/log/jenkins/slave.log' :
-      ensure  => file,
-      owner   => 'jenkins',
-      group   => 'jenkins',
-      mode    => '0660',
+      ensure => file,
+      owner  => 'jenkins',
+      group  => 'jenkins',
+      mode   => '0660',
     }
 
     file {'/var/log/jenkins/slave.error.log' :
-      ensure  => file,
-      owner   => 'jenkins',
-      group   => 'jenkins',
-      mode    => '0660',
+      ensure => file,
+      owner  => 'jenkins',
+      group  => 'jenkins',
+      mode   => '0660',
     }
 
     File['/etc/init.d/jnlp']
