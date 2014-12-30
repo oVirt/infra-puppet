@@ -11,7 +11,7 @@ class ovirt_jenkins_slave::vdsm_test_runner {
     'm2crypto', 'psmisc', 'python-netaddr', 'genisoimage', 'python-dmidecode',
     'libtool', 'libselinux-python', 'python-kitchen', 'python-cpopen',
     'python-lxml', 'python-inotify', 'python-ply', 'dosfstools',
-    'pylint', 'python-six', 'libnl3',
+    'pylint', 'python-six', 'libnl3', 'python-ioprocess',
   ]
 
   include ovirt_jenkins_slave::make_builder
