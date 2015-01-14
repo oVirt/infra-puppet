@@ -9,6 +9,16 @@ class ovirt_jenkins_slave::base {
   package {['tmpwatch', 'rpm', 'git']:
     ensure => latest,
   }
+
+  # Provide additional entropy to the VMs (provided by EPEL for EL)
+  package {'haveged':
+  }
+  service {'haveged' :
+    ensure => running,
+    enable => true,
+  }
+  Package['haveged'] -> Service['haveged']
+
   case "${::osfamily}-${::operatingsystem}" {
     RedHat-Fedora: {
       case $::operatingsystemrelease {
