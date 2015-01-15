@@ -6,30 +6,58 @@
 # === Parameters
 #
 class ovirt_jenkins_slave::ovirt_node_builder () {
-  $packages = [
-    'livecd-tools',
-    'appliance-tools',
-    'appliance-tools-minimizer',
-    'fedora-packager',
-    'rpm-build',
-    'selinux-policy-doc',
-    'checkpolicy',
-    'selinux-policy-devel',
-    'hardlink',
-    'ltrace',
-    'python-lockfile',
-  ]
-
-  include ovirt_package::python_devel
-  include ovirt_package::createrepo
-  include ovirt_package::python_mock
   include ovirt_package::automake
   include ovirt_package::autoconf
+  include ovirt_package::createrepo
   include ovirt_package::pykickstart
+  include ovirt_package::python_devel
+  include ovirt_package::python_mock
+
+  $common_packages = [
+    'appliance-tools-minimizer',
+    'checkpolicy',
+    'fedora-packager',
+    'hardlink',
+    'livecd-tools',
+    'ltrace',
+    'python-lockfile',
+    'rpm-build',
+    'selinux-policy-devel',
+    'selinux-policy-doc',
+  ]
+
+  $f20_packages = [
+    'appliance-tools',
+  ]
+
+  $el7_packages = [
+    'dumpet',
+    'isomd5sum',
+    'lorax',
+    'hfsplus-tools',
+    'pyparted',
+    'python-imgcreate',
+    'squashfs-tools',
+    'syslinux',
+    'syslinux-extlinux',
+    'system-config-keyboard',
+  ]
 
   case "${::operatingsystem}-${::operatingsystemrelease}" {
     'Fedora-20': {
-      package {$packages:
+      package {$common_packages:
+        ensure => latest,
+      }
+      package {$f20_packages:
+        ensure => latest,
+      }
+    }
+    /^CentOS-7.*/: {
+      include ovirt_package::genisoimage
+      package {$common_packages:
+        ensure => latest,
+      }
+      package {$el7_packages:
         ensure => latest,
       }
     }
