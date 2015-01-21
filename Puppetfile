@@ -14,6 +14,9 @@ mod "puppetlabs/stdlib", "4.3.2"
 mod "rtyler/jenkins", "0.2.4"
 mod "saz/ssh", "1.2.0"
 mod "saz/timezone", "1.2.0"
+mod "squid3",
+  :git => "https://github.com/david-caro/puppet-squid3.git",
+  :ref => '92c7c5917fac5734789629c2ac3c51d179be65fa'
 mod "stahnma/epel", "0.1.0"
 mod "theforeman/concat_native", "1.3.1"
 mod "theforeman/foreman", "2.1.3"

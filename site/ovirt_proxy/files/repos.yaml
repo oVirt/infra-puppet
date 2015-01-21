@@ -1,0 +1,70 @@
+## Fedora repos
+fedora:
+    mirrorlist: http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-{releasever}&arch={arch}
+
+fedora-updates:
+    mirrorlist: http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f{releasever}&arch={arch}
+
+fedora-updates-testing:
+    mirrorlist: http://mirrors.fedoraproject.org/mirrorlist?repo=updates-testing-f{releasever}&arch={arch}
+
+fedora-koji:
+    baseurl: http://kojipkgs.fedoraproject.org/repos/f{releasever}-build/latest/{arch}/
+
+fedora-debuginfo:
+    mirrorlist: http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-debug-{releasever}&arch={arch}
+
+fedora-updates-debuginfo:
+    mirrorlist: http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-debug-f{releasever}&arch={arch}
+
+fedora-updates-testing-debuginfo:
+    mirrorlist: http://mirrors.fedoraproject.org/mirrorlist?repo=updates-testing-debug-f{releasever}&arch={arch}
+
+
+## CentOS repos
+centos-base:
+    mirrorlist: http://mirrorlist.centos.org/?release={releasever}&arch={arch}&repo=os
+
+centos-updates:
+    mirrorlist: http://mirrorlist.centos.org/?release={releasever}&arch={arch}&repo=updates
+
+centos-epel:
+    mirrorlist: http://mirrors.fedoraproject.org/mirrorlist?repo=epel-{releasever}&arch={arch}
+
+centos-testing:
+    mirrorlist: http://mirrors.fedoraproject.org/mirrorlist?repo=testing-epel{releasever}&arch={arch}
+
+centos-6-koji:
+    baseurl: http://kojipkgs.fedoraproject.org/repos/dist-6E-epel-build/latest/{arch}/
+
+centos-7-koji:
+    baseurl: http://kojipkgs.fedoraproject.org/repos/epel7-build/latest/{arch}/
+
+centos-epel-debug:
+    mirrorlist: http://mirrors.fedoraproject.org/mirrorlist?repo=epel-debug-{releasever}&arch={arch}
+
+
+## oVirt repos
+ovirt-3.5-fedora:
+    mirrorlist: http://resources.ovirt.org/pub/yum-repo/mirrorlist-ovirt-3.5-fc{releasever}
+
+ovirt-3.5-snapshot-fedora:
+    mirrorlist: http://resources.ovirt.org/pub/yum-repo/mirrorlist-ovirt-3.5-snapshot-fc{releasever}
+
+ovirt-3.5-el:
+    mirrorlist: http://resources.ovirt.org/pub/yum-repo/mirrorlist-ovirt-3.5-el{releasever}
+
+ovirt-3.5-snapshot-el:
+    mirrorlist: http://resources.ovirt.org/pub/yum-repo/mirrorlist-ovirt-3.5-snapshot-el{releasever}
+
+ovirt-3.4-fedora:
+    mirrorlist: http://resources.ovirt.org/pub/yum-repo/mirrorlist-ovirt-3.4-fc{releasever}
+
+ovirt-3.4-el:
+    mirrorlist: http://resources.ovirt.org/pub/yum-repo/mirrorlist-ovirt-3.4-el{releasever}
+
+ovirt-master-snapshot-fedora:
+    mirrorlist: http://resources.ovirt.org/pub/yum-repo/mirrorlist-ovirt-master-snapshot-fc{releasever}
+
+ovirt-master-snapshot-el:
+    mirrorlist: http://resources.ovirt.org/pub/yum-repo/mirrorlist-ovirt-master-snapshot-el{releasever}
