@@ -28,9 +28,14 @@ class ovirt_jenkins_slave::base {
             ensure => latest;
           }
         }
-        /(20|19)/: {
+        20: {
           package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk',
                     'java-1.7.0-openjdk-headless']:
+            ensure => latest;
+          }
+        }
+        19: {
+          package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk']:
             ensure => latest;
           }
         }
