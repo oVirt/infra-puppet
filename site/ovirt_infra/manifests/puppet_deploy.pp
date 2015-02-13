@@ -1,3 +1,7 @@
+# == Class: ovirt_infra::puppet_deploy
+#
+# Everything needed to deploy the puppet manifests in the puppet master
+#
 class ovirt_infra::puppet_deploy (
   $username = 'puppet-repos',
 ) {
@@ -6,8 +10,8 @@ class ovirt_infra::puppet_deploy (
   $r10k = "${homedir}/bin/r10k"
 
   user {$username:
-    ensure  => present,
-    home    => $homedir,
+    ensure => present,
+    home   => $homedir,
   }
 
   file {"${homedir}/bin":
@@ -16,7 +20,7 @@ class ovirt_infra::puppet_deploy (
   }
 
   file {$update:
-    content => "#!/bin/sh\nscl enable ruby193 '${r10k} -v debug deploy environment -p'",
+    content => "#!/bin/sh\nscl enable ruby193 '${r10k} -v debug deploy environment -p'\n",
     owner   => $username,
     mode    => '0755',
   }
@@ -30,6 +34,18 @@ class ovirt_infra::puppet_deploy (
 
   file {'/etc/r10k.yaml':
     content => template('ovirt_infra/r10k.yaml.erb'),
+  }
+
+  file {'/etc/puppet/hiera.yaml':
+    owner  => 'root',
+    mode   => '0644',
+    source => 'puppet:///modules/ovirt_infra/hiera.yaml',
+  }
+
+  file {'/etc/puppet/hieradata':
+    ensure => directory,
+    owner  => $username,
+    mode   => '0755',
   }
 
   ssh_authorized_key { "Allow jenkins to update puppet for ${username}":

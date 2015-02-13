@@ -5,9 +5,14 @@
 :sources:
   # This will clone the git repository and instantiate an environment per
   # branch in /etc/puppet/environments
-  :plops:
+  :puppet:
     remote: 'git://gerrit.ovirt.org/infra-puppet'
     basedir: '/etc/puppet/environments'
+  # This will clone the git repository and instantiate an environment per
+  # branch in /etc/puppet/hieradata
+  :hiera:
+    remote: 'ssh://<%= @username %>@gerrit.ovirt.org:29418/infra-hiera'
+    basedir: '/etc/puppet/hieradata'
 
 # This directory will be purged of any directory that doesn't map to a
 # git branch
