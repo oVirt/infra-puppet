@@ -48,7 +48,7 @@ class ovirt_jenkins_slave::base {
       file {'/etc/yum.repos.d/gluster.repo':
         ensure => absent,
       }
-
+      $enable_nested = true
     }
     ## CentOS machines
     /^RedHat.*/: {
@@ -59,6 +59,7 @@ class ovirt_jenkins_slave::base {
                     'java-1.7.0-openjdk-headless']:
             ensure => latest;
           }
+          $enable_nested = true
         }
         default: {
           ## There's a bug on latest jdk that breaks the engine build
@@ -78,6 +79,7 @@ class ovirt_jenkins_slave::base {
             ensure      => present,
             syncversion => true,
           }
+          $enable_nested = false
         }
       }
 
@@ -138,5 +140,15 @@ class ovirt_jenkins_slave::base {
   }
   sysctl { 'fs.file-max':
     value => '64000',
+  }
+
+  if $enable_nested {
+    file { '/etc/modprobe.d/nested.conf':
+      content => "options kvm-intel nested=y
+",
+      mode    => '0644',
+      owner   => 'root',
+      group   => 'root',
+    }
   }
 }
