@@ -14,7 +14,6 @@ class ovirt_jenkins_slave::ovirt_node_builder () {
   include ovirt_package::python_mock
 
   $common_packages = [
-    'appliance-tools-minimizer',
     'checkpolicy',
     'fedora-packager',
     'hardlink',
@@ -27,6 +26,7 @@ class ovirt_jenkins_slave::ovirt_node_builder () {
   ]
 
   $f20_packages = [
+    'appliance-tools-minimizer',
     'appliance-tools',
   ]
 
