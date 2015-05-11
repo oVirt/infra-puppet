@@ -68,14 +68,14 @@ class ovirt_jenkins_slave::base {
           }
           ## On centos we need an extra selinux policy to allow slave spawned
           ## processes (ex: engine-setup) to install rpms
-          file {'/usr/share/selinux/targeted/jenkins_slave.pp':
+          file {'/usr/share/selinux/targeted/slave.pp':
             ensure => present,
             owner  => 'root',
             group  => 'root',
             mode   => '0644',
             source => 'puppet:///modules/ovirt_jenkins_slave/jenkins_slave.selinux.el6';
           }
-          selmodule {'jenkins_slave':
+          selmodule {'slave':
             ensure      => present,
             syncversion => true,
           }
