@@ -10,7 +10,7 @@
 #   Size of the RAM cache to use, if set to detect, it will autodetect it
 #
 class ovirt_proxy(
-  $allow='66.187.230.0/26',
+  $allow='66.187.230.0/25',
   $cache_mem='detect',
 ) {
 
