@@ -21,4 +21,6 @@ class ovirt_base {
   package{'bash':
     ensure => 'latest',
   }
+
+  ensure_resource('package', 'logrotate')
 }
