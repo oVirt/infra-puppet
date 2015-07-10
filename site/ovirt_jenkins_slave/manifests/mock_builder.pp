@@ -8,7 +8,11 @@
 class ovirt_jenkins_slave::mock_builder (
   $mock_user='jenkins',
 ) {
-  $packages = ['yum-utils', 'mock', 'yum', ]
+
+  $packages = "${::osfamily}-${::operatingsystemmajrelease}" ? {
+    'RedHat-6' => ['yum-utils', 'mock', 'yum'],
+    default    => ['yum-utils', 'mock', 'yum', 'nosync'],
+  }
 
   include ovirt_package::python_mock
 
