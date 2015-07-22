@@ -21,13 +21,13 @@ class ovirt_jenkins_slave::ovirt_node_builder () {
     'ltrace',
     'python-lockfile',
     'rpm-build',
-    'selinux-policy-devel',
     'selinux-policy-doc',
   ]
 
   $f20_packages = [
     'appliance-tools-minimizer',
     'appliance-tools',
+    'selinux-policy-devel',
   ]
 
   $el7_packages = [
@@ -41,6 +41,7 @@ class ovirt_jenkins_slave::ovirt_node_builder () {
     'syslinux',
     'syslinux-extlinux',
     'system-config-keyboard',
+    'selinux-policy-devel',
   ]
 
   case "${::operatingsystem}-${::operatingsystemrelease}" {
@@ -61,8 +62,16 @@ class ovirt_jenkins_slave::ovirt_node_builder () {
         ensure => latest,
       }
     }
+    /^CentOS-6.*/: {
+      include ovirt_package::genisoimage
+      package {$common_packages:
+        ensure => latest,
+      }
+    }
     default: {
-      #TBD only fedora 20 for now
+      package {$common_packages:
+        ensure => latest,
+      }
     }
   }
 }
