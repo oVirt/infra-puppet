@@ -11,7 +11,7 @@ class ovirt_jenkins_slave::vdsm_test_runner {
     'm2crypto', 'psmisc', 'python-netaddr', 'python-dmidecode',
     'libtool', 'libselinux-python', 'python-kitchen', 'python-cpopen',
     'python-lxml', 'python-inotify', 'python-ply', 'dosfstools',
-    'pylint', 'python-six', 'libnl3', 'python-ioprocess',
+    'pylint', 'python-six', 'libnl3', 'python-ioprocess', 'python-pep8',
   ]
 
   include ovirt_jenkins_slave::make_builder
@@ -48,10 +48,6 @@ class ovirt_jenkins_slave::vdsm_test_runner {
 
       # Common to all CentOS
       include epel
-
-      package {'python-pep8':
-        ensure => latest,
-      }
 
     }
     default: {
