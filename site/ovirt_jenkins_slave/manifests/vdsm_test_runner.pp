@@ -22,9 +22,14 @@ class ovirt_jenkins_slave::vdsm_test_runner {
     ensure => latest,
   }
 
-  if "${::osfamily}-${::operatingsystem}-${::operatingsystemrelease}" != 'RedHat-Fedora-21' {
-    package{'python-ordereddict':
-      ensure => latest,
+  # only fc20 and el7 need python-ordereddict anymore
+  case "${::osfamily}-${::operatingsystem}-${::operatingsystemrelease}" {
+    /^(RedHat-Fedora-20|RedHat-CentOS-7.*)$/: {
+      package{'python-ordereddict':
+        ensure => latest,
+      }
+    }
+    default: {
     }
   }
 
