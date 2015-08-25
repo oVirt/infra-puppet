@@ -9,11 +9,18 @@ class ovirt_resources(
   include ::apache::mod::php
   include ::apache::mod::ssl
 
+  $common_aliases = [
+    { scriptaliasmatch => '^/repos/jpackage/generate_mirrors.cgi',
+      path             => "${resources_dir}/repos/jpackage/generate_mirrors.cgi",
+    },
+  ]
+
   apache::vhost {$::fqdn:
     vhost_name     => '*',
     docroot        => $resources_dir,
     directoryindex => 'index.html index.html.var /_h5ai/server/php/index.php',
     manage_docroot => false,
+    aliases        => $common_aliases,
   }
 
   apache::vhost {"plain.${::fqdn}":
@@ -21,5 +28,6 @@ class ovirt_resources(
     docroot        => "${resources_dir}.plain",
     directoryindex => 'index.html',
     manage_docroot => false,
+    aliases        => $common_aliases,
   }
 }
