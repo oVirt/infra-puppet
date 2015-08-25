@@ -1,9 +1,7 @@
 forge "forge.puppetlabs.org"
 
 mod "erwbgy/limits", "0.3.1"
-mod "apache",
-  :git => "https://github.com/puppetlabs/puppetlabs-apache.git",
-  :ref => 'd051887078363bb01a060f9c405f2875315d345c'
+mod "puppetlabs/apache", "1.6.0"
 mod "puppetlabs/concat", "1.1.1"
 mod "puppetlabs/inifile", "1.1.4"
 mod "puppetlabs/ntp", "3.0.3"
