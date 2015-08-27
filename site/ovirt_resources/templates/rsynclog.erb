@@ -1,0 +1,6 @@
+#!/bin/bash
+mirror="$1"
+shift
+echo "START:$(date)" >> "<%= @rsynclog_log_path %>/mirror.$mirror.log"
+rsync "$@"
+echo "    END:$(date)" >> "<%= @rsynclog_log_path %>/mirror.$mirror.log"

@@ -3,7 +3,10 @@
 class ovirt_resources::apache(
   $resources_dir='/data/repos',
 ) {
-  include ::apache
+  class{'apache':
+    # We are not serving anything from /var/www/html
+    docroot => $resources_dir,
+  }
   include ::apache::mod::prefork
   include ::apache::mod::php
   include ::apache::mod::ssl
