@@ -6,10 +6,16 @@
 # === Parameters
 #
 class ovirt_jenkins_slave::base {
-  package {['tmpwatch', 'rpm', 'git']:
+  package {['tmpwatch', 'rpm', 'git', 'libvirt', 'qemu-kvm']:
     ensure => latest,
   }
 
+  # Make sure libvirt is started
+  service {'libvirtd' :
+    ensure => running,
+    enable => true,
+  }
+  Package['libvirt'] -> Service['libvirtd']
   # Provide additional entropy to the VMs (provided by EPEL for EL)
   package {'haveged':
   }
@@ -101,7 +107,7 @@ class ovirt_jenkins_slave::base {
   }
   file {'/home/jenkins':
     ensure => directory,
-    mode   => '0700',
+    mode   => '0750',
     owner  => 'jenkins',
     group  => 'jenkins';
   }
@@ -110,6 +116,11 @@ class ovirt_jenkins_slave::base {
     mode   => '0700',
     owner  => 'jenkins',
     group  => 'jenkins';
+  }
+  user {'qemu':
+    ensure  => present,
+    groups  => ['jenkins'],
+    require => User['jenkins'],
   }
 
   cron {

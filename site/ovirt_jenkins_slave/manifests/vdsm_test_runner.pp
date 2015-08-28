@@ -7,7 +7,7 @@
 class ovirt_jenkins_slave::vdsm_test_runner {
   $packages = [
     'python-pip', 'wget', 'python-nose', 'ethtool', 'pyflakes',
-    'python-ethtool', 'libvirt', 'libvirt-python', 'python-pthreading',
+    'python-ethtool', 'libvirt-python', 'python-pthreading',
     'm2crypto', 'psmisc', 'python-netaddr', 'python-dmidecode',
     'libtool', 'libselinux-python', 'python-kitchen', 'python-cpopen',
     'python-lxml', 'python-inotify', 'python-ply', 'dosfstools',
