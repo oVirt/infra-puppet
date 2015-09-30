@@ -58,7 +58,7 @@ class ovirt_jenkins_slave::base {
     }
     ## CentOS machines
     /^RedHat.*/: {
-      case $::operatingsystemmajrelease {
+      case $::os_maj_version {
         7: {
           ## There's a bug on latest jdk that breaks the engine build
           package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk',
@@ -67,7 +67,7 @@ class ovirt_jenkins_slave::base {
           }
           $enable_nested = true
         }
-        default: {
+        6: {
           ## There's a bug on latest jdk that breaks the engine build
           package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk']:
             ensure => latest;
@@ -86,6 +86,9 @@ class ovirt_jenkins_slave::base {
             syncversion => true,
           }
           $enable_nested = false
+        }
+        default: {
+          fail("Unsupported ${::operatingsystem}-${::operatingsystemrelease}")
         }
       }
 
