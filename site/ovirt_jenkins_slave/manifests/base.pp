@@ -51,6 +51,18 @@ class ovirt_jenkins_slave::base {
       }
 
       # Common to all fedoras
+
+      if $::virtual != 'physical' {
+        # Provide Guest Agent for oVirt
+        package {'ovirt-guest-agent-common':
+        }
+        service {'ovirt-guest-agent' :
+          ensure => running,
+          enable => true,
+        }
+        Package['ovirt-guest-agent-common'] -> Service['ovirt-guest-agent']
+      }
+
       file {'/etc/yum.repos.d/gluster.repo':
         ensure => absent,
       }
@@ -66,8 +78,29 @@ class ovirt_jenkins_slave::base {
             ensure => latest;
           }
           $enable_nested = true
+          if $::virtual != 'physical' {
+            # Provide Guest Agent for oVirt
+            package {'ovirt-guest-agent-common':
+            }
+            service {'ovirt-guest-agent' :
+              ensure => running,
+              enable => true,
+            }
+            Package['ovirt-guest-agent-common'] -> Service['ovirt-guest-agent']
+          }
         }
         6: {
+          if $::virtual != 'physical' {
+            # Provide Guest Agent for oVirt
+            package {'ovirt-guest-agent':
+            }
+            service {'ovirt-guest-agent' :
+              ensure => running,
+              enable => true,
+            }
+            Package['ovirt-guest-agent'] -> Service['ovirt-guest-agent']
+          }
+
           ## There's a bug on latest jdk that breaks the engine build
           package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk']:
             ensure => latest;
