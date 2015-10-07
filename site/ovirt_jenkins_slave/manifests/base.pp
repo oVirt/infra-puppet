@@ -74,7 +74,8 @@ class ovirt_jenkins_slave::base {
         7: {
           ## There's a bug on latest jdk that breaks the engine build
           package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk',
-                    'java-1.7.0-openjdk-headless']:
+                    'java-1.7.0-openjdk-headless', 'java-1.8.0-openjdk-devel',
+                    'java-1.8.0-openjdk', 'java-1.8.0-openjdk-headless']:
             ensure => latest;
           }
           $enable_nested = true
