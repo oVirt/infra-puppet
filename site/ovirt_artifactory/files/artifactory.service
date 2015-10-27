@@ -1,0 +1,15 @@
+[Unit]
+Description=JFrog Artifactory Server
+After=network.target
+
+[Service]
+Type=forking
+User=artifactory
+Group=artifactory
+TimeoutStartSec=300
+ExecStart=/opt/jfrog/artifactory/bin/artifactory.sh start
+ExecStop=/opt/jfrog/artifactory/bin/artifactory.sh stop
+EnvironmentFile=/etc/sysconfig/artifactory
+
+[Install]
+WantedBy=multi-user.target
