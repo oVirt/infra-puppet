@@ -1,9 +1,28 @@
 # Handles a resources machine: http service serving repositories
 # with support for mirroring and uploading files
 class ovirt_resources(
-  $resources_dir='/data/repos',
-  $mirror_user='mirror',
+  $resources_block_dev ='/dev/vdb',
+  $resources_dir       ='/srv/resources',
+  $mirror_user         ='mirror',
 ) {
+
+  file { $resources_dir:
+    ensure  => directory,
+  }
+
+  mount { $resources_dir:
+    ensure  => mounted,
+    atboot  => true,
+    device  => $resources_block_dev,
+    fstype  => 'ext4',
+    options => 'defaults,noatime',
+    require => File[$resources_dir],
+  }
+
+  class { 'selinux':
+    mode => 'permissive'
+  }
+
   class{'ovirt_resources::apache':
     resources_dir => $resources_dir,
   }

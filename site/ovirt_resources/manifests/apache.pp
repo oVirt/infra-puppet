@@ -23,13 +23,15 @@ class ovirt_resources::apache(
     directoryindex => 'index.html index.html.var /_h5ai/server/php/index.php',
     manage_docroot => false,
     aliases        => $common_aliases,
+    require        => Mount[$resources_dir],
   }
 
   apache::vhost {"plain.${::fqdn}":
     vhost_name     => '*',
-    docroot        => "${resources_dir}.plain",
+    docroot        => $resources_dir,
     directoryindex => 'index.html',
     manage_docroot => false,
     aliases        => $common_aliases,
+    require        => Mount[$resources_dir],
   }
 }
