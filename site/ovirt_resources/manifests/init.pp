@@ -29,10 +29,12 @@ class ovirt_resources(
     server_alias  => $server_alias,
   }
 
-  include ovirt_infra::user::system::jenkins
-
   class{'ovirt_resources::mirror':
     mirror_user   => $mirror_user,
+    resources_dir => $resources_dir,
+  }
+
+  class{'ovirt_resources::publish':
     resources_dir => $resources_dir,
   }
 }

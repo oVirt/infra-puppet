@@ -1,0 +1,2 @@
+# Clean up old published artifacts
+00 2 * * * root <%= @releng_path %>/clean_repos.sh --days=2 <%= @resources_dir %>/pub/ovirt-*snapshot > /var/log/clean_nightly.log

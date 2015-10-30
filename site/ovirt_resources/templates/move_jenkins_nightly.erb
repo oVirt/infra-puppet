@@ -1,0 +1,2 @@
+# Move new artifacts to publicly accessible dir
+*/30 * * * * root <%= @releng_path %>/scan_for_artifacts.sh --repository-path=<%= @resources_dir %>/pub --artifacts-source=<%= @incoming_dir %> >> /var/log/move_jenkins_nightly.cron.log 2>&1
