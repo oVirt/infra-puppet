@@ -1,9 +1,10 @@
 # Handles a resources machine: http service serving repositories
 # with support for mirroring and uploading files
 class ovirt_resources(
-  $resources_block_dev ='/dev/vdb',
-  $resources_dir       ='/srv/resources',
-  $mirror_user         ='mirror',
+  $resources_block_dev = '/dev/vdb',
+  $resources_dir       = '/srv/resources',
+  $mirror_user         = 'mirror',
+  $server_alias        = 'resources.ovirt.org',
 ) {
 
   file { $resources_dir:
@@ -25,6 +26,7 @@ class ovirt_resources(
 
   class{'ovirt_resources::apache':
     resources_dir => $resources_dir,
+    server_alias  => $server_alias,
   }
 
   include ovirt_infra::user::system::jenkins
