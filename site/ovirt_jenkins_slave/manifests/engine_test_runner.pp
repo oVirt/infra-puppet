@@ -44,7 +44,13 @@ class ovirt_jenkins_slave::engine_test_runner {
     /^RedHat.*/: {
       case $::operatingsystemmajrelease {
         7: {
-          package {['maven', 'junit']:
+          yumrepo{'ovirt-master-snapshot-static':
+            descr    => 'ovirt-master-snapshot-static repo',
+            baseurl  => 'http://plain.resources.ovirt.org/pub/ovirt-master-snapshot-static/rpm/el$releasever',
+            gpgcheck => 0,
+            enabled  => 1,
+          }
+          package {['maven', 'junit', 'assertj-core']:
             ensure => latest,
           }
         }
