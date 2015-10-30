@@ -215,4 +215,17 @@ class ovirt_resources::mirror(
     user    => $mirror_user,
   }
 
+  ssh_authorized_key { 'jsiml@plusline.net':
+    ensure  => present,
+    name    => 'Jan Siml <jsiml@plusline.net> - Plus.line (Germany)',
+    key     => 'AAAAB3NzaC1yc2EAAAABIwAAAgEAxchnpLrvkMvK8OecW/myX8gug/Q38qXf8jjy+KO54ecO1493gFniEmGd/d5AC1zIRwPAVOkE0nTKQPObaPn6Alu3TugtP2j1pOhOt9e4TttD4cMcBgbOMuNLkrHrAvixQy4Nr4vKGboHZ6gvHU5mWpuFzJMC1Rm9jJ4jPfq59ZEBbIrTPmh6veuOw2wN3pH3V6HOLobLRw6MrEiRsUNJOqo0IrSgrc7xinaqaBexy68uIhYfov5zxAXeFvAurQg5BduK+izgYV+uHieS2kDdf9j6/7zRXMIfXXzEoarG0aCovYpmMtPNPiy3XeJwlFtjJPEurbKNbmZkl0/EItfQKl/TNpVeQ8y3u/qwvN8UsgQloaNDBYzZ67j1XRQ861RmqKxuV12rqugv+53wTPBP1KAvQkj52Wk39ZZPvLYFwPUaNKC8aPaj/MX8v4tnLQZhiFgg/Og7HuMOVStlh3lr5T+g/+hRSBqBxdbi+IyvtcEKxmtzkfJ2k0yQVBa2TELWxseJQOkQhJA6UDHjUbAczv/lpxWm+8ld5XnqXQ4iQZro6ewLC1+WGGcrSqIBDC9Xo2WFxsg2ac51Yc41HxwLNt4iVWifz2UsbHiV/6lfSTL0OaF1+BEqw5culpBAeBnx0lYBnAj+JzasBF45WFoCmU4mMa5mk5xdWuuDxHCEyXs=',
+    options => ["command=\"${rsynclog} plusline.net --server --sender -vrltH . ${mirror_path}pub/\"",
+                'no-port-forwarding',
+                'no-X11-forwarding',
+                'no-agent-forwarding',
+                'no-pty'],
+    type    => 'ssh-rsa',
+    user    => $mirror_user,
+  }
+
 }
