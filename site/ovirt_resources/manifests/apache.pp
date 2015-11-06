@@ -22,34 +22,45 @@ class ovirt_resources::apache(
     { rewrite_rule => '^/pub/yum-repo/(mirrorlist-ovirt-.*)$  /pub/yum-repo/mirrors.cgi?$1' },
   ]
 
-  $common_directories = [
-    { path    => "${resources_dir}/pub/yum-repo",
-      options => ['ExecCGI'],
-      addhandlers => [{ handler => 'cgi-script', extensions => ['.cgi']}],
-    },
-  ]
-
   apache::vhost {$::fqdn:
     vhost_name     => '*',
     port           => 80,
     serveraliases  => [$server_alias],
     docroot        => $resources_dir,
-    directoryindex => 'index.html index.html.var /_h5ai/server/php/index.php',
     manage_docroot => false,
-    directories    => $common_directories,
+    directories    => [
+      { path           => $resources_dir,
+        options        => ['+Indexes', '+FollowSymLinks', '+MultiViews'],
+        directoryindex => 'index.html index.html.var /_h5ai/server/php/index.php',
+      },
+      { path        => "${resources_dir}/pub/yum-repo",
+        options     => ['+ExecCGI'],
+        addhandlers => [{ handler    => 'cgi-script',
+                          extensions => ['.cgi']}],
+      },
+    ],
     aliases        => $common_aliases,
     rewrites       => $common_rewrites,
     require        => Mount[$resources_dir],
     default_vhost  => true,
   }
 
-  apache::vhost {"plain.${::fqdn}":
+  apache::vhost {"plain.${server_alias}":
     vhost_name     => '*',
-    serveraliases  => ["plain.${server_alias}"],
+    port           => 80,
     docroot        => $resources_dir,
-    directoryindex => 'index.html',
     manage_docroot => false,
-    directories    => $common_directories,
+    directories    => [
+      { path           => $resources_dir,
+        options        => ['+Indexes', '+FollowSymLinks', '+MultiViews'],
+        directoryindex => 'index.html',
+      },
+      { path        => "${resources_dir}/pub/yum-repo",
+        options     => ['+ExecCGI'],
+        addhandlers => [{ handler    => 'cgi-script',
+                          extensions => ['.cgi']}],
+      },
+    ],
     aliases        => $common_aliases,
     rewrites       => $common_rewrites,
     require        => Mount[$resources_dir],
