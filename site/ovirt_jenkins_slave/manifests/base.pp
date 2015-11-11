@@ -6,7 +6,7 @@
 # === Parameters
 #
 class ovirt_jenkins_slave::base {
-  package {['tmpwatch', 'rpm', 'git', 'libvirt', 'qemu-kvm']:
+  package {['tmpwatch', 'rpm', 'git', 'libvirt']:
     ensure => latest,
   }
 
@@ -55,7 +55,9 @@ class ovirt_jenkins_slave::base {
       }
 
       # Common to all fedoras
-
+      package {'qemu-kvm':
+        ensure => latest,
+      }
       if $::virtual != 'physical' {
         # Provide Guest Agent for oVirt
         package {'ovirt-guest-agent-common':
@@ -79,7 +81,8 @@ class ovirt_jenkins_slave::base {
           ## There's a bug on latest jdk that breaks the engine build
           package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk',
                     'java-1.7.0-openjdk-headless', 'java-1.8.0-openjdk-devel',
-                    'java-1.8.0-openjdk', 'java-1.8.0-openjdk-headless']:
+                    'java-1.8.0-openjdk', 'java-1.8.0-openjdk-headless',
+                    'qemu-kvm-ev']:
             ensure => latest;
           }
           $enable_nested = true
@@ -107,7 +110,8 @@ class ovirt_jenkins_slave::base {
           }
 
           ## There's a bug on latest jdk that breaks the engine build
-          package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk']:
+          package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk',
+                    'qemu-kvm-rhev']:
             ensure => latest;
           }
           ## On centos we need an extra selinux policy to allow slave spawned
