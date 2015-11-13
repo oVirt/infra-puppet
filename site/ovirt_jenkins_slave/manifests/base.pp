@@ -10,6 +10,10 @@ class ovirt_jenkins_slave::base {
     ensure => latest,
   }
 
+  class { 'selinux':
+    mode => 'permissive'
+  }
+
   # Make sure libvirt is started
   service {'libvirtd' :
     ensure => running,
