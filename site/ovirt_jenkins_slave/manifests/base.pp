@@ -10,7 +10,7 @@ class ovirt_jenkins_slave::base {
     ensure => latest,
   }
 
-  class { 'selinux':
+  class { 'ovirt_selinux':
     mode => 'permissive'
   }
 
