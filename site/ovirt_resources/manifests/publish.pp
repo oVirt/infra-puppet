@@ -18,6 +18,15 @@ class ovirt_resources::publish(
     ensure => present,
   }
 
+  # Provide additional entropy for rpm signing
+  package {'haveged':
+  }
+  service {'haveged' :
+    ensure => running,
+    enable => true,
+  }
+  Package['haveged'] -> Service['haveged']
+
   vcsrepo { $releng_path:
     ensure   => latest,
     provider => git,
