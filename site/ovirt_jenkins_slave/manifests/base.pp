@@ -81,8 +81,7 @@ class ovirt_jenkins_slave::base {
           ## There's a bug on latest jdk that breaks the engine build
           package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk',
                     'java-1.7.0-openjdk-headless', 'java-1.8.0-openjdk-devel',
-                    'java-1.8.0-openjdk', 'java-1.8.0-openjdk-headless',
-                    'qemu-kvm-ev']:
+                    'java-1.8.0-openjdk', 'java-1.8.0-openjdk-headless']:
             ensure => latest;
           }
           $enable_nested = true
@@ -110,8 +109,7 @@ class ovirt_jenkins_slave::base {
           }
 
           ## There's a bug on latest jdk that breaks the engine build
-          package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk',
-                    'qemu-kvm-rhev']:
+          package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk']:
             ensure => latest;
           }
           ## On centos we need an extra selinux policy to allow slave spawned
