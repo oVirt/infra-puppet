@@ -29,6 +29,14 @@ class ovirt_jenkins_slave::base {
   }
   Package['haveged'] -> Service['haveged']
 
+  # we don't need lago installed, but we need somewhere to put the cached store
+  # and repos
+  file {'/var/lib/lago':
+    ensure => directory,
+    owner  => 'root',
+    mode   => '0644',
+  }
+
   case "${::osfamily}-${::operatingsystem}" {
     RedHat-Fedora: {
       case $::operatingsystemrelease {
