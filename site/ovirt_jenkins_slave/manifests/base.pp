@@ -45,6 +45,18 @@ class ovirt_jenkins_slave::base {
                     'java-1.8.0-openjdk-headless']:
             ensure => latest;
           }
+
+          firewalld_rich_rule { 'Accept http to lago internal repo from vms':
+            ensure => present,
+            zone   => 'public',
+            source => '192.168.0.0/16',
+            dest   => '192.168.0.0/16',
+            port   => {
+              'port'     => '8585',
+              'protocol' => 'tcp',
+            },
+            action => 'accept',
+          }
         }
         20: {
           package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk',
