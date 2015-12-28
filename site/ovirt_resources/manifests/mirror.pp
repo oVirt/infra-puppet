@@ -228,4 +228,18 @@ class ovirt_resources::mirror(
     user    => $mirror_user,
   }
 
+
+  ssh_authorized_key { 'kaplanlior@gmail.com':
+    ensure  => present,
+    name    => 'Mirror http://mirror.isoc.org.il/ - kaplanlior@gmail.com',
+    key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDO1w2Hq1Kls2NhNfmv09SwD6bYbpaEaywoqqafQ/37g9K6iT0jtuS3BhnSSV8p5oWC+7VWmf64jD0+n2bKsMaBY2XK77RbWwsErmHqAEzaY4/coMPTmoIMV67Y34tVgzAgbqV6XUQpnrsFbla6N8DNYoE6LPHprF3/rP66UJOuyYC/gd3Zyx5r7TQQLoReC0NYjCmq0bjc6hLfV9cyslkFGJXZGTIZrCFenuAsa/XXdN7NKGoSwh+47sSEKhR5qR7mtgXh4e7Pxo1OoQQ/gF9QzJT+8esxGntTRBP5by5amPt2w7WFNUE2daLkUUWAtrfOMPXwEwsM7WHdNpaFbRmp',
+    options => ["command=\"${rsynclog} mirror.isoc.org.il --server --sender -vrltH . ${mirror_path}pub/\"",
+                'no-port-forwarding',
+                'no-X11-forwarding',
+                'no-agent-forwarding',
+                'no-pty'],
+    type    => 'ssh-rsa',
+    user    => $mirror_user,
+  }
+
 }
