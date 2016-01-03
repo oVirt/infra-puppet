@@ -7,6 +7,7 @@ class ovirt_resources::mirror(
   $rsynclog_bin_path = "/home/${mirror_user}/bin"
   $rsynclog_log_path = '/var/log/mirrors'
   $rsynclog          = "${rsynclog_bin_path}/rsynclog"
+  $mirrorlist_file   = '/srv/resources/pub/yum-repo/mirrorlist'
 
   # Till all mirror configs updated to use $resources_dir we need to keep this
   file { $mirror_path:
@@ -44,6 +45,14 @@ class ovirt_resources::mirror(
     group   => $mirror_user,
     mode    => '0775',
     content => template('ovirt_resources/rsynclog.erb'),
+  }
+
+  file { $mirrorlist_file:
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    source => 'puppet:///modules/ovirt_resources/mirrorlist',
   }
 
   ssh_authorized_key { 'mirror@archive.linux.duke.edu':

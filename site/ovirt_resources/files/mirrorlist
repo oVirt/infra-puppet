@@ -1,0 +1,6 @@
+http://resources.ovirt.org/pub/ovirt-@VERSION@/rpm/@DIST@/
+http://ftp.nluug.nl/os/Linux/virtual/ovirt/ovirt-@VERSION@/rpm/@DIST@/
+http://www.gtlib.gatech.edu/pub/oVirt/pub/ovirt-@VERSION@/rpm/@DIST@/
+ftp://ftp.gtlib.gatech.edu/pub/oVirt/pub/ovirt-@VERSION@/rpm/@DIST@/
+http://ftp.plusline.net/ovirt/ovirt-@VERSION@/rpm/@DIST@/
+http://mirror.slu.cz/ovirt/ovirt-@VERSION@/rpm/@DIST@/
