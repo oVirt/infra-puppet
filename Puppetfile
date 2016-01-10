@@ -8,7 +8,7 @@ mod "puppetlabs/ntp", "3.0.3"
 mod "postgresql",
   :git => "https://github.com/david-caro/puppetlabs-postgresql.git",
   :ref => '53048211d02b1e758eb7b9c89aedb132566eaa72'
-mod "puppetlabs/stdlib", "4.3.2"
+mod "puppetlabs/stdlib", "4.10.0"
 mod "rtyler/jenkins", "0.2.4"
 mod "saz/ssh", "1.2.0"
 mod "saz/timezone", "1.2.0"
