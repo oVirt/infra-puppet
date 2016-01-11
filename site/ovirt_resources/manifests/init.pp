@@ -5,6 +5,7 @@ class ovirt_resources(
   $resources_dir       = '/srv/resources',
   $mirror_user         = 'mirror',
   $server_alias        = 'resources.ovirt.org',
+  $release_users       = {},
 ) {
 
   file { $resources_dir:
@@ -37,4 +38,6 @@ class ovirt_resources(
   class{'ovirt_resources::publish':
     resources_dir => $resources_dir,
   }
+
+  create_resources(ovirt_infra::user, $release_users)
 }
