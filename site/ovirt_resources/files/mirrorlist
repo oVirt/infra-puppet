@@ -4,3 +4,4 @@ http://www.gtlib.gatech.edu/pub/oVirt/pub/ovirt-@VERSION@/rpm/@DIST@/
 ftp://ftp.gtlib.gatech.edu/pub/oVirt/pub/ovirt-@VERSION@/rpm/@DIST@/
 http://ftp.plusline.net/ovirt/ovirt-@VERSION@/rpm/@DIST@/
 http://mirror.slu.cz/ovirt/ovirt-@VERSION@/rpm/@DIST@/
+http://mirror.isoc.org.il/pub/ovirt/ovirt-@VERSION@/rpm/@DIST@/
