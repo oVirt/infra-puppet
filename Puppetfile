@@ -1,7 +1,7 @@
 forge "forge.puppetlabs.org"
 
 mod "erwbgy/limits", "0.3.1"
-mod "puppetlabs/apache", "1.6.0"
+mod "puppetlabs/apache", "1.8.0"
 mod "puppetlabs/concat", "1.1.1"
 mod "puppetlabs/inifile", "1.1.4"
 mod "puppetlabs/ntp", "3.0.3"
@@ -9,7 +9,11 @@ mod "postgresql",
   :git => "https://github.com/david-caro/puppetlabs-postgresql.git",
   :ref => '53048211d02b1e758eb7b9c89aedb132566eaa72'
 mod "puppetlabs/stdlib", "4.10.0"
-mod "rtyler/jenkins", "0.2.4"
+mod "rtyler/jenkins", "1.6.1"
+mod "puppetlabs/java", "1.0.1"
+mod "darin/zypprepo", "1.0.2"
+mod "nanliu/staging", "1.0.3"
+mod "camptocamp/archive", "0.8.1"
 mod "saz/ssh", "1.2.0"
 mod "saz/timezone", "1.2.0"
 mod "squid3",
