@@ -2,9 +2,13 @@
 :backends:
   - yaml
 :yaml:
-  :datadir: "/etc/puppet/hieradata/%{environment}"
+  :datadir: "/etc/puppet"
 :hierarchy:
-  - "nodes/%{::clientcert}"
-  - "OS/%{::operatingsystem}_%{operatingsystemmajrelease}"
-  - "OS/%{::operatingsystem}"
-  - common
+  - "hieradata/%{environment}/nodes/%{::clientcert}"
+  - "environments/%{environment}/hieradata/nodes/%{::clientcert}" 
+  - "hieradata/%{environment}/OS/%{::operatingsystem}_%{operatingsystemmajrelease}"
+  - "environments/%{environment}/hieradata/OS/%{::operatingsystem}_%{operatingsystemmajrelease}"
+  - "hieradata/%{environment}/OS/%{::operatingsystem}"
+  - "environments/%{environment}/hieradata/OS/%{::operatingsystem}"
+  - "hieradata/%{environment}/common"
+  - "environments/%{environment}/hieradata/common"
