@@ -1,0 +1,60 @@
+
+#!/bin/bash
+#
+# Gerrit backup script - database backup
+#
+# 0.1 Alpha - 20111207 Karsten Wade <kwade@redhat.com> <quaid@iquaid.org>
+#
+#
+# Copyright 2011 Karsten Wade <kwade@redhat.com> <quaid@iquaid.org>
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+#
+
+# set variables
+SU="/bin/su"
+SCP="/usr/bin/scp"
+SSH="/usr/bin/ssh"
+TAR="/bin/tar"
+TAROPTS="-czf"
+HOME="<%= @gerrit_home %>/"
+PGDUMP="/usr/bin/pg_dump"
+PGUSER="gerrit2"
+PGHOST="localhost"
+# PGPORT=""
+# The -w directive stops a password request, the ~/.pgpass file provides the password
+PGOPTS="-w"
+DATE=`/bin/date +%Y%m%d`
+DBNAME="reviewdb"
+BACKUPDIR="<%= @gerrit_home %>/backups/database"
+BACKUPFILE="gerrit-pg-dump"
+REMOTEHOST="<%= @backup_server %>"
+REMOTEUSER="<%= @backup_owner %>"
+REMOTEDIR="gerrit.ovirt.org-database-backup"
+
+## Run backup
+# Switch to the Gerrit user - useful if root runs the script
+#$SU - $PGUSER
+# The gerrit2 user should change to the home directory
+cd $HOME
+# Cleanup any backups older than a week
+find $BACKUPDIR -type f -mtime +7 |grep -v ^\.$| xargs rm -rf
+# Dump the database to a SQL script file with a dated filename
+$PGDUMP $PGOPTS $DBNAME > $BACKUPDIR/$BACKUPFILE-$DATE.sql
+# Compress the SQL script
+$TAR $TAROPTS $BACKUPDIR/$BACKUPFILE-$DATE.tgz $BACKUPDIR/$BACKUPFILE-$DATE.sql
+# Securely copy the SQL script to a remote backup host
+$SSH -t $REMOTEUSER@$REMOTEHOST <<EOC
+    mkdir -p $REMOTEDIR
+EOC
+$SCP $BACKUPDIR/$BACKUPFILE-$DATE.tgz $REMOTEUSER@$REMOTEHOST:$REMOTEDIR/
