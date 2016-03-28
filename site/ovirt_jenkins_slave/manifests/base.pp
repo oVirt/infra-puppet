@@ -201,6 +201,14 @@ class ovirt_jenkins_slave::base {
       user    => 'jenkins';
   }
 
+  ssh_authorized_key {
+    'jenkins@jenkins.phx.ovirt.org':
+      key  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDsZ34L+B3YzL7a6zCrJB41r/IqM/s1ILXyjslApSrtquQRtUcbeoE7kS4PdyhO2U4Pu91EzYMPWc7JVnQirwKX5ksXwxZn/Y8f5KzKm5IfPRJfX6sBWS9eGRsyLj5JQjHiVYiBSsACidIr8zc3lJo/nxhp18wj5Ao4h5rhqpw/P+u53/NQ0KvRQtrBFxgWR9JM6KpcjB6rVzm1OBJQPe9aSm97NLh3ijXxYNrbIpXt/YoyByP36QVlcM+L9idFAWY2TkCX5mWclCJJeCint9+SxD0gRW3/tgNWwxx7nkFDGdl/WKhgT0JjmCVFqSG/cGNYYMX+A25zKqqD1SqPNFhx',
+      type => 'ssh-rsa',
+      user => 'jenkins',
+  }
+
+
   class {'limits':
     config    => {
       '*' => {

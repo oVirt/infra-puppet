@@ -1,0 +1,17 @@
+#header {
+    background-color: #030;
+}
+#jenkins-head-icon {
+  display: block;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: url(/userContent/oVirt-logo.png) no-repeat;
+  width: 112px;
+  height: 28px;
+  padding-left: 80px;
+  bottom: 7px;
+}
+#jenkins-name-icon {
+  bottom: 0px;
+  left: 110px;
+}

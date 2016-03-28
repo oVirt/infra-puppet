@@ -7,6 +7,7 @@ class ovirt_jenkins(
   $jenkins_ver = 'latest',
   $manage_java = true,
   $plugins = {},
+  $jnlp_port = '56293',
   )
 {
   file { $data_dir:
@@ -25,10 +26,27 @@ class ovirt_jenkins(
     install_java  => $manage_java,
     cli           => true,
     config_hash   => {
-    'JENKINS_HOME' => {
-      'value' => "${data_dir}/jenkins"
-    }
+      'JENKINS_HOME'         => {
+        'value' => "${data_dir}/jenkins"
+      },
+      'JENKINS_JAVA_OPTIONS' => {
+        'value' => '-Djava.awt.headless=true -Xmx8G -XX:MaxPermSize=3G'
+      },
     },
+  }
+
+  file { 'userContent':
+    path         => "${data_dir}/jenkins/userContent",
+    source       => 'puppet:///modules/ovirt_jenkins/userContent',
+    recurse      => true,
+    recurselimit => 1,
+    owner        => 'jenkins',
+    group        => 'jenkins',
+  }
+
+
+  class {'jenkins::cli_helper':
+      ssh_keyfile => "${data_dir}/jenkins/.ssh/id_rsa",
   }
 
   create_resources('jenkins::plugin', $plugins)
@@ -58,9 +76,40 @@ class ovirt_jenkins(
     ensure  => 'present',
     service => 'http',
   }
+
+  firewalld_port { 'jnlp port for jenkins slave':
+    ensure   => 'present',
+    zone     => 'public',
+    port     => '56293',
+    protocol => 'tcp',
+  }
+
   class { '::selinux':
     mode => 'enforcing',
   }
   selinux::boolean { 'httpd_can_network_relay': }
 
+  class {'::epel': }
+  package { ['python-pip', 'git']:
+    ensure => latest,
+  }
+  package {'ordereddict':
+    ensure   => present,
+    provider => 'pip',
+  }
+  package { ['puppet-lint', 'rspec' ]:
+      ensure   => present,
+      provider => 'gem',
+  }
+  Class['epel']
+  ->Package['python-pip']
+  ->Package['ordereddict']
+
+  file { "${data_dir}/jenkins/.jenkinsjobsrc-defaults":
+    ensure  => present,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0644',
+    content => template('ovirt_jenkins/jenkinsjobsrc.erb'),
+  }
 }
