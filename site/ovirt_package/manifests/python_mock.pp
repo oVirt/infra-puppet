@@ -14,7 +14,19 @@
 class ovirt_package::python_mock(
   $ensure = 'latest',
 ){
-  package{'python-mock':
-    ensure => $ensure,
+  case "${::osfamily}-${::operatingsystem}-${::operatingsystemrelease}" {
+    /^(RedHat-RedHat-7.*|RedHat-CentOS-7.*)$/: {
+    $package_name = 'python2-mock'
   }
+
+  default: {
+    $package_name = 'python-mock'
+    }
+  }
+
+  package{'python-mock':
+      ensure => $ensure,
+      name   => $package_name,
+  }
+
 }
