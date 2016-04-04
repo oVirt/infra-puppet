@@ -14,7 +14,6 @@ class ovirt_jenkins_slave::mock_builder (
     default      => ['yum-utils', 'mock', 'yum', 'nosync'],
   }
 
-  include ovirt_package::python_mock
 
   package {$packages:
     ensure => latest,

@@ -11,7 +11,6 @@ class ovirt_jenkins_slave::ovirt_node_builder () {
   include ovirt_package::createrepo
   include ovirt_package::pykickstart
   include ovirt_package::python_devel
-  include ovirt_package::python_mock
 
   $common_packages = [
     'checkpolicy',
