@@ -16,7 +16,7 @@ class ovirt_backup::server(
 ) {
   include ovirt_base
 
-  ensure_packages(['lvm2'])
+  ensure_packages(['lvm2', 'rsync'])
 
   if $mk_backup_pv {
     physical_volume { $backup_pv:
