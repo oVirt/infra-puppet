@@ -16,7 +16,7 @@ class ovirt_backup::server(
 ) {
   include ovirt_base
 
-  ensure_packages(['lvm2'])
+  ensure_packages(['lvm2', 'rsync'])
 
   if $mk_backup_pv {
     physical_volume { $backup_pv:
@@ -76,6 +76,10 @@ class ovirt_backup::server(
 
   class { 'ovirt_backup::gerrit::server':
     backup_home  => "${backup_home}/gerrit",
+    backup_group => $backup_group,
+  }
+  class { 'ovirt_backup::jenkins::server':
+    backup_home  => "${backup_home}/jenkins",
     backup_group => $backup_group,
   }
 }

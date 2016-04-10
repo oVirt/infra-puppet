@@ -121,4 +121,13 @@ class ovirt_jenkins(
     mode    => '0644',
     content => template('ovirt_jenkins/jenkinsjobsrc.erb'),
   }
+
+  if  $::jenkins_sshrsa {
+    @@ssh_authorized_key { "jenkins@${::fqdn}":
+      user => 'jenkins',
+      type => 'ssh-rsa',
+      key  => $::jenkins_sshrsa,
+      tag  => 'jenkins_sshrsa',
+    }
+  }
 }
