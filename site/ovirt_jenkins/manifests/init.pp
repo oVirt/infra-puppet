@@ -30,7 +30,7 @@ class ovirt_jenkins(
         'value' => "${data_dir}/jenkins"
       },
       'JENKINS_JAVA_OPTIONS' => {
-        'value' => '-Djava.awt.headless=true -Xmx8G -XX:MaxPermSize=3G'
+        'value' => '-Djava.awt.headless=true -Xmx12G -Xms4G -XX:MaxPermSize=3G'
       },
     },
   }
