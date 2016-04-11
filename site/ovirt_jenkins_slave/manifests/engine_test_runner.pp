@@ -6,19 +6,21 @@
 # === Parameters
 #
 class ovirt_jenkins_slave::engine_test_runner {
-  $packages = [
-    'postgresql-jdbc', 'libnl', 'log4j', 'jasperreports-server',
-    'chrpath', 'sos', 'mailcap',
-  ]
+  #$packages = [
+    #'postgresql-jdbc', 'log4j', 'jasperreports-server',
+    #'chrpath', 'sos', 'mailcap',
+  #]
+
 
   include ovirt_package::createrepo
 
-  package {$packages:
-    ensure => latest,
-  }
+  #package {$packages:
+    #ensure => latest,
+  #}
 
   case "${::osfamily}-${::operatingsystem}" {
     RedHat-Fedora: {
+
 
       # Common to all fedoras
       package {[

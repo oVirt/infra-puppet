@@ -4,10 +4,8 @@ mod "erwbgy/limits", "0.3.1"
 mod "puppetlabs/apache", "1.8.0"
 mod "puppetlabs/concat", "1.1.1"
 mod "puppetlabs/inifile", "1.1.4"
-mod "puppetlabs/ntp", "3.0.3"
-mod "postgresql",
-  :git => "https://github.com/david-caro/puppetlabs-postgresql.git",
-  :ref => '53048211d02b1e758eb7b9c89aedb132566eaa72'
+mod "puppetlabs/ntp", "4.1.2"
+mod "puppetlabs/postgresql", "4.7.1"
 mod "puppetlabs/stdlib", "4.10.0"
 mod "rtyler/jenkins", "1.6.1"
 mod "puppetlabs/java", "1.0.1"

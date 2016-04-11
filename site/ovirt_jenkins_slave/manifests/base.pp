@@ -40,7 +40,7 @@ class ovirt_jenkins_slave::base {
   case "${::osfamily}-${::operatingsystem}" {
     RedHat-Fedora: {
       case $::operatingsystemrelease {
-        21: {
+        /^(21|22)$/: {
           package {['java-1.8.0-openjdk-devel', 'java-1.8.0-openjdk',
                     'java-1.8.0-openjdk-headless']:
             ensure => latest;
@@ -83,8 +83,9 @@ class ovirt_jenkins_slave::base {
         package {'ovirt-guest-agent-common':
         }
         service {'ovirt-guest-agent' :
-          ensure => running,
-          enable => true,
+          ensure   => running,
+          enable   => true,
+          provider => 'systemd',
         }
         Package['ovirt-guest-agent-common'] -> Service['ovirt-guest-agent']
       }
@@ -181,9 +182,8 @@ class ovirt_jenkins_slave::base {
     group  => 'jenkins';
   }
   user {'qemu':
-    ensure  => present,
-    groups  => ['jenkins'],
-    require => User['jenkins'],
+    ensure => present,
+    groups => ['jenkins'],
   }
 
   cron {
@@ -194,19 +194,25 @@ class ovirt_jenkins_slave::base {
       minute  => 0,
   }
 
-  ssh_authorized_key {
-    'jenkins@ip-10-114-123-188':
+  ssh_authorized_key { 'jenkins@ip-10-114-123-188':
       key     => 'AAAAB3NzaC1yc2EAAAABIwAAAQEAykXy+X1qUI/TyblF5J35A1bexPeFWj7SmzzcClS3GzQ8jEaV7AaOzbvyl2dQ8P4nh8tr2nSeT7LAFYWhIGscy6V7p5vMRr3mUzRA/E/g3r9wdmdDcPLOqfpJWiLTDlA3XQyFhJnwQopGRBSf5yzFGWFezH+rjzlwBDDN2mQkI/WuSEBh+UT/9+E7JvQBVhg2hapXszfSrrtrVniw/1TvNJEvR+wdwxCUkJWP+LZOtdbGIYQZMkmw8yMNy/fkEfxR3CLge65rDCbxqlDkqFff0VWcwd3SBXdIo4T1401kIjcPiPR9npib7Ra88QiWXIazHW05ejp+m2W136zmYmfxFw==',
       type    => 'ssh-rsa',
       user    => 'jenkins';
   }
 
-  ssh_authorized_key {
-    'jenkins@jenkins.phx.ovirt.org':
+  ssh_authorized_key { 'jenkins@jenkins.phx.ovirt.org':
       key  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDsZ34L+B3YzL7a6zCrJB41r/IqM/s1ILXyjslApSrtquQRtUcbeoE7kS4PdyhO2U4Pu91EzYMPWc7JVnQirwKX5ksXwxZn/Y8f5KzKm5IfPRJfX6sBWS9eGRsyLj5JQjHiVYiBSsACidIr8zc3lJo/nxhp18wj5Ao4h5rhqpw/P+u53/NQ0KvRQtrBFxgWR9JM6KpcjB6rVzm1OBJQPe9aSm97NLh3ijXxYNrbIpXt/YoyByP36QVlcM+L9idFAWY2TkCX5mWclCJJeCint9+SxD0gRW3/tgNWwxx7nkFDGdl/WKhgT0JjmCVFqSG/cGNYYMX+A25zKqqD1SqPNFhx',
       type => 'ssh-rsa',
       user => 'jenkins',
   }
+  
+  User['jenkins']->
+  File['/home/jenkins']->
+  File['/home/jenkins/.ssh']->
+  User['qemu']->
+  Ssh_authorized_key['jenkins@ip-10-114-123-188']->
+  Ssh_authorized_key['jenkins@jenkins.phx.ovirt.org']
+
 
 
   class {'limits':
