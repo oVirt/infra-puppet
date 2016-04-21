@@ -4,7 +4,7 @@
 class ovirt_jenkins(
   $data_dir = '/var/lib/data',
   $block_device = '/dev/mapper/jenkins_lvm-data',
-  $jenkins_ver = 'latest',
+  $jenkins_ver = 'installed',
   $manage_java = true,
   $plugins = {},
   $jnlp_port = '56293',
@@ -22,6 +22,7 @@ class ovirt_jenkins(
   }
   class { '::jenkins':
     version       => $jenkins_ver,
+    lts           => true,
     localstatedir => "${data_dir}/jenkins",
     install_java  => $manage_java,
     cli           => true,
