@@ -179,7 +179,7 @@ ovirt_jenkins::plugins:
   'bugzilla':
     version: '1.5'
   'extra-columns':
-    version: '1.15'
+    version: '1.17'
   'rebuild':
     version: '1.25'
   'github-api':
