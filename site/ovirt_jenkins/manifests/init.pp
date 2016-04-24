@@ -33,6 +33,9 @@ class ovirt_jenkins(
       'JENKINS_JAVA_OPTIONS' => {
         'value' => '-Djava.awt.headless=true -Xmx12G -Xms4G -XX:MaxPermSize=3G'
       },
+      'JENKINS_ARGS'         => {
+        'value' =>  ' --sessionTimeout=400 ',
+      },
     },
   }
 
