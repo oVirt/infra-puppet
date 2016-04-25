@@ -5,7 +5,7 @@ class ovirt_jenkins(
   $data_dir = '/var/lib/data',
   $block_device = '/dev/mapper/jenkins_lvm-data',
   $jenkins_ver = 'installed',
-  $manage_java = true,
+  $manage_java = false,
   $plugins = {},
   $jnlp_port = '56293',
   )
@@ -108,6 +108,11 @@ class ovirt_jenkins(
   Class['epel']
   ->Package['python-pip']
   ->Package['ordereddict']
+
+  package {['java-1.8.0-openjdk-devel','java-1.8.0-openjdk',
+            'java-1.8.0-openjdk-headless']:
+    ensure => latest
+  }
 
   file { "${data_dir}/jenkins/.jenkinsjobsrc-defaults":
     ensure  => present,
