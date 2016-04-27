@@ -4,6 +4,7 @@ define ovirt_infra::user (
     $sudo = true,
     $ensure = present,
     $password = undef,
+    $type = 'ssh-rsa',
 ) {
   user { $name:
     ensure     => $ensure,
@@ -13,9 +14,9 @@ define ovirt_infra::user (
 
   if ($key != undef) {
     ssh_authorized_key {"key-${name}":
-      key     => $key,
-      type    => 'ssh-rsa',
-      user    => $name,
+      key  => $key,
+      type => $type,
+      user => $name,
     }
   }
 
