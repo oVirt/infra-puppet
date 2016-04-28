@@ -1,4 +1,4 @@
-forge "forge.puppetlabs.org"
+forge "https://forgeapi.puppetlabs.com/"
 
 mod "erwbgy/limits", "0.3.1"
 mod "puppetlabs/apache", "1.8.0"
