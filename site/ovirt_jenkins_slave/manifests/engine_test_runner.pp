@@ -104,14 +104,9 @@ class ovirt_jenkins_slave::engine_test_runner {
       ## Use a file resource instead of yumrepo because skip_if_unavailable is
       ## not supported yet
       unless 'ppc' in $::architecture {
-        file { '/etc/yum.repos.d/gluster.repo':
-          ensure => present,
-          mode   => '0664',
-          owner  => 'root',
-          group  => 'root',
-          source => 'puppet:///modules/ovirt_jenkins_slave/gluster.epel.repo';
+        package {['centos-release-gluster37']:
+                    ensure => latest,
         }
-
         yumrepo{ 'patternfly':
           descr    => 'Copr repo for patternfly1 owned by patternfly',
           baseurl  => 'http://copr-be.cloud.fedoraproject.org/results/patternfly/patternfly1/epel-$releasever-$basearch/',

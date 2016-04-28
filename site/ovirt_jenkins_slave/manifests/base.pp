@@ -36,6 +36,11 @@ class ovirt_jenkins_slave::base {
     owner  => 'root',
     mode   => '0644',
   }
+  # gluster is taken from SIG from 'centos-release-gluster'
+  # repository and is needed on EL7> only.
+  file {'/etc/yum.repos.d/gluster.repo':
+    ensure => absent,
+  }
 
   case "${::osfamily}-${::operatingsystem}" {
     RedHat-Fedora: {
@@ -84,9 +89,6 @@ class ovirt_jenkins_slave::base {
         Package['ovirt-guest-agent-common'] -> Service['ovirt-guest-agent']
       }
 
-      file {'/etc/yum.repos.d/gluster.repo':
-        ensure => absent,
-      }
       $enable_nested = true
     }
     ## CentOS machines
