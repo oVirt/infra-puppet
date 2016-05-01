@@ -15,8 +15,10 @@ class ovirt_backup::server(
   $backup_lv_size = '60G'
 ) {
   include ovirt_base
-
-  ensure_packages(['lvm2', 'rsync'])
+  class {'::epel': }
+  ensure_packages(['lvm2', 'rsync', 'duplicity'])
+  Class['epel']
+  ->Package['duplicity']
 
   if $mk_backup_pv {
     physical_volume { $backup_pv:

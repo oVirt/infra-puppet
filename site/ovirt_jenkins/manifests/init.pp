@@ -133,9 +133,12 @@ class ovirt_jenkins(
       ensure   => present,
       provider => 'gem',
   }
+  class { '::ovirt_backup::jenkins::client': }
+
   Class['epel']
   ->Package['python-pip']
   ->Package['ordereddict']
+  ->Class['::ovirt_backup::jenkins::client']
 
   package {['java-1.8.0-openjdk-devel','java-1.8.0-openjdk',
             'java-1.8.0-openjdk-headless']:
