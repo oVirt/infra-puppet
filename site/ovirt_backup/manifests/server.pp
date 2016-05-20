@@ -82,4 +82,8 @@ class ovirt_backup::server(
     backup_home  => "${backup_home}/jenkins",
     backup_group => $backup_group,
   }
+  class { 'ovirt_backup::engine::server':
+    backup_home  => "${backup_home}/engine",
+    backup_group => $backup_group,
+  }
 }

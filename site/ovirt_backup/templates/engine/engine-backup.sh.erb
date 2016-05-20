@@ -1,0 +1,48 @@
+#!/bin/bash -e
+#
+# Engine backup script - database backup
+#
+# 0.1 Alpha - 20160804 Evgheni Dereveanchin <ederevea@redhat.com>
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+#
+
+# set variables
+SCP="/usr/bin/scp"
+SSH="/usr/bin/ssh"
+HOME="<%= @engine_backups %>/"
+DATE=`/bin/date +%Y%m%d`
+BACKUPDIR="<%= @engine_backups %>"
+BACKUPFILE="engine-backup"
+REMOTEHOST="<%= @backup_server %>"
+REMOTEUSER="<%= @backup_owner %>"
+REMOTEDIR="<%= @fqdn %>-backup"
+ENGINEBKP="/usr/bin/engine-backup"
+BKPOPTS="--scope=all --mode=backup"
+
+## Run backup
+cd $HOME
+
+# Cleanup any backups older than a week
+find $BACKUPDIR -type f -mtime +7 -delete
+
+# Generate backup with a dated filename
+$ENGINEBKP $BKPOPTS \
+ --log=$BACKUPDIR/$BACKUPFILE-log-$DATE.tar.bz2 \
+ --file=$BACKUPDIR/$BACKUPFILE-$DATE.tar.bz2
+
+# Securely copy the SQL script to a remote backup host
+$SSH -t $REMOTEUSER@$REMOTEHOST <<EOC
+    mkdir -p $REMOTEDIR
+EOC
+$SCP -o PasswordAuthentication=no $BACKUPDIR/$BACKUPFILE-$DATE.tar.bz2 $REMOTEUSER@$REMOTEHOST:$REMOTEDIR/
