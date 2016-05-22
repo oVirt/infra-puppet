@@ -40,7 +40,7 @@ class ovirt_jenkins_slave::base {
   case "${::osfamily}-${::operatingsystem}" {
     RedHat-Fedora: {
       case $::operatingsystemrelease {
-        21: {
+        /^(21|22|23)$/: {
           package {['java-1.8.0-openjdk-devel', 'java-1.8.0-openjdk',
                     'java-1.8.0-openjdk-headless']:
             ensure => latest;
@@ -58,14 +58,9 @@ class ovirt_jenkins_slave::base {
             action => 'accept',
           }
         }
-        20: {
+        /^20$/: {
           package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk',
                     'java-1.7.0-openjdk-headless']:
-            ensure => latest;
-          }
-        }
-        19: {
-          package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk']:
             ensure => latest;
           }
         }
@@ -180,6 +175,16 @@ class ovirt_jenkins_slave::base {
     owner  => 'jenkins',
     group  => 'jenkins';
   }
+  Ssh_authorized_key <<| tag == 'jenkins_sshrsa' |>>
+  {
+    user    => 'jenkins',
+    type    => 'ssh-rsa',
+    require => User['jenkins'],
+  }
+  User['jenkins']->
+  File['/home/jenkins']->
+  File['/home/jenkins/.ssh']
+
   user {'qemu':
     ensure  => present,
     groups  => ['jenkins'],
@@ -194,22 +199,11 @@ class ovirt_jenkins_slave::base {
       minute  => 0,
   }
 
-  ssh_authorized_key {
-    'jenkins@ip-10-114-123-188':
-      key     => 'AAAAB3NzaC1yc2EAAAABIwAAAQEAykXy+X1qUI/TyblF5J35A1bexPeFWj7SmzzcClS3GzQ8jEaV7AaOzbvyl2dQ8P4nh8tr2nSeT7LAFYWhIGscy6V7p5vMRr3mUzRA/E/g3r9wdmdDcPLOqfpJWiLTDlA3XQyFhJnwQopGRBSf5yzFGWFezH+rjzlwBDDN2mQkI/WuSEBh+UT/9+E7JvQBVhg2hapXszfSrrtrVniw/1TvNJEvR+wdwxCUkJWP+LZOtdbGIYQZMkmw8yMNy/fkEfxR3CLge65rDCbxqlDkqFff0VWcwd3SBXdIo4T1401kIjcPiPR9npib7Ra88QiWXIazHW05ejp+m2W136zmYmfxFw==',
-      type    => 'ssh-rsa',
-      user    => 'jenkins';
-  }
-
-  ssh_authorized_key {
-    'jenkins@jenkins.phx.ovirt.org':
-      key  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDsZ34L+B3YzL7a6zCrJB41r/IqM/s1ILXyjslApSrtquQRtUcbeoE7kS4PdyhO2U4Pu91EzYMPWc7JVnQirwKX5ksXwxZn/Y8f5KzKm5IfPRJfX6sBWS9eGRsyLj5JQjHiVYiBSsACidIr8zc3lJo/nxhp18wj5Ao4h5rhqpw/P+u53/NQ0KvRQtrBFxgWR9JM6KpcjB6rVzm1OBJQPe9aSm97NLh3ijXxYNrbIpXt/YoyByP36QVlcM+L9idFAWY2TkCX5mWclCJJeCint9+SxD0gRW3/tgNWwxx7nkFDGdl/WKhgT0JjmCVFqSG/cGNYYMX+A25zKqqD1SqPNFhx',
-      type => 'ssh-rsa',
-      user => 'jenkins',
-  }
-
-
   class {'limits':
+  # TO-DO: this doesn't take any affect on the current connected
+  # users(i.e. jenkins agent), so jenkins agent has to reconnet.
+  # once we start using the swarm-plugin, we need to schedule here a refresh
+  # of jenkins-slave service after applying the limit.
     config    => {
       '*' => {
         'nofile' => {
@@ -226,8 +220,7 @@ class ovirt_jenkins_slave::base {
 
   if $enable_nested {
     file { '/etc/modprobe.d/nested.conf':
-      content => "options kvm-intel nested=y
-",
+      content => "options kvm-intel nested=y\n",
       mode    => '0644',
       owner   => 'root',
       group   => 'root',

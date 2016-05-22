@@ -11,8 +11,8 @@ class ovirt_jenkins_slave::ovirt_node_builder () {
   include ovirt_package::createrepo
   include ovirt_package::pykickstart
   include ovirt_package::python_devel
-
-  $common_packages = [
+  include ovirt_package::genisoimage
+  $node_packages = [
     'checkpolicy',
     'fedora-packager',
     'hardlink',
@@ -21,15 +21,6 @@ class ovirt_jenkins_slave::ovirt_node_builder () {
     'python-lockfile',
     'rpm-build',
     'selinux-policy-doc',
-  ]
-
-  $f20_packages = [
-    'appliance-tools-minimizer',
-    'appliance-tools',
-    'selinux-policy-devel',
-  ]
-
-  $el7_packages = [
     'dumpet',
     'isomd5sum',
     'lorax',
@@ -42,35 +33,7 @@ class ovirt_jenkins_slave::ovirt_node_builder () {
     'system-config-keyboard',
     'selinux-policy-devel',
   ]
-
-  case "${::operatingsystem}-${::operatingsystemrelease}" {
-    'Fedora-20': {
-      package {$common_packages:
-        ensure => latest,
-      }
-      package {$f20_packages:
-        ensure => latest,
-      }
-    }
-    /^CentOS-7.*/: {
-      include ovirt_package::genisoimage
-      package {$common_packages:
-        ensure => latest,
-      }
-      package {$el7_packages:
-        ensure => latest,
-      }
-    }
-    /^CentOS-6.*/: {
-      include ovirt_package::genisoimage
-      package {$common_packages:
-        ensure => latest,
-      }
-    }
-    default: {
-      package {$common_packages:
-        ensure => latest,
-      }
-    }
+  package {$node_packages:
+    ensure => latest,
   }
 }

@@ -7,8 +7,8 @@
 #
 class ovirt_jenkins_slave::engine_test_runner {
   $packages = [
-    'postgresql-jdbc', 'libnl', 'log4j', 'jasperreports-server',
-    'chrpath', 'sos', 'mailcap',
+    'postgresql-jdbc', 'log4j','jasperreports-server','chrpath',
+    'sos', 'mailcap',
   ]
 
   include ovirt_package::createrepo

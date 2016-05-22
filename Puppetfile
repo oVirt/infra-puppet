@@ -6,8 +6,8 @@ mod "puppetlabs/concat", "1.1.1"
 mod "puppetlabs/inifile", "1.1.4"
 mod "puppetlabs/ntp", "3.0.3"
 mod "postgresql",
-  :git => "https://github.com/david-caro/puppetlabs-postgresql.git",
-  :ref => '53048211d02b1e758eb7b9c89aedb132566eaa72'
+    :git => "https://github.com/puppetlabs/puppetlabs-postgresql.git",
+    :ref => '5ddafcaf8da49c977fde29bac6c1f4ceb02735c4'
 mod "puppetlabs/stdlib", "4.10.0"
 mod "rtyler/jenkins", "1.6.1"
 mod "puppetlabs/java", "1.0.1"
@@ -24,7 +24,7 @@ mod "theforeman/concat_native", "1.3.1"
 mod "theforeman/foreman", "2.1.3"
 mod "theforeman/git", "1.3.1"
 mod "theforeman/puppet", "2.1.2"
-mod "thias/sysctl", "0.3.0"
+mod "thias/sysctl", "1.0.6"
 mod "jfryman/selinux", "0.2.5"
 mod "crayfishx/firewalld", "2.2.0"
 mod "puppetlabs/vcsrepo", "1.3.1"
