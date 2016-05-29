@@ -6,8 +6,8 @@ mod "puppetlabs/concat", "1.1.1"
 mod "puppetlabs/inifile", "1.1.4"
 mod "puppetlabs/ntp", "3.0.3"
 mod "postgresql",
-    :git => "https://github.com/puppetlabs/puppetlabs-postgresql.git",
-    :ref => '5ddafcaf8da49c977fde29bac6c1f4ceb02735c4'
+    :git => "https://github.com/nvgoldin/puppetlabs-postgresql.git",
+    :ref => 'master'
 mod "puppetlabs/stdlib", "4.10.0"
 mod "rtyler/jenkins", "1.6.1"
 mod "puppetlabs/java", "1.0.1"
