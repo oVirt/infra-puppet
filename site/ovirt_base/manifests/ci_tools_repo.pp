@@ -4,8 +4,8 @@
 #
 class ovirt_base::ci_tools_repo() {
   case $::operatingsystem {
-    'CentOS': { $flavour_url = 'EL' }
-    'Fedora': { $flavour_url = 'fedora' }
+    /^(CentOS|RedHat)$/: { $flavour_url = 'EL' }
+    /^Fedora$/: { $flavour_url = 'fedora' }
     default: { fail("Unsupported operatingsystem ${::operatingsystem}") }
   }
 
