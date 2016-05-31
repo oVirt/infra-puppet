@@ -175,15 +175,14 @@ class ovirt_jenkins_slave::base {
     owner  => 'jenkins',
     group  => 'jenkins';
   }
+  User['jenkins']->
+  File['/home/jenkins']->
+  File['/home/jenkins/.ssh']->
   Ssh_authorized_key <<| tag == 'jenkins_sshrsa' |>>
   {
     user    => 'jenkins',
     type    => 'ssh-rsa',
-    require => User['jenkins'],
   }
-  User['jenkins']->
-  File['/home/jenkins']->
-  File['/home/jenkins/.ssh']
 
   user {'qemu':
     ensure  => present,
@@ -219,11 +218,15 @@ class ovirt_jenkins_slave::base {
   }
 
   if $enable_nested {
-    file { '/etc/modprobe.d/nested.conf':
-      content => "options kvm-intel nested=y\n",
-      mode    => '0644',
-      owner   => 'root',
-      group   => 'root',
+    kmod::option {'enable nested':
+      module => 'kvm_intel',
+      option => 'nested',
+      value  => 'y',
+      file   => '/etc/modprobe.d/nested.conf',
     }
+    kmod::load { 'kvm_intel': }
+    
+    Kmod::Option['enable nested']~>
+    Kmod::Load['kvm_intel']
   }
 }
