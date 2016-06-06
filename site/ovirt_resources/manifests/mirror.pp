@@ -174,8 +174,8 @@ class ovirt_resources::mirror(
 
   ssh_authorized_key { 'root@dev-19.rhev.lab.eng.brq.redhat.com':
     ensure  => present,
-    name    => '"David Caro <dcaroest@redhat.com> - RedHat internal mirror"',
-    key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCve0SRK1qh+BD5Xv8fozC1puqPoqKNHGS6L3GWH+oBKFpU98c/ZJjIXZU8iZunE81fDQww9fDOZF6Vrv+YqiWoyqcf1AakG4a3iDWw5OAaGW5ZDQRytR7Uux7uRh8B+/c1+rzwWkWHxqyHvTvBoL3P+aXJswcUQDP+YP3LRlzlLMZ0x7Ti9pxOW5e5neBHkdsPBbIEVab67rskd2Rdes3ZTUcdPzMDoTS4E5SQZ31r4kr+zfLYAfzhl9QGND64mUaLheT3HWyoTwikVHo65EuVNGu+3XGx3ITlNJgbIZKqmLTOvCHm7KfTccVGRBfvF36nd64BLyiLl+F5QWJCDGr3',
+    name    => '"Barak Korren <bkorren@redhat.com> - RedHat internal mirror"',
+    key     => 'AAAAB3NzaC1yc2EAAAABIwAAAQEAvrvqQaqwT6cgBSs1skVO57R5eQ5x+GF/4eNoLSfHrYkh1R96BsMB7k/s0EQmXCbA99x/q0goQxHzCp4DZZ34gnCmN4GHhCIqc6gezD5AHNtszDn7lFrE802guOykRXM2DYCBwFQTXoI2RO3Faz4T555r9NUwNphEgXE+FYEvwG9NxtKeHt3lbymOn/SjlgsK/gEyzN2t17lQusKzp9cXo/xDfSL48eFGurM5GssVgpwKRYKDnrypknrATRFGOoHsUg0LbqK+vFgbeZzI2oe56YGrmkKly6ZnFd9ejQPrsmNlKkzoJNcQVCmZqDCKIPcNxcYh6niJUXpYSlgHNzLOEQ==',
     options => ["command=\"${rsynclog} redhat.tlv --server --sender -vzrltH . ${mirror_path}pub/\"",
                 'no-port-forwarding',
                 'no-X11-forwarding',
