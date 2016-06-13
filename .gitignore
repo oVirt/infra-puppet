@@ -1,6 +1,7 @@
 .*.sw?
-Gemfile.lock
 modules/
 *~
 \#*
 .\#*
+.bundle/
+vendor/

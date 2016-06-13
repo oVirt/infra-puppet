@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'r10k'
-gem 'puppet'
+gem 'puppet', '<4.0'
+gem 'puppet-lint', :group => :test
+gem 'r10k', :group => :deployment
