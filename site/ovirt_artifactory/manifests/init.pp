@@ -74,10 +74,11 @@ class ovirt_artifactory (
   $jfrog_base = '/opt/jfrog'
 
   # packages
-  $packages = ['epel-release', 'lvm2', 'java-1.8.0-openjdk']
+  $packages = ['epel-release', 'lvm2', 'java-1.8.0-openjdk',
+      'ovirt-guest-agent-common']
   ensure_packages($packages, {'ensure' =>  'present'} )
 
-  package { 'artifactory':
+  package { 'jfrog-artifactory-oss':
     ensure => 'present',
   }
 
@@ -238,6 +239,12 @@ ${artifactory::params::copy_configuration_from}\
     enable   => true,
   }
 
+  service { 'ovirt-guest-agent':
+    ensure   => running,
+    provider => 'systemd',
+    enable   => true,
+  }
+
   if $users {
     validate_hash($users)
     create_resources('ovirt_artifactory::user', $users)
@@ -280,18 +287,20 @@ ${artifactory::params::copy_configuration_from}\
   }
 
   file { "${jfrog_dir}/artifactory":
-    ensure  => directory,
-    owner   => 'artifactory',
-    group   => 'artifactory',
-    replace => false,
-    recurse => true,
+    ensure       => directory,
+    owner        => 'artifactory',
+    group        => 'artifactory',
+    replace      => false,
+    recurse      => true,
+    recurselimit => 1,
   }
   file { "${jfrog_base}/artifactory":
-    ensure  => directory,
-    owner   => 'artifactory',
-    group   => 'artifactory',
-    replace => false,
-    recurse => true,
+    ensure       => directory,
+    owner        => 'artifactory',
+    group        => 'artifactory',
+    replace      => false,
+    recurse      => true,
+    recurselimit => 1,
   }
 
   exec {'systemd-reload':
@@ -304,6 +313,8 @@ ${artifactory::params::copy_configuration_from}\
   Yumrepo['artifactory']->
   Package['epel-release']->
   Package['lvm2'] ->
+  Package['ovirt-guest-agent-common']->
+  Service['ovirt-guest-agent']->
   File[$jfrog_dir] ->
   Physical_volume[$pv] ->
   Volume_group[$vg] ->
@@ -311,7 +322,7 @@ ${artifactory::params::copy_configuration_from}\
   Filesystem[$jfrog_fs_dev] ->
   Mount[$jfrog_dir]->
   Package['java-1.8.0-openjdk']->
-  Package['artifactory'] ->
+  Package['jfrog-artifactory-oss'] ->
   File["${jfrog_dir}/artifactory"] ->
   File["${jfrog_base}/artifactory"] ->
   File[$config_import] ->
