@@ -73,6 +73,10 @@ class ovirt_jenkins(
       'path'     => '/',
       'url'      => 'http://localhost:8080/',
       'keywords' => ['nocanon'],
+      'params'   => {
+        'connectiontimeout' => '2400',
+        'timeout'           => '2400',
+      },
     }, ],
     allow_encoded_slashes => 'on',
 
