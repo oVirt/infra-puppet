@@ -1,0 +1,7 @@
+[Unit]
+Description=Format locally attached disk
+Before=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/mkfs -t ext4 <%= @device %>

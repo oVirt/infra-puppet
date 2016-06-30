@@ -1,0 +1,12 @@
+[Unit]
+Description=Create directories on local disk for later bind mounts
+After=srv-local.mount
+Requires=srv-local.mount
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/mkdir -p /srv/local/jenkins /srv/local/mock_lib /srv/local/mock_cache
+ExecStart=/usr/bin/chown <%= @jenkins_user %>:<%= @jenkins_user %> /srv/local/jenkins
+ExecStart=/bin/sh -c '/usr/bin/test -d <%= @jenkins_lib %>/.ssh && /usr/bin/cp -rp <%= @jenkins_lib %>/.ssh /srv/local/jenkins || true'
+ExecStart=/usr/bin/chown root:mock /srv/local/mock_lib /srv/local/mock_cache
+ExecStart=/usr/bin/chmod g+ws /srv/local/mock_lib /srv/local/mock_cache

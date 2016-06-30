@@ -1,0 +1,14 @@
+[Unit]
+Description=Mount mock cache directory
+After=prepare-srv-local.service
+Before=local-fs.target
+Requires=prepare-srv-local.service
+
+[Install]
+WantedBy=local-fs.target
+
+[Mount]
+What=/srv/local/mock_cache
+Where=<%= @mock_cache %>
+Type=none
+Options=bind

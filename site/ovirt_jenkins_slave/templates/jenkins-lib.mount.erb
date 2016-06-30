@@ -1,0 +1,14 @@
+[Unit]
+Description=Mount jenkins workspace directory
+After=prepare-srv-local.service
+Before=local-fs.target
+Requires=prepare-srv-local.service
+
+[Install]
+WantedBy=local-fs.target
+
+[Mount]
+What=/srv/local/jenkins
+Where=<%= @jenkins_lib %>
+Type=none
+Options=bind

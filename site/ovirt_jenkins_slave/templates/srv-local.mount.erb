@@ -1,0 +1,12 @@
+[Unit]
+Description=Mount locally attached disk
+After=format-local-disk.service
+Before=local-fs.target
+Requires=format-local-disk.service
+        
+[Install]
+WantedBy=local-fs.target
+        
+[Mount]
+What=/dev/vdb
+Where=/srv/local
