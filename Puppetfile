@@ -10,7 +10,7 @@ mod "postgresql",
     :ref => 'master'
 mod "puppetlabs/stdlib", "4.10.0"
 mod "jenkins",
-	:git => "https://github.com/nvgoldin/puppet-jenkins.git",
+	:git => "https://github.com/ifireball/puppet-jenkins.git",
 	:ref => "master"
 mod "puppetlabs/java", "1.0.1"
 mod "darin/zypprepo", "1.0.2"

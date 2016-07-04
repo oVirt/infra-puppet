@@ -150,7 +150,7 @@ ovirt_jenkins::plugins:
   'momentjs':
     version: '1.1.1'
   'monitoring':
-    version: '1.55.0'
+    version: '1.60.0'
   'multi-slave-config-plugin':
     version: '1.2.0'
   'multiple-scms':
@@ -261,6 +261,10 @@ ovirt_jenkins::plugins:
     version: '2.0'
   'ws-cleanup':
     version: '0.28'
+  'whitesource':
+    version: '1.7.2'
+  'groovy-events-listener-plugin':
+    version: '1.014'
 
   # Bundled plugins
   'ssh-agent':
