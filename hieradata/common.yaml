@@ -5,208 +5,270 @@ ovirt_jenkins::manage_java: true
 ovirt_jenkins::cli_ssh_key: '/var/lib/data/jenkins/.ssh/id_rsa'
 ovirt_jenkins::icinga_ip: '31.15.26.10'
 ovirt_jenkins::plugins:
-  'monitoring':
-    version: '1.55.0'
-  'port-allocator':
-    version: '1.8'
-  'view-job-filters':
-    version: '1.26'
-  'git':
-    version: '2.4.1'
-  'workflow-cps':
-    version: '1.14'
-  'handlebars':
-    version: '1.1.1'
-  'analysis-core':
-    version: '1.74'
-  'workflow-scm-step':
-    version: '1.14'
-  'github':
-    version: '1.17.1'
-  'buildgraph-view':
-    version: '1.1.1'
-  'scm-api':
-    version: '1.0'
-  'copyartifact':
-    version: '1.35'
-  'token-macro':
-    version: '1.11'
-  'compact-columns':
-    version: '1.10'
-  'preSCMbuildstep':
-    version: '0.3'
-  'purge-build-queue-plugin':
-    version: '1.0'
-  'extended-read-permission':
-    version: '1.0'
-  'plain-credentials':
-    version: '1.1'
-  'console-column-plugin':
-    version: '1.5'
-  'nodenamecolumn':
-    version: '1.2'
-  'google-login':
-    version: '1.1'
-  'naginator':
-    version: '1.16'
-  'scriptler':
-    version: '2.9'
-  'ghprb':
-    version: '1.31.1'
-  'dashboard-view':
-    version: '2.9.4'
-  'progress-bar-column-plugin':
-    version: '1.0'
+  'PrioritySorter':
+    version: '3.4'
   'ace-editor':
     version: '1.0.1'
-  'multiple-scms':
-    version: '0.5'
-  'instant-messaging':
-    version: '1.35'
-  'copr':
-    version: '0.3'
-  'cron_column':
-    version: '1.4'
-  'configure-job-column-plugin':
-    version: '1.0'
-  'jabber':
-    version: '1.35'
-  'momentjs':
-    version: '1.1.1'
-  'postbuild-task':
-    version: '1.8'
-  'throttle-concurrents':
-    version: '1.8.4'
-  'jquery-detached':
-    version: '1.1.1'
-  'groovy-postbuild':
-    version: '2.2'
-  'ansicolor':
-    version: '0.4.1'
-  'gerrit-trigger':
-    version: '2.17.2'
-  'violations':
-    version: '0.7.11'
-  'simple-theme-plugin':
-    version: '0.3'
-  'pipeline-rest-api':
-    version: '1.0'
-  'workflow-aggregator':
-    version: '1.14'
   'analysis-collector':
     version: '1.43'
+  'analysis-core':
+    version: '1.74'
+  'ansicolor':
+    version: '0.4.1'
+  'ant':
+    version: '1.2'
+  'antisamy-markup-formatter':
+    version: '1.1'
+  'audit-trail':
+    version: '2.1'
+  'branch-api':
+    version: '1.6'
+  'bugzilla':
+    version: '1.5'
+  'build-flow-plugin':
+    version: '0.17'
   'build-metrics':
     version: '1.0'
-  'jquery':
-    version: '1.11.2-0'
-  'tasks':
-    version: '4.44'
-  'workflow-job':
-    version: '1.14'
-  'workflow-basic-steps':
+  'build-pipeline-plugin':
+    version: '1.4.8'
+  'build-timeout':
+    version: '1.14.1'
+  'buildgraph-view':
+    version: '1.1.1'
+  'bulk-builder':
+    version: '1.5'
+  'checkstyle':
+    version: '3.42'
+  'cloudbees-folder':
+    version: '5.8'
+  'compact-columns':
+    version: '1.10'
+  'configurationslicing':
+    version: '1.40'
+  'configure-job-column-plugin':
+    version: '1.0'
+  'console-column-plugin':
+    version: '1.5'
+  'copr':
+    version: '0.3'
+  'copy-data-to-workspace-plugin':
+    version: '1.0'
+  'copy-to-slave':
+    version: '1.4.4'
+  'copyartifact':
+    version: '1.35'
+  'credentials':
+    version: '1.26'
+  'cron_column':
+    version: '1.4'
+  'cvs':
+    version: '2.11'
+  'dashboard-view':
+    version: '2.9.4'
+  'description-column-plugin':
+    version: '1.3'
+  'disk-usage':
+    version: '0.28'
+  'durable-task':
+    version: '1.6'
+  'email-ext':
+    version: '2.40'
+  'extended-read-permission':
+    version: '1.0'
+  'external-monitor-job':
+    version: '1.4'
+  'extra-columns':
+    version: '1.17'
+  'findbugs':
+    version: '4.62'
+  'flexible-publish':
+    version: '0.15.2'
+  'gerrit-trigger':
+    version: '2.17.2'
+  'ghprb':
+    version: '1.31.1'
+  'git':
+    version: '2.4.1'
+  'git-client':
+    version: '1.19.0'
+  'git-server':
+    version: '1.6'
+  'github':
+    version: '1.17.1'
+  'github-api':
+    version: '1.72.1'
+  'github-branch-source':
+    version: '1.5'
+  'github-organization-folder':
+    version: '1.2'
+  'global-build-stats':
+    version: '1.3'
+  'google-login':
+    version: '1.1'
+  'greenballs':
     version: '1.14'
   'groovy':
     version: '1.24'
-  'build-flow-plugin':
-    version: '0.17'
-  'timestamper':
-    version: '1.7.2'
-  'global-build-stats':
-    version: '1.3'
-  'nested-view':
-    version: '1.14'
-  'workflow-durable-task-step':
-    version: '1.14'
-  'role-strategy':
-    version: '2.2.0'
-  'openid':
-    version: '2.1.1'
-  'run-condition':
-    version: '1.0'
-  'ssh-agent':
-    version: '1.10'
-  'parameterized-trigger':
-    version: '2.29'
-  'pipeline-stage-view':
-    version: '1.0'
-  'ws-cleanup':
-    version: '0.28'
-  'checkstyle':
-    version: '3.42'
-  'audit-trail':
-    version: '2.1'
-  'bulk-builder':
-    version: '1.5'
-  'matrix-reloaded':
-    version: '1.1.3'
-  'copy-to-slave':
-    version: '1.4.4'
-  'durable-task':
-    version: '1.6'
-  'mask-passwords':
-    version: '2.8'
-  'postbuildscript':
-    version: '0.17'
-  'openid4java':
-    version: '0.9.8.0'
-  'jobConfigHistory':
-    version: '2.12'
-  'warnings':
-    version: '4.50'
+  'groovy-postbuild':
+    version: '2.2'
+  'handlebars':
+    version: '1.1.1'
   'heavy-job':
     version: '1.1'
   'htmlpublisher':
     version: '1.10'
-  'build-timeout':
-    version: '1.14.1'
-  'flexible-publish':
-    version: '0.15.2'
-  'workflow-step-api':
-    version: '1.14'
-  'description-column-plugin':
-    version: '1.3'
-  'greenballs':
-    version: '1.14'
-  'email-ext':
-    version: '2.40'
-  'workflow-cps-global-lib':
-    version: '1.14'
-  'publish-over-ssh':
-    version: '1.13'
-  'build-pipeline-plugin':
-    version: '1.4.8'
-  'workflow-support':
-    version: '1.14'
-  'bugzilla':
-    version: '1.5'
-  'extra-columns':
-    version: '1.17'
-  'rebuild':
-    version: '1.25'
-  'github-api':
-    version: '1.72.1'
-  'PrioritySorter':
-    version: '3.4'
-  'ssh':
-    version: '2.4'
-  'git-client':
-    version: '1.19.0'
+  'icon-shim':
+    version: '2.0.3'
+  'instant-messaging':
+    version: '1.35'
+  'jabber':
+    version: '1.35'
+  'javadoc':
+    version: '1.1'
+  'jobConfigHistory':
+    version: '2.12'
+  'jquery':
+    version: '1.11.2-0'
+  'jquery-detached':
+    version: '1.2.1'
+  'junit':
+    version: '1.2-beta-4'
+  'ldap':
+    version: '1.11'
   'mapdb-api':
     version: '1.0.6.0'
-  'copy-data-to-workspace-plugin':
-    version: '1.0'
-  'git-server':
-    version: '1.6'
-  'workflow-api':
-    version: '1.14'
-  'findbugs':
-    version: '4.62'
+  'mask-passwords':
+    version: '2.8'
+  'matrix-auth':
+    version: '1.1'
+  'matrix-project':
+    version: '1.4.1'
+  'matrix-reloaded':
+    version: '1.1.3'
+  'maven-plugin':
+    version: '2.7.1'
+  'momentjs':
+    version: '1.1.1'
+  'monitoring':
+    version: '1.55.0'
   'multi-slave-config-plugin':
     version: '1.2.0'
-  'configurationslicing':
-    version: '1.40'
+  'multiple-scms':
+    version: '0.5'
+  'naginator':
+    version: '1.16'
+  'nested-view':
+    version: '1.14'
+  'nodenamecolumn':
+    version: '1.2'
+  'openid':
+    version: '2.1.1'
+  'openid4java':
+    version: '0.9.8.0'
+  'pam-auth':
+    version: '1.1'
+  'parameterized-trigger':
+    version: '2.29'
+  'pipeline-build-step':
+    version: '2.0'
+  'pipeline-input-step':
+    version: '2.0'
+  'pipeline-rest-api':
+    version: '1.3'
+  'pipeline-stage-step':
+    version: '2.0'
+  'pipeline-stage-view':
+    version: '1.3'
+  'plain-credentials':
+    version: '1.1'
+  'port-allocator':
+    version: '1.8'
+  'postbuild-task':
+    version: '1.8'
+  'postbuildscript':
+    version: '0.17'
+  'preSCMbuildstep':
+    version: '0.3'
+  'progress-bar-column-plugin':
+    version: '1.0'
+  'publish-over-ssh':
+    version: '1.13'
+  'purge-build-queue-plugin':
+    version: '1.0'
+  'rebuild':
+    version: '1.25'
+  'role-strategy':
+    version: '2.2.0'
+  'run-condition':
+    version: '1.0'
+  'scm-api':
+    version: '1.2'
+  'scriptler':
+    version: '2.9'
+  'simple-theme-plugin':
+    version: '0.3'
+  'ssh':
+    version: '2.4'
+  'ssh-credentials':
+    version: '1.10'
+  'ssh-slaves':
+    version: '1.9'
+  'structs':
+    version: '1.1'
+  'subversion':
+    version: '1.54'
   'swarm':
     version: '2.0'
-  'disk-usage':
+  'tasks':
+    version: '4.44'
+  'throttle-concurrents':
+    version: '1.8.4'
+  'timestamper':
+    version: '1.7.2'
+  'token-macro':
+    version: '1.11'
+  'translation':
+    version: '1.10'
+  'view-job-filters':
+    version: '1.26'
+  'violations':
+    version: '0.7.11'
+  'warnings':
+    version: '4.50'
+  'windows-slaves':
+    version: '1.0'
+  'workflow-aggregator':
+    version: '2.0'
+  'workflow-api':
+    version: '2.0'
+  'workflow-basic-steps':
+    version: '2.0'
+  'workflow-cps':
+    version: '2.1'
+  'workflow-cps-global-lib':
+    version: '2.0'
+  'workflow-durable-task-step':
+    version: '2.0'
+  'workflow-job':
+    version: '2.1'
+  'workflow-multibranch':
+    version: '2.3'
+  'workflow-scm-step':
+    version: '2.0'
+  'workflow-step-api':
+    version: '2.0'
+  'workflow-support':
+    version: '2.0'
+  'ws-cleanup':
     version: '0.28'
+
+  # Bundled plugins
+  'ssh-agent':
+    version: '1.9'
+  'script-security':
+    version: '1.18.1'
+  'ssh-credentials':
+    version: '1.10'
+  'mailer':
+    version: '1.11'
 

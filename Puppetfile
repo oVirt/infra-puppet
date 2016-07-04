@@ -9,11 +9,13 @@ mod "postgresql",
     :git => "https://github.com/nvgoldin/puppetlabs-postgresql.git",
     :ref => 'master'
 mod "puppetlabs/stdlib", "4.10.0"
-mod "rtyler/jenkins", "1.6.1"
+mod "jenkins",
+	:git => "https://github.com/nvgoldin/puppet-jenkins.git",
+	:ref => "master"
 mod "puppetlabs/java", "1.0.1"
 mod "darin/zypprepo", "1.0.2"
 mod "nanliu/staging", "1.0.3"
-mod "camptocamp/archive", "0.8.1"
+mod "puppet/archive", "0.5.1"
 mod "saz/ssh", "1.2.0"
 mod "saz/timezone", "1.2.0"
 mod "squid3",

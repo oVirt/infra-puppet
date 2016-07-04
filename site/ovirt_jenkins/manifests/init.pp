@@ -50,9 +50,6 @@ class ovirt_jenkins(
   }
 
 
-  class {'jenkins::cli_helper':
-      ssh_keyfile => "${data_dir}/jenkins/.ssh/id_rsa",
-  }
 
   create_resources('jenkins::plugin', $plugins)
 
