@@ -1,0 +1,15 @@
+[
+job_completed: { String jobName, String result, long jobDuration  ->
+  def host = "<%= @graphite_host %>"
+  try {
+    netcat = new Socket(host, <%= @graphite_port %>)
+    netcat.withStreams { input, output ->
+      long unixTime = System.currentTimeMillis() / 1000L;
+      msg = "systems.<%= @fqdn %>.jenkins.jobs.${jobName}.${result}.duration ${jobDuration} ${unixTime}\n"
+      output << "${msg}"
+      netcat.close()
+    }
+  } catch (ex) {
+    log.error("Exception sending to graphite ${host}: ${ex}");
+  }
+}]

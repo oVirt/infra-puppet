@@ -8,7 +8,9 @@ class ovirt_jenkins(
   $manage_java = false,
   $plugins = {},
   $jnlp_port = '56293',
-  $icinga_ip = ''
+  $icinga_ip = '',
+  $graphite_host = 'localhost',
+  $graphite_port = '2003',
   )
 {
   file { $data_dir:
@@ -49,6 +51,27 @@ class ovirt_jenkins(
     group        => 'jenkins',
   }
 
+  file { 'includes':
+    ensure => directory,
+    path   => "${data_dir}/jenkins/includes",
+    owner  => 'jenkins',
+    group  => 'jenkins',
+  }
+
+  file { 'Monitor.groovy':
+    ensure  => file,
+    path    => "${data_dir}/jenkins/includes/Monitor.groovy",
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    content => template('ovirt_jenkins/Monitor.groovy.erb'),
+  }
+  file {'groovy-events':
+    ensure  => file,
+    path    => "${data_dir}/jenkins/includes/events.groovy.template",
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    content => template('ovirt_jenkins/groovy-events.groovy.erb'),
+  }
 
 
   create_resources('jenkins::plugin', $plugins)
@@ -56,6 +79,9 @@ class ovirt_jenkins(
   File[$data_dir]
   ->Mount[$data_dir]
   ->Class['::jenkins']
+  ->File['includes']
+  ->File['Monitor.groovy']
+  ->File['groovy-events']
 
   class { '::apache':
     require       => Class['jenkins'],

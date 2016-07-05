@@ -1,0 +1,6 @@
+// The content of this file needs to be added manually in:
+// Jenkins global config -> Groovy Events Listener Plugin
+if (event == Event.JOB_FINALIZED) {
+  def monitor = evaluate(new File("<%= @data_dir %>/jenkins/includes/Monitor.groovy"))
+  monitor.job_completed(env.JOB_NAME, run.result.toString(), run.duration)
+}

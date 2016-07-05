@@ -4,6 +4,8 @@ ovirt_jenkins::jenkins_ver: 1.651.1-1.1
 ovirt_jenkins::manage_java: true
 ovirt_jenkins::cli_ssh_key: '/var/lib/data/jenkins/.ssh/id_rsa'
 ovirt_jenkins::icinga_ip: '31.15.26.10'
+ovirt_jenkins::graphite_host: 'graphite.phx.ovirt.org'
+ovirt_jenkins::graphite_port: '2003'
 ovirt_jenkins::plugins:
   'PrioritySorter':
     version: '3.4'
