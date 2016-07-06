@@ -74,7 +74,7 @@ ovirt_jenkins::plugins:
   'durable-task':
     version: '1.6'
   'email-ext':
-    version: '2.40'
+    version: '2.44'
   'extended-read-permission':
     version: '1.0'
   'external-monitor-job':
@@ -134,7 +134,7 @@ ovirt_jenkins::plugins:
   'jquery-detached':
     version: '1.2.1'
   'junit':
-    version: '1.2-beta-4'
+    version: '1.14'
   'ldap':
     version: '1.11'
   'mapdb-api':
@@ -228,7 +228,7 @@ ovirt_jenkins::plugins:
   'timestamper':
     version: '1.7.2'
   'token-macro':
-    version: '1.11'
+    version: '1.12.1'
   'translation':
     version: '1.10'
   'view-job-filters':
@@ -276,5 +276,5 @@ ovirt_jenkins::plugins:
   'ssh-credentials':
     version: '1.10'
   'mailer':
-    version: '1.11'
+    version: '1.5'
 
