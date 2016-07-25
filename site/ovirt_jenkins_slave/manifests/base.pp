@@ -101,6 +101,12 @@ class ovirt_jenkins_slave::base {
                     'java-1.8.0-openjdk', 'java-1.8.0-openjdk-headless']:
             ensure => latest;
           }
+          package { 'centos-release-qemu-ev':
+            ensure => latest,
+          } ->
+          package { 'qemu-kvm-ev':
+            ensure => latest,
+          }
           $enable_nested = true
           if $::virtual != 'physical' {
             # Provide Guest Agent for oVirt
