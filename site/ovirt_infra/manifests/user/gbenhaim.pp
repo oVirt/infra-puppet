@@ -1,0 +1,7 @@
+# The user for Gal Ben Haim
+class ovirt_infra::user::gbenhaim($password = undef) {
+  ovirt_infra::user { 'gbenhaim':
+    key      => 'AAAAB3NzaC1yc2EAAAADAQABAAACAQCn9tt7fSJGd4KrQ4ZOfi3VoWTsBDt+ixhCOnqrsWB/sT9JFAFJ9TuSOt/seYjUTJ21nwSlb4NVVo00NToy72AlTLnBO07K8ZhQjewblAH2fNOTFxXEMNbRtzBS5iz7ZgcMMKBc/KNoGuQEzy0kMsWHOEli77S7UCXpoXghVOwC1krOgGxs2mkVjG4CnoUk0lv0WLG9znvtyC9MtDjtD68GN/i6hJ/NI9oDhCQwlyLC3YsQx8QADPi5n4jDx/00LmqrkkU6t79Kg2HsMJ87GZdKRPcCAFvKvjJP1Lt7aZ5W9FH7zXH5CpMSzPUp353suV/OCJ9fh3BI3VkUqEkxuHroT5W59lvtsS8wT9ThPi9ZvjMl4PSFsOqoAX6P2Y69R1bETf/b59Fzr9kwQM7fvVn0HKyvKooU/yIWgV/aNph0Acpru256GUjx3zrHizeRXaanVqWc++lnOqZZVcwLzZ9a128eB+noqaUoEiEA2fYrAWZIF4r2Tk72Poms093LQv3lHR7QPPQHV8zVHjRJhTrf1G/QX0juLxCcN1yPAbCdxN9jCAQ75toIV0gOR19EoZftpq4Zfmm3XEiVnoGssL3bq8r4TUPuoNvPBGJeKbOaST/cPUPoJFUCVayNB2apAtAsaWhJIIbZ20jtaTBq8Anmgw8M3jfZWuzg08j+kb3p3w==',
+    password => $password,
+  }
+}
