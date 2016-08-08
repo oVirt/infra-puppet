@@ -289,3 +289,13 @@ ovirt_backup::engine::server::sshkey: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCuQ6dzFlOgn
 ovirt_backup::engine::client::engine_backups: '/var/backups'
 ovirt_backup::engine::client::backup_server:  'backup.phx.ovirt.org'
 ovirt_backup::engine::client::backup_owner:   'engine-backup'
+
+# off-site backup rsync user
+ovirt_backup::rsync::server::backup_home: '/export/backup/rsync'
+ovirt_backup::rsync::server::backup_owner: 'rsync-backup'
+ovirt_backup::rsync::server::backup_group: 'backup'
+ovirt_backup::rsync::server::sshkey: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDUlAA84VQ5O50UHissQFvzWqS1CwBpsJxVG+6sCK2FAZMt2vvPJtRBtZKkJTuVJKISwKWjN32ZP2r8CautTCMDZKp1SDFAfsV3FZydhpyr2ab7cmHYQI7ygF47YlRL2TzurK6mdNit/p9syJ9bxurVdoucZtnT2/5Re1jfbbRa9MjVZacVc+IiGcJ4WwRDdLoJv1iwWP6qHfTdjaVk6DRryIWVEnwZ4IcV+kRM4vokoI696T2/RS6grjwVaMomQZLCVRXeoalwqaQ70QeSnhlholh1/uUWNAd+UQiGdHcIMW6t9+t6inNEm66w24t0Tb8U+pbmR2gDz5ZWjr5NGAGP'
+ovirt_backup::rsync::client::remote_directory: '/export/backup'
+ovirt_backup::rsync::client::local_directory: '/var/backup_mirror'
+ovirt_backup::rsync::client::backup_server:  'backup.phx.ovirt.org'
+ovirt_backup::rsync::client::backup_owner:   'rsync-backup'

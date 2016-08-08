@@ -86,4 +86,8 @@ class ovirt_backup::server(
     backup_home  => "${backup_home}/engine",
     backup_group => $backup_group,
   }
+  class { 'ovirt_backup::rsync::server':
+    backup_home  => "${backup_home}/rsync",
+    backup_group => $backup_group,
+  }
 }
