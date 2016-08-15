@@ -88,7 +88,7 @@ ovirt_jenkins::plugins:
   'gerrit-trigger':
     version: '2.21.1'
   'ghprb':
-    version: '1.31.1'
+    version: '1.33.1'
   'git':
     version: '2.4.1'
   'git-client':
@@ -144,7 +144,7 @@ ovirt_jenkins::plugins:
   'matrix-auth':
     version: '1.1'
   'matrix-project':
-    version: '1.4.1'
+    version: '1.7.1'
   'matrix-reloaded':
     version: '1.1.3'
   'maven-plugin':
