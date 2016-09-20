@@ -2,6 +2,7 @@
 Description=Create directories on local disk for later bind mounts
 After=srv-local.mount
 Requires=srv-local.mount
+DefaultDependencies=false
 
 [Service]
 Type=oneshot
