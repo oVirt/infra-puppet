@@ -19,7 +19,7 @@ class ovirt_jenkins_slave (
   # Requirements for non packaging jobs
   include ovirt_jenkins_slave::engine_test_runner
   # node builder jobs only run on el7
-  if "${::osfamily}-${::operatingsystem}-${::operatingsystemrelease}" =~ /^(RedHat-RedHat-7.*|RedHat-CentOS-7.*)$/ {
+  if "${::osfamily}-${::operatingsystem}-${::operatingsystemrelease}" =~ /^(RedHat-RedHat-7.*|RedHat-CentOS-7.*)$/ and $::architecture == x86_64 {
       include ovirt_jenkins_slave::ovirt_node_builder
   }
   # packaging jobs requirements
