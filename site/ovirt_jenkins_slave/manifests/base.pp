@@ -229,7 +229,7 @@ class ovirt_jenkins_slave::base {
     value => '64000',
   }
 
-  if $enable_nested {
+  if $enable_nested and $::architecture =~ /^(x86_64|amd64)$/ {
     kmod::option {'enable nested':
       module => 'kvm_intel',
       option => 'nested',
@@ -237,7 +237,6 @@ class ovirt_jenkins_slave::base {
       file   => '/etc/modprobe.d/nested.conf',
     }
     kmod::load { 'kvm_intel': }
-    
     Kmod::Option['enable nested']~>
     Kmod::Load['kvm_intel']
   }
