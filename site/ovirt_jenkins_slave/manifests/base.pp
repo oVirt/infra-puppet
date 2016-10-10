@@ -101,6 +101,10 @@ class ovirt_jenkins_slave::base {
                     'java-1.8.0-openjdk', 'java-1.8.0-openjdk-headless']:
             ensure => latest;
           }
+          ## workaround for OVIRT-616
+          package {['hystrix-core', 'hystrix-metrics-event-stream']:
+            ensure => latest;
+          }
           package { 'centos-release-qemu-ev':
             ensure => latest,
           } ->
