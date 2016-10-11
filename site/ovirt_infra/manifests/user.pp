@@ -6,10 +6,18 @@ define ovirt_infra::user (
     $password = undef,
     $type = 'ssh-rsa',
 ) {
+  # Puppet will not remove previous password if the var gets unset.
+  # Here we police which hashes we accept. Everything other gets set to '!!'.
+    $policed_password = $password ? {
+    /^\$6\$/ => $password, # SHA-512
+    /^\$1\$/ => $password, # MD5 (TODO: force users to change and remove)
+    default => '!!'
+  }
+
   user { $name:
     ensure     => $ensure,
     managehome => true,
-    password   => $password,
+    password   => $policed_password,
   }
 
   if ($key != undef) {
