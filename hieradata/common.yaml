@@ -284,7 +284,7 @@ ovirt_jenkins::plugins:
 ovirt_backup::engine::server::backup_home: '/export/backup/engine'
 ovirt_backup::engine::server::backup_owner: 'engine-backup'
 ovirt_backup::engine::server::backup_group: 'backup'
-ovirt_backup::engine::server::sshkey: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCuQ6dzFlOgnNfOmt/stw74wY82W2xuFrm6jS8GWOXwDxDLaT3Ej46mlrbM7d4NrGZPu1qDN/r8uACqbo7t7kyyB00Kv8Lpzvb9D4oXQmieMBEkmPawgauuOnSIVf4jHJHOLDMd3sdBlwvME7FjyaYJ98WjIUslPy2aVQker/nMIZBbnPOMGxt0K9u+DrYgaZCc1POtIkHjzGtSvge+MoJw0aOOKxYQINfwb3SBaemaAWHJ1eoQ7BoHec5VI1ioGjE4mSaU9p1rRmZDedz7Ysq1cd9XhOjcP1KW30QJR8sGZHQHL5W2to1vufzQFI5sXfBT4uQt6y/sA+ZZKpXLmuXl'
+ovirt_backup::engine::server::sshkey: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQC2D5vuDBJxoCnhEXNGXIFRqkHwApV9c6PubcspYjJwwoEEITm/DZnuCNyDR+1k6o8zLjpsPuNHf9wZoy9lZJpAiCzUKrRAeucfOFvN1kqZ5LWbzhAPula3w45CWUXgjLiKbzixQCuQu/sOp9P6Yhm3vJmTE6N0NjaQAxfOIzUfFEABkKZxKPmimtcDiEFhSbNYrEh1PCpxHocY0yX9Ffphgkj+bPcWF8HKWbmX1eFuNK31ZpwWahVijt4AXqkSg0oecLahCPt0G0EZVeqq0cNtnbAmI2JxGHg8gDzWrSKicyZ4LK96IyAQQJSYs2H0EKqiUzd3727wcNUosNKz2hzT'
 
 ovirt_backup::engine::client::engine_backups: '/var/backups'
 ovirt_backup::engine::client::backup_server:  'backup.phx.ovirt.org'
