@@ -188,11 +188,11 @@ class ovirt_jenkins(
   nrpe::command {
     'check_data_disk':
       ensure  => present,
-      command => "check_disk -w 20 -c 10 ${data_dir}",
+      command => "check_disk -w 20% -c 10% ${data_dir}",
     ;
     'check_root_disk':
       ensure  => present,
-      command => 'check_disk -w 20 -c 10 /',
+      command => 'check_disk -w 20% -c 10% /',
     ;
     'check_jenkins_war':
       ensure  => present,
