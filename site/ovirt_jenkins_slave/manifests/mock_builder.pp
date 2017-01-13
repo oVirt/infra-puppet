@@ -11,7 +11,7 @@ class ovirt_jenkins_slave::mock_builder (
 
   $packages = "${::osfamily}-${::operatingsystem}-${::operatingsystemrelease}" ? {
     /^RedHat-CentOS-6.*$/  => ['yum-utils', 'mock', 'yum'],
-    /^RedHat-Fedora-24$/   => ['yum-utils', 'mock', 'yum', 'nosync', 'python2-requests'],
+    /^RedHat-Fedora-.*$/   => ['yum-utils', 'mock', 'yum', 'nosync', 'python2-requests'],
     default                => ['yum-utils', 'mock', 'yum', 'nosync'],
   }
 
