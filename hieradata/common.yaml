@@ -164,7 +164,7 @@ ovirt_jenkins::plugins:
   'nodenamecolumn':
     version: '1.2'
   'notification':
-    version: '1.10'
+    version: '1.11'
   'openid':
     version: '2.1.1'
   'openid4java':
