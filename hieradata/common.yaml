@@ -16,7 +16,7 @@ ovirt_jenkins::plugins:
   'analysis-core':
     version: '1.74'
   'ansicolor':
-    version: '0.4.1'
+    version: '0.4.3'
   'ant':
     version: '1.2'
   'antisamy-markup-formatter':
