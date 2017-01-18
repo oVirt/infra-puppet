@@ -18,7 +18,7 @@ class ovirt_backup::rsync::client(
   ensure_packages([ 'rsync'])
   cron { 'rsync-backup':
     command => "flock -w 30 /var/run/ovirt_backup_rsync.lock \
-      rsync -az -e \"ssh -o PasswordAuthentication=false\" \
+      rsync -az --delete -e \"ssh -o PasswordAuthentication=false\" \
       --bwlimit=2048  --exclude=\".*\" --exclude \".*/\" \
       ${backup_owner}@${backup_server}:${remote_directory} ${local_directory}",
     minute  => '20',
