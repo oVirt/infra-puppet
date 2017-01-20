@@ -75,6 +75,8 @@ ovirt_jenkins::plugins:
     version: '1.6'
   'email-ext':
     version: '2.44'
+  'embeddable-build-status':
+    version: '1.9'
   'extended-read-permission':
     version: '1.0'
   'external-monitor-job':
@@ -225,6 +227,8 @@ ovirt_jenkins::plugins:
     version: '2.0'
   'tasks':
     version: '4.44'
+  'test-results-analyzer':
+    version: '0.3.4'
   'throttle-concurrents':
     version: '1.8.4'
   'timestamper':
