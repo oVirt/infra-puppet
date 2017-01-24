@@ -48,7 +48,7 @@ class ovirt_jenkins_slave::base {
         /^(23|24|25)$/: {
           package {['java-1.8.0-openjdk-devel', 'java-1.8.0-openjdk',
                     'java-1.8.0-openjdk-headless']:
-            ensure => latest;
+            ensure => installed;
           }
 
           firewalld_rich_rule { 'Accept http to lago internal repo from vms':
@@ -61,12 +61,6 @@ class ovirt_jenkins_slave::base {
               'protocol' => 'tcp',
             },
             action => 'accept',
-          }
-        }
-        /^20$/: {
-          package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk',
-                    'java-1.7.0-openjdk-headless']:
-            ensure => latest;
           }
         }
         default: {
@@ -99,7 +93,7 @@ class ovirt_jenkins_slave::base {
           package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk',
                     'java-1.7.0-openjdk-headless', 'java-1.8.0-openjdk-devel',
                     'java-1.8.0-openjdk', 'java-1.8.0-openjdk-headless']:
-            ensure => latest;
+            ensure => installed;
           }
           ## workaround for OVIRT-616
           package {['hystrix-core', 'hystrix-metrics-event-stream']:
@@ -137,7 +131,7 @@ class ovirt_jenkins_slave::base {
 
           ## There's a bug on latest jdk that breaks the engine build
           package {['java-1.7.0-openjdk-devel', 'java-1.7.0-openjdk']:
-            ensure => latest;
+            ensure => installed;
           }
           ## On centos we need an extra selinux policy to allow slave spawned
           ## processes (ex: engine-setup) to install rpms
