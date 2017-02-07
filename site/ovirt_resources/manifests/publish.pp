@@ -42,4 +42,7 @@ class ovirt_resources::publish(
     content => template('ovirt_resources/move_jenkins_nightly.erb'),
   }
 
+  file { '/etc/cron.d/update_yum-repo':
+    content => template('ovirt_resources/update_yum-repo.erb'),
+  }
 }
