@@ -23,8 +23,10 @@ ovirt_jenkins::plugins:
     version: '1.1'
   'audit-trail':
     version: '2.1'
+  'authentication-tokens':
+    version: '1.3'
   'branch-api':
-    version: '1.6'
+    version: '1.11.1'
   'bugzilla':
     version: '1.5'
   'build-flow-plugin':
@@ -42,7 +44,7 @@ ovirt_jenkins::plugins:
   'checkstyle':
     version: '3.42'
   'cloudbees-folder':
-    version: '5.8'
+    version: '5.16'
   'compact-columns':
     version: '1.10'
   'configurationslicing':
@@ -61,6 +63,8 @@ ovirt_jenkins::plugins:
     version: '1.35'
   'credentials':
     version: '2.1.10'
+  'credentials-binding':
+    version: '1.10'
   'cron_column':
     version: '1.4'
   'cvs':
@@ -71,18 +75,28 @@ ovirt_jenkins::plugins:
     version: '1.3'
   'disk-usage':
     version: '0.28'
-  'durable-task':
+  'display-url-api':
+    version: '1.0.1'
+  'docker-commons':
     version: '1.6'
+  'docker-workflow':
+    version: '1.9'
+  'durable-task':
+    version: '1.13'
   'email-ext':
     version: '2.44'
   'embeddable-build-status':
     version: '1.9'
+  'envinject':
+    version: '1.92.1'
   'extended-read-permission':
     version: '1.0'
   'external-monitor-job':
     version: '1.4'
   'extra-columns':
     version: '1.17'
+  'favorite':
+    version: '2.0.4'
   'findbugs':
     version: '4.62'
   'flexible-publish':
@@ -90,29 +104,31 @@ ovirt_jenkins::plugins:
   'gerrit-trigger':
     version: '2.21.1'
   'ghprb':
-    version: '1.33.1'
+    version: '1.35.0'
   'git':
-    version: '2.4.1'
+    version: '2.5.3'
   'git-client':
-    version: '1.19.0'
+    version: '2.2.1'
   'git-server':
     version: '1.6'
   'github':
     version: '1.17.1'
   'github-api':
-    version: '1.72.1'
+    version: '1.84'
   'github-branch-source':
-    version: '1.5'
+    version: '1.10.1'
   'github-organization-folder':
-    version: '1.2'
+    version: '1.5'
   'global-build-stats':
     version: '1.3'
   'google-login':
-    version: '1.1'
+    version: '1.3'
   'greenballs':
     version: '1.14'
   'groovy':
     version: '1.24'
+  'groovy-events-listener-plugin':
+    version: '1.014'
   'groovy-postbuild':
     version: '2.2'
   'handlebars':
@@ -127,6 +143,8 @@ ovirt_jenkins::plugins:
     version: '1.35'
   'jabber':
     version: '1.35'
+  'jackson2-api':
+    version: '2.7.3'
   'javadoc':
     version: '1.1'
   'jobConfigHistory':
@@ -139,6 +157,8 @@ ovirt_jenkins::plugins:
     version: '1.14'
   'ldap':
     version: '1.11'
+  'mailer':
+    version: '1.19'
   'mapdb-api':
     version: '1.0.6.0'
   'mask-passwords':
@@ -151,6 +171,8 @@ ovirt_jenkins::plugins:
     version: '1.1.3'
   'maven-plugin':
     version: '2.14'
+  'metrics':
+    version: '3.1.2.9'
   'momentjs':
     version: '1.1.1'
   'monitoring':
@@ -177,16 +199,26 @@ ovirt_jenkins::plugins:
     version: '2.29'
   'pipeline-build-step':
     version: '2.0'
+  'pipeline-graph-analysis':
+    version: '1.3'
   'pipeline-input-step':
     version: '2.0'
+  'pipeline-model-api':
+    version: '1.0'
   'pipeline-rest-api':
     version: '1.3'
+  'pipeline-model-declarative-agent':
+    version: '1.0'
+  'pipeline-model-definition':
+    version: '1.0'
+  'pipeline-stage-tags-metadata':
+    version: '1.0'
   'pipeline-stage-step':
-    version: '2.0'
+    version: '2.2'
   'pipeline-stage-view':
     version: '1.3'
   'plain-credentials':
-    version: '1.1'
+    version: '1.3'
   'port-allocator':
     version: '1.8'
   'postbuild-task':
@@ -199,6 +231,8 @@ ovirt_jenkins::plugins:
     version: '1.0'
   'publish-over-ssh':
     version: '1.13'
+  'pubsub-light':
+    version: '1.6'
   'purge-build-queue-plugin':
     version: '1.0'
   'rebuild':
@@ -209,18 +243,24 @@ ovirt_jenkins::plugins:
     version: '1.0'
   'scm-api':
     version: '1.3'
+  'script-security':
+    version: '1.25'
   'scriptler':
     version: '2.9'
   'simple-theme-plugin':
     version: '0.3'
+  'sse-gateway':
+    version: '1.15'
   'ssh':
     version: '2.4'
+  'ssh-agent':
+    version: '1.9'
   'ssh-credentials':
     version: '1.12'
   'ssh-slaves':
     version: '1.9'
   'structs':
-    version: '1.1'
+    version: '1.5'
   'subversion':
     version: '2.7.1'
   'swarm':
@@ -237,6 +277,8 @@ ovirt_jenkins::plugins:
     version: '1.12.1'
   'translation':
     version: '1.10'
+  'variant':
+    version: '1.1'
   'view-job-filters':
     version: '1.26'
   'violations':
@@ -248,41 +290,29 @@ ovirt_jenkins::plugins:
   'workflow-aggregator':
     version: '2.0'
   'workflow-api':
-    version: '2.0'
+    version: '2.8'
   'workflow-basic-steps':
-    version: '2.0'
-  'workflow-cps':
-    version: '2.1'
-  'workflow-cps-global-lib':
-    version: '2.0'
-  'workflow-durable-task-step':
-    version: '2.0'
-  'workflow-job':
-    version: '2.1'
-  'workflow-multibranch':
     version: '2.3'
+  'workflow-cps':
+    version: '2.24'
+  'workflow-cps-global-lib':
+    version: '2.5'
+  'workflow-durable-task-step':
+    version: '2.8'
+  'workflow-job':
+    version: '2.9'
+  'workflow-multibranch':
+    version: '2.9.2'
   'workflow-scm-step':
-    version: '2.1'
+    version: '2.3'
   'workflow-step-api':
-    version: '2.0'
+    version: '2.7'
   'workflow-support':
-    version: '2.0'
+    version: '2.12'
   'ws-cleanup':
     version: '0.28'
   'whitesource':
     version: '1.7.2'
-  'groovy-events-listener-plugin':
-    version: '1.014'
-  'envinject':
-    version: '1.92.1'
-
-  # Bundled plugins
-  'ssh-agent':
-    version: '1.9'
-  'script-security':
-    version: '1.18.1'
-  'mailer':
-    version: '1.17'
 
 #oVirt engine backup
 ovirt_backup::engine::server::backup_home: '/export/backup/engine'
