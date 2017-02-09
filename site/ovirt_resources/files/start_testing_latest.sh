@@ -7,7 +7,7 @@ LOCK_PATH=$HOME/experimental_repo.lock
 wait_for_lock() {
     for ((i = 0; i < $MAX_LOCK_ATTEMPTS; i++)); do
         if (set -o noclobber; > $LOCK_PATH) 2> /dev/null; then
-            trap "rm -f '$LOCK_PATH'" EXIT
+            trap "rm -f '$LOCK_PATH'" EXIT HUP
             return
         fi
         sleep $LOCK_WAIT_INTERVAL

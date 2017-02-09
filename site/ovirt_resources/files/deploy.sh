@@ -9,7 +9,7 @@ wait_for_lock() {
     sleep $WAIT_BEFOR_LOCK_INTERVAL
     for ((i = 0; i < $MAX_LOCK_ATTEMPTS; i++)); do
         if (set -o noclobber; > $LOCK_PATH) 2> /dev/null; then
-            trap "rm -f '$LOCK_PATH'" EXIT
+            trap "rm -f '$LOCK_PATH'" EXIT HUP
             return
         fi
         sleep $LOCK_WAIT_INTERVAL
