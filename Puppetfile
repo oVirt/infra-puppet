@@ -15,9 +15,7 @@ mod "nanliu/staging", "1.0.3"
 mod "puppet/archive", "0.5.1"
 mod "saz/ssh", "1.2.0"
 mod "saz/timezone", "1.2.0"
-mod "squid3",
-  :git => "https://github.com/david-caro/puppet-squid3.git",
-  :ref => '92c7c5917fac5734789629c2ac3c51d179be65fa'
+mod "thias/squid3", "1.0.2"
 mod "stahnma/epel", "0.1.0"
 mod "theforeman/concat_native", "1.3.1"
 mod "theforeman/foreman", "2.1.3"

@@ -1,6 +1,6 @@
 # == Class: ovirt_proxy
 #
-# Configures a local network proxy with yum repo proxying
+# Configures a local network proxy
 #
 # === Parameters
 # allow
@@ -48,33 +48,19 @@ class ovirt_proxy(
     template            => 'short',
   }
 
-  class {'ovirt_proxy::repoproxy':
-    basedir => '/opt/repoproxy',
-    user    => 'squid',
-    group   => 'squid',
-    ip      => '127.0.0.1',
-    port    => '5000',
-  }
 
   host { $::fqdn:
       ip => '127.0.0.1',
   }
 
-  exec {'add_firewalld_squid_now':
-    command => 'firewall-cmd --add-port 3128/tcp',
-    unless  => 'firewall-cmd --query-port 3128/tcp',
-    path    => '/bin',
-  }
-
-  exec {'add_firewalld_squid_persist':
-    command     => 'firewall-cmd --persist --add-port 3128/tcp',
-    refreshonly => true,
-    path        => '/bin',
+  firewalld_port { 'SQUID proxy port':
+    ensure   => present,
+    zone     => 'public',
+    port     => 3128,
+    protocol => 'tcp',
   }
 
   Host[$::fqdn]
   -> Class['::squid3']
 
-  Exec['add_firewalld_squid_now']
-  ~> Exec['add_firewalld_squid_persist']
 }
