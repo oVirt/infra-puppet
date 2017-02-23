@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-MAX_LOCK_ATTEMPTS=120
+MAX_LOCK_ATTEMPTS=180
 LOCK_WAIT_INTERVAL=5
 LOCK_PATH=$HOME/experimental_repo.lock
 
