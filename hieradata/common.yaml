@@ -25,6 +25,8 @@ ovirt_jenkins::plugins:
     version: '2.1'
   'authentication-tokens':
     version: '1.3'
+  'bouncycastle-api':
+    version: '2.16.0'
   'branch-api':
     version: '1.11.1'
   'bugzilla':
@@ -84,7 +86,7 @@ ovirt_jenkins::plugins:
   'durable-task':
     version: '1.13'
   'email-ext':
-    version: '2.44'
+    version: '2.57.1'
   'embeddable-build-status':
     version: '1.9'
   'envinject':
@@ -158,7 +160,7 @@ ovirt_jenkins::plugins:
   'ldap':
     version: '1.11'
   'mailer':
-    version: '1.19'
+    version: '1.20'
   'mapdb-api':
     version: '1.0.6.0'
   'mask-passwords':
@@ -212,13 +214,15 @@ ovirt_jenkins::plugins:
   'pipeline-model-definition':
     version: '1.0'
   'pipeline-rest-api':
-    version: '1.3'
+    version: '2.6'
   'pipeline-stage-tags-metadata':
     version: '1.0'
   'pipeline-stage-step':
     version: '2.2'
   'pipeline-stage-view':
-    version: '1.3'
+    version: '2.6'
+  'pipeline-utility-steps':
+    version: '1.3.0'
   'plain-credentials':
     version: '1.3'
   'port-allocator':
@@ -246,7 +250,7 @@ ovirt_jenkins::plugins:
   'scm-api':
     version: '1.3'
   'script-security':
-    version: '1.25'
+    version: '1.27'
   'scriptler':
     version: '2.9'
   'simple-theme-plugin':
@@ -260,7 +264,7 @@ ovirt_jenkins::plugins:
   'ssh-credentials':
     version: '1.12'
   'ssh-slaves':
-    version: '1.9'
+    version: '1.15'
   'structs':
     version: '1.5'
   'subversion':
@@ -276,7 +280,7 @@ ovirt_jenkins::plugins:
   'timestamper':
     version: '1.7.2'
   'token-macro':
-    version: '1.12.1'
+    version: '2.0'
   'translation':
     version: '1.10'
   'variant':
@@ -292,7 +296,7 @@ ovirt_jenkins::plugins:
   'workflow-aggregator':
     version: '2.0'
   'workflow-api':
-    version: '2.8'
+    version: '2.12'
   'workflow-basic-steps':
     version: '2.3'
   'workflow-cps':
