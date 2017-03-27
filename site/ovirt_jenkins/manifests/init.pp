@@ -122,7 +122,7 @@ class ovirt_jenkins(
   selinux::boolean { 'httpd_can_network_relay': }
 
   class {'::epel': }
-  package { ['python-pip', 'git']:
+  package { ['python2-pip', 'git']:
     ensure => latest,
   }
   package {'ordereddict':
@@ -136,7 +136,7 @@ class ovirt_jenkins(
   class { '::ovirt_backup::jenkins::client': }
 
   Class['epel']
-  ->Package['python-pip']
+  ->Package['python2-pip']
   ->Package['ordereddict']
   ->Class['::ovirt_backup::jenkins::client']
 
