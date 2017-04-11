@@ -1,6 +1,6 @@
 ---
 ovirt_jenkins_slave::swarm_plugin_user: swarm-plugin
-ovirt_jenkins::jenkins_ver: 2.32.3-1.1
+ovirt_jenkins::jenkins_ver: 2.46.1-1.1
 ovirt_jenkins::manage_java: true
 ovirt_jenkins::cli_ssh_key: '/var/lib/data/jenkins/.ssh/id_rsa'
 ovirt_jenkins::icinga_ip: '31.15.26.10'
@@ -14,7 +14,7 @@ ovirt_jenkins::plugins:
   'analysis-collector':
     version: '1.43'
   'analysis-core':
-    version: '1.74'
+    version: '1.86'
   'ansicolor':
     version: '0.4.3'
   'ant':
@@ -86,11 +86,11 @@ ovirt_jenkins::plugins:
   'durable-task':
     version: '1.13'
   'email-ext':
-    version: '2.57.1'
+    version: '2.57.2'
   'embeddable-build-status':
     version: '1.9'
   'envinject':
-    version: '1.92.1'
+    version: '2.0'
   'extended-read-permission':
     version: '1.0'
   'external-monitor-job':
@@ -128,7 +128,7 @@ ovirt_jenkins::plugins:
   'greenballs':
     version: '1.14'
   'groovy':
-    version: '1.24'
+    version: '2.0'
   'groovy-events-listener-plugin':
     version: '1.014'
   'groovy-postbuild':
@@ -166,7 +166,7 @@ ovirt_jenkins::plugins:
   'mask-passwords':
     version: '2.8'
   'matrix-auth':
-    version: '1.1'
+    version: '1.5'
   'matrix-project':
     version: '1.7.1'
   'matrix-reloaded':
