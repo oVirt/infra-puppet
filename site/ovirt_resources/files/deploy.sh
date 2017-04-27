@@ -21,7 +21,6 @@ wait_for_lock() {
 wait_for_lock
 
 repoman \
-    --verbose \
     --temp-dir generate-in-repo \
     --option main.allowed_repo_paths=/srv/resources/repos/ovirt/experimental \
     --create-latest-repo \
