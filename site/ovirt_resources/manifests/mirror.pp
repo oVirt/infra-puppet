@@ -251,4 +251,17 @@ class ovirt_resources::mirror(
     user    => $mirror_user,
   }
 
+  ssh_authorized_key { 'network@nfrance.com':
+    ensure  => present,
+    name    => 'Mirror http://ovirt.repo.nfrance.com/ - network@nfrance.com',
+    key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCxDuAJ0utqeqWqsq2zGJ4Ay87xDnmAZlMLQ7K/LvJXQAX/lh0w6lMUlLScR0FFWBa3guysU9vqfpxPIqnbdJJbEpnWrliEyVezd5CusdYCWI5GuVJHRmXI4yO3UnoYuiQ7Av6GO1jtncNUZtBbDmPG8eWccEPg0x9OO5c3GDaxqqtu7WeTB7BfO8W8KygsvqDffZ7ryBWeftQgykHejju9Mao51de1Q0U5ksYqjahusoEpLuG5dSEIS0LziM38lCukBGvtFopMMItKjuAOwqf4XSwp/f2e6u71geBzWRLMugpZtEnQRUgqwXti/fx9485ipp+EnSN1/hkXiIKHrEGL',
+    options => ["command=\"${rsynclog} ovirt.repo.nfrance.com --server --sender -vrltH . ${mirror_path}pub/\"",
+                'no-port-forwarding',
+                'no-X11-forwarding',
+                'no-agent-forwarding',
+                'no-pty'],
+    type    => 'ssh-rsa',
+    user    => $mirror_user,
+  }
+
 }
