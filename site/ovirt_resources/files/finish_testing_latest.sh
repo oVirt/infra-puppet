@@ -62,14 +62,14 @@ install -o "$USER" -m 755 -d "$published_path"
     find . -type d \! -name 'repodata' | tac | while read dir; do
         install -o "$USER" -m 755 -d "$published_path/$dir"
         find "$dir" -maxdepth 1 \! -type d -print0 | \
-            xargs -0 -r cp -RPpl -t "$published_path/$dir"
-            if [[ -d "$dir/repodata" ]]; then
-                createrepo \
-                    --update \
-                    --retain-old-md "$PUBLISH_MD_COPIES" \
-                    --workers 8 \
-                    "$published_path/$dir"
-            fi
+            xargs -0 -r cp -RPplf -t "$published_path/$dir"
+        if [[ -d "$dir/repodata" ]]; then
+            createrepo \
+                --update \
+                --retain-old-md "$PUBLISH_MD_COPIES" \
+                --workers 8 \
+                "$published_path/$dir"
+        fi
     done
 )
 exit 0
