@@ -19,14 +19,11 @@ wait_for_lock() {
 wait_for_lock
 
 REPO_PATH="/srv/resources/repos/ovirt/experimental"
-PUBLISH_PATH="/srv/resources/repos/ovirt/tested"
 PUBLISH_MD_COPIES=50
 read version
 
 testing_path="${REPO_PATH}/${version}/latest.under_testing"
 tested_path="${testing_path%.*}.tested"
-
-published_path="${PUBLISH_PATH}/${version}"
 
 wrong_version() {
     local test_repo
@@ -55,21 +52,4 @@ echo "Moving to tested $tested_path"
 rm -rf "${tested_path?}"
 mv "$testing_path" "$tested_path"
 
-echo "Copying to published repo"
-install -o "$USER" -m 755 -d "$published_path"
-(
-    cd "$tested_path"
-    find . -type d \! -name 'repodata' | tac | while read dir; do
-        install -o "$USER" -m 755 -d "$published_path/$dir"
-        find "$dir" -maxdepth 1 \! -type d -print0 | \
-            xargs -0 -r cp -RPplf -t "$published_path/$dir"
-        if [[ -d "$dir/repodata" ]]; then
-            createrepo \
-                --update \
-                --retain-old-md "$PUBLISH_MD_COPIES" \
-                --workers 8 \
-                "$published_path/$dir"
-        fi
-    done
-)
 exit 0
