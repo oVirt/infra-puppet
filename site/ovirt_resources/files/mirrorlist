@@ -9,3 +9,4 @@ http://mirrors.rit.edu/ovirt/pub/ovirt-@VERSION@/rpm/@DIST@/
 http://mirror.slu.cz/ovirt/ovirt-@VERSION@/rpm/@DIST@/
 http://ftp.snt.utwente.nl/pub/software/ovirt/ovirt-@VERSION@/rpm/@DIST@/
 http://ftp.nluug.nl/os/Linux/virtual/ovirt/ovirt-@VERSION@/rpm/@DIST@/
+http://ovirt.repo.nfrance.com/ovirt-@VERSION@/rpm/@DIST@/
