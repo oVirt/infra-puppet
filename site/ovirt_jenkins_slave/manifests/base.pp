@@ -45,7 +45,7 @@ class ovirt_jenkins_slave::base {
   case "${::osfamily}-${::operatingsystem}" {
     RedHat-Fedora: {
       case $::operatingsystemrelease {
-        /^(23|24|25)$/: {
+        /^(24|25|26)$/: {
           package {['java-1.8.0-openjdk-devel', 'java-1.8.0-openjdk',
                     'java-1.8.0-openjdk-headless']:
             ensure => installed;
