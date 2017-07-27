@@ -1,8 +1,8 @@
 # The user for Marc Dequènes (Duck)
 class ovirt_infra::user::duck($password = undef) {
   ovirt_infra::user { 'duck':
-    key      => 'AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFF7fG1/v1CJmIGjRMlPKOwPt6gUOxmoWMLGh79PakIngrj/We3fZRDj8OOgtW07SmYqfeoIpg168UMTbJBwrEw=',
-    type     => 'ecdsa-sha2-nistp256',
+    key      => 'AAAAC3NzaC1lZDI1NTE5AAAAINkTw3tpP6CFVAFKCGucuJUluJbgaqBInH91e8HyK46U',
+    type     => 'ssh-ed25519',
     password => $password,
   }
 }
