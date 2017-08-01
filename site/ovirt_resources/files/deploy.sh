@@ -23,6 +23,7 @@ wait_for_lock
 repoman \
     --temp-dir generate-in-repo \
     --option main.allowed_repo_paths=/srv/resources/repos/ovirt/experimental \
+    --option main.on_empty_source=warn \
     --create-latest-repo \
     '/srv/resources/repos/ovirt/experimental' \
     add conf:stdin

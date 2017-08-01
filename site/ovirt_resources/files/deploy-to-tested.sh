@@ -25,6 +25,7 @@ collect_packages() {
     repoman \
         --temp-dir generate-in-repo \
         --option main.allowed_repo_paths="$repoman_dst" \
+        --option main.on_empty_source=warn \
         "$repoman_dst" \
         add conf:stdin
 }
