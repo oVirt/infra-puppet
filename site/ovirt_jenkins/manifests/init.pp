@@ -8,6 +8,7 @@ class ovirt_jenkins(
   $manage_java = false,
   $plugins = {},
   $jnlp_port = '56293',
+  $ssl_certnames = [$::fqdn],
   $icinga_ip = '',
   $graphite_host = 'localhost',
   $graphite_port = '2003',
@@ -107,6 +108,49 @@ class ovirt_jenkins(
   firewalld_service { 'Allow HTTP':
     ensure  => 'present',
     service => 'http',
+  }
+
+  Apache::Vhost<|ssl == false|> ~> Exec['Restart Apache'] -> Letsencrypt::Certonly<||> -> Apache::Vhost<|ssl == true|>
+  class { '::letsencrypt':
+    configure_epel      => false,
+    unsafe_registration => true,
+  }
+  package { ['python2-certbot-apache']:
+    ensure => installed,
+  }
+  $ssl_cert_primary_domain = $ssl_certnames[0]
+  letsencrypt::certonly { $ssl_cert_primary_domain:
+    domains              => $ssl_certnames,
+    plugin               => 'apache',
+    manage_cron          => true,
+    cron_success_command => '/bin/systemctl reload httpd.service',
+  }
+  apache::vhost { "${::fqdn}-ssl":
+    port                  => '443',
+    manage_docroot        => false,
+    docroot               => false,
+    ssl                   => true,
+    ssl_cert              => "/etc/letsencrypt/live/${ssl_cert_primary_domain}/fullchain.pem",
+    ssl_key               => "/etc/letsencrypt/live/${ssl_cert_primary_domain}/privkey.pem",
+    proxy_pass            => [ {
+      'path'     => '/',
+      'url'      => 'http://localhost:8080/',
+      'keywords' => ['nocanon'],
+      'params'   => {
+        'connectiontimeout' => '2400',
+        'timeout'           => '2400',
+      },
+    }, ],
+    allow_encoded_slashes => 'nodecode',
+
+  }
+  exec {'Restart Apache':
+    command     => '/bin/systemctl restart httpd.service',
+    refreshonly => true,
+  }
+  firewalld_service { 'Allow HTTPS':
+    ensure  => 'present',
+    service => 'https',
   }
 
   firewalld_port { 'jnlp port for jenkins slave':

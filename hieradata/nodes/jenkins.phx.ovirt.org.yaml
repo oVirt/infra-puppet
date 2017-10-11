@@ -1,0 +1,3 @@
+ovirt_jenkins::ssl_certnames:
+  - jenkins.ovirt.org
+  - jenkins.phx.ovirt.org

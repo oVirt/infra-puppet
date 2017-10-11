@@ -1,7 +1,7 @@
 forge "https://forgeapi.puppetlabs.com/"
 
 mod "erwbgy/limits", "0.3.1"
-mod "puppetlabs/apache", "1.8.0"
+mod "puppetlabs/apache", "1.11.1"
 mod "puppetlabs/concat", "1.1.1"
 mod "puppetlabs/inifile", "1.1.4"
 mod "puppetlabs/ntp", "3.0.3"
@@ -29,3 +29,4 @@ mod "puppetlabs/lvm", "0.7.0"
 mod "pdxcat/nrpe", "2.0.0"
 mod "camptocamp/kmod", "2.1.0"
 mod "camptocamp/openssl", "1.7.1"
+mod "puppet/letsencrypt", "1.1.0"
