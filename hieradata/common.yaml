@@ -149,6 +149,8 @@ ovirt_jenkins::plugins:
     version: '4.71'
   'flexible-publish':
     version: '0.15.2'
+  'generic-webhook-trigger':
+    version: '1.20'
   'gerrit-trigger':
     version: '2.26.1'
   'ghprb':
