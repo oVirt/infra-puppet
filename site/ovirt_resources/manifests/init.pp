@@ -1,7 +1,7 @@
 # Handles a resources machine: http service serving repositories
 # with support for mirroring and uploading files
 class ovirt_resources(
-  $resources_block_dev = '/dev/vdb',
+  $resources_block_dev = '/dev/mapper/resources_lvm-data',
   $resources_dir       = '/srv/resources',
   $mirror_user         = 'mirror',
   $server_alias        = 'resources.ovirt.org',
