@@ -170,7 +170,7 @@ ovirt_jenkins::plugins:
   'github-organization-folder':
     version: '1.6'
   'global-build-stats':
-    version: '1.4'
+    version: '1.5'
   'google-login':
     version: '1.3'
   'greenballs':
