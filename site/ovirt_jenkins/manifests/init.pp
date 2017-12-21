@@ -142,7 +142,7 @@ class ovirt_jenkins(
 
   package {['java-1.8.0-openjdk-devel','java-1.8.0-openjdk',
             'java-1.8.0-openjdk-headless']:
-    ensure => latest
+    ensure => installed
   }
 
   file { "${data_dir}/jenkins/.jenkinsjobsrc-defaults":
