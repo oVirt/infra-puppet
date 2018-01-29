@@ -1,6 +1,6 @@
 ---
 ovirt_jenkins_slave::swarm_plugin_user: swarm-plugin
-ovirt_jenkins::jenkins_ver: 2.89.2-1.1
+ovirt_jenkins::jenkins_ver: 2.89.4-1.1
 ovirt_jenkins::manage_java: true
 ovirt_jenkins::cli_ssh_key: '/var/lib/data/jenkins/.ssh/id_rsa'
 ovirt_jenkins::icinga_ip: '31.15.26.10'
@@ -8,69 +8,71 @@ ovirt_jenkins::graphite_host: 'graphite.phx.ovirt.org'
 ovirt_jenkins::graphite_port: '2003'
 ovirt_jenkins::plugins:
   'PrioritySorter':
-    version: '3.5.1'
+    version: '3.6.0'
   'ace-editor':
     version: '1.1'
   'analysis-collector':
     version: '1.52'
   'analysis-core':
-    version: '1.93'
+    version: '1.94'
   'ansicolor':
     version: '0.5.2'
   'ant':
-    version: '1.7'
+    version: '1.8'
   'antisamy-markup-formatter':
     version: '1.5'
   'apache-httpcomponents-client-4-api':
-    version: '4.5.3-2.0'
+    version: '4.5.3-2.1'
   'audit-trail':
     version: '2.2'
   'authentication-tokens':
     version: '1.3'
   'blueocean':
-    version: '1.3.5'
+    version: '1.4.2'
   'blueocean-autofavorite':
     version: '1.2.1'
   'blueocean-bitbucket-pipeline':
-    version: '1.3.5'
+    version: '1.4.2'
   'blueocean-commons':
-    version: '1.3.5'
+    version: '1.4.2'
   'blueocean-config':
-    version: '1.3.5'
+    version: '1.4.2'
+  'blueocean-core-js':
+    version: '1.4.2'
   'blueocean-dashboard':
-    version: '1.3.5'
+    version: '1.4.2'
   'blueocean-display-url':
     version: '2.2.0'
   'blueocean-events':
-    version: '1.3.5'
+    version: '1.4.2'
   'blueocean-git-pipeline':
-    version: '1.3.5'
+    version: '1.4.2'
   'blueocean-github-pipeline':
-    version: '1.3.5'
+    version: '1.4.2'
   'blueocean-i18n':
-    version: '1.3.5'
+    version: '1.4.2'
   'blueocean-jira':
-    version: '1.3.5'
+    version: '1.4.2'
   'blueocean-jwt':
-    version: '1.3.5'
+    version: '1.4.2'
   'blueocean-personalization':
-    version: '1.3.5'
+    version: '1.4.2'
   'blueocean-pipeline-api-impl':
-    version: '1.3.5'
+    version: '1.4.2'
   'blueocean-pipeline-editor':
-    version: '1.3.5'
+    version: '1.4.2'
   'blueocean-pipeline-scm-api':
-    version: '1.3.5'
+    version: '1.4.2'
   'blueocean-rest':
-    version: '1.3.5'
+    version: '1.4.2'
   'blueocean-rest-impl':
-    version: '1.3.5'
+    version: '1.4.2'
   'blueocean-web':
-    version: '1.3.5'
+    version: '1.4.2'
   'bouncycastle-api':
     version: '2.16.2'
   'branch-api':
-    version: '2.0.16'
+    version: '2.0.18'
   'bugzilla':
     version: '1.5'
   'build-metrics':
@@ -84,11 +86,13 @@ ovirt_jenkins::plugins:
   'bulk-builder':
     version: '1.5'
   'checkstyle':
-    version: '3.49'
+    version: '3.50'
   'cloudbees-bitbucket-branch-source':
-    version: '2.2.7'
+    version: '2.2.10'
   'cloudbees-folder':
-    version: '6.2.1'
+    version: '6.3'
+  'command-launcher':
+    version: '1.2'
   'compact-columns':
     version: '1.10'
   'conditional-buildstep':
@@ -110,7 +114,7 @@ ovirt_jenkins::plugins:
   'credentials':
     version: '2.1.16'
   'credentials-binding':
-    version: '1.13'
+    version: '1.15'
   'cron_column':
     version: '1.4'
   'cvs':
@@ -124,11 +128,11 @@ ovirt_jenkins::plugins:
   'docker-build-publish':
     version: '1.3.2'
   'docker-commons':
-    version: '1.10'
+    version: '1.11'
   'docker-workflow':
-    version: '1.14'
+    version: '1.15.1'
   'durable-task':
-    version: '1.17'
+    version: '1.18'
   'email-ext':
     version: '2.61'
   'embeddable-build-status':
@@ -136,7 +140,7 @@ ovirt_jenkins::plugins:
   'envinject':
     version: '2.1.5'
   'envinject-api':
-    version: '1.4'
+    version: '1.5'
   'extended-read-permission':
     version: '2.0'
   'external-monitor-job':
@@ -146,27 +150,27 @@ ovirt_jenkins::plugins:
   'favorite':
     version: '2.3.1'
   'findbugs':
-    version: '4.71'
+    version: '4.72'
   'flexible-publish':
     version: '0.15.2'
   'generic-webhook-trigger':
-    version: '1.20'
+    version: '1.26'
   'gerrit-trigger':
-    version: '2.27.1'
+    version: '2.27.3'
   'ghprb':
-    version: '1.39.0'
+    version: '1.40.0'
   'git':
-    version: '3.6.4'
+    version: '3.7.0'
   'git-client':
-    version: '2.6.0'
+    version: '2.7.1'
   'git-server':
     version: '1.7'
   'github':
-    version: '1.28.1'
+    version: '1.29.0'
   'github-api':
     version: '1.90'
   'github-branch-source':
-    version: '2.3.1'
+    version: '2.3.2'
   'github-organization-folder':
     version: '1.6'
   'global-build-stats':
@@ -183,6 +187,8 @@ ovirt_jenkins::plugins:
     version: '2.3.1'
   'handlebars':
     version: '1.1.1'
+  'handy-uri-templates-2-api':
+    version: '2.1.6-1.0'
   'heavy-job':
     version: '1.1'
   'htmlpublisher':
@@ -194,11 +200,13 @@ ovirt_jenkins::plugins:
   'jabber':
     version: '1.36'
   'jackson2-api':
-    version: '2.8.10.1'
+    version: '2.8.11.1'
   'javadoc':
     version: '1.4'
+  'jenkins-design-language':
+    version: '1.4.2'
   'jira':
-    version: '2.5'
+    version: '2.5.1'
   'jobConfigHistory':
     version: '2.18'
   'jquery':
@@ -206,11 +214,11 @@ ovirt_jenkins::plugins:
   'jquery-detached':
     version: '1.2.1'
   'jsch':
-    version: '0.1.54.1'
+    version: '0.1.54.2'
   'junit':
-    version: '1.23'
+    version: '1.24'
   'ldap':
-    version: '1.18'
+    version: '1.19'
   'mailer':
     version: '1.20'
   'mapdb-api':
@@ -224,7 +232,7 @@ ovirt_jenkins::plugins:
   'matrix-reloaded':
     version: '1.1.3'
   'maven-plugin':
-    version: '3.0'
+    version: '3.1'
   'mercurial':
     version: '2.2'
   'metrics':
@@ -232,7 +240,7 @@ ovirt_jenkins::plugins:
   'momentjs':
     version: '1.1.1'
   'monitoring':
-    version: '1.70.0'
+    version: '1.71.0'
   'multi-slave-config-plugin':
     version: '1.2.0'
   'multiple-scms':
@@ -254,35 +262,35 @@ ovirt_jenkins::plugins:
   'parameterized-trigger':
     version: '2.35.2'
   'pipeline-build-step':
-    version: '2.6'
+    version: '2.7'
   'pipeline-github-lib':
     version: '1.0'
   'pipeline-githubnotify-step':
-    version: '1.0.3'
+    version: '1.0.4'
   'pipeline-graph-analysis':
-    version: '1.5'
+    version: '1.6'
   'pipeline-input-step':
     version: '2.8'
   'pipeline-milestone-step':
     version: '1.3.1'
   'pipeline-model-api':
-    version: '1.2.5'
+    version: '1.2.7'
   'pipeline-model-declarative-agent':
     version: '1.1.1'
   'pipeline-model-definition':
-    version: '1.2.5'
+    version: '1.2.7'
   'pipeline-model-extensions':
-    version: '1.2.5'
+    version: '1.2.7'
   'pipeline-rest-api':
     version: '2.9'
   'pipeline-stage-step':
     version: '2.3'
   'pipeline-stage-tags-metadata':
-    version: '1.2.5'
+    version: '1.2.7'
   'pipeline-stage-view':
     version: '2.9'
   'pipeline-utility-steps':
-    version: '1.5.1'
+    version: '2.0.1'
   'plain-credentials':
     version: '1.4'
   'port-allocator':
@@ -294,9 +302,11 @@ ovirt_jenkins::plugins:
   'progress-bar-column-plugin':
     version: '1.0'
   'promoted-builds':
-    version: '2.31'
+    version: '2.31.1'
+  'publish-over':
+    version: '0.21'
   'publish-over-ssh':
-    version: '1.17'
+    version: '1.18'
   'pubsub-light':
     version: '1.12'
   'purge-build-queue-plugin':
@@ -306,15 +316,15 @@ ovirt_jenkins::plugins:
   'resource-disposer':
     version: '0.8'
   'role-strategy':
-    version: '2.6.1'
+    version: '2.7.0'
   'run-condition':
     version: '1.0'
   'scm-api':
     version: '2.2.6'
   'script-security':
-    version: '1.39'
+    version: '1.41'
   'simple-theme-plugin':
-    version: '0.3'
+    version: '0.4'
   'sse-gateway':
     version: '1.15'
   'ssh':
@@ -324,13 +334,13 @@ ovirt_jenkins::plugins:
   'ssh-credentials':
     version: '1.13'
   'ssh-slaves':
-    version: '1.23'
+    version: '1.25.1'
   'structs':
-    version: '1.10'
+    version: '1.14'
   'subversion':
     version: '2.10.2'
   'swarm':
-    version: '3.6'
+    version: '3.9'
   'tasks':
     version: '4.52'
   'test-results-analyzer':
@@ -338,11 +348,11 @@ ovirt_jenkins::plugins:
   'throttle-concurrents':
     version: '2.0.1'
   'timestamper':
-    version: '1.8.8'
+    version: '1.8.9'
   'token-macro':
     version: '2.3'
   'translation':
-    version: '1.15'
+    version: '1.16'
   'variant':
     version: '1.1'
   'view-job-filters':
@@ -350,33 +360,33 @@ ovirt_jenkins::plugins:
   'violations':
     version: '0.7.11'
   'warnings':
-    version: '4.64'
+    version: '4.65'
   'whitesource':
-    version: '17.11.4'
+    version: '18.1.3'
   'windows-slaves':
     version: '1.3.1'
   'workflow-aggregator':
     version: '2.5'
   'workflow-api':
-    version: '2.24'
+    version: '2.25'
   'workflow-basic-steps':
     version: '2.6'
   'workflow-cps':
-    version: '2.42'
+    version: '2.45'
   'workflow-cps-global-lib':
     version: '2.9'
   'workflow-durable-task-step':
-    version: '2.17'
+    version: '2.19'
   'workflow-job':
-    version: '2.15'
+    version: '2.17'
   'workflow-multibranch':
-    version: '2.16'
+    version: '2.17'
   'workflow-scm-step':
     version: '2.6'
   'workflow-step-api':
     version: '2.14'
   'workflow-support':
-    version: '2.16'
+    version: '2.18'
   'ws-cleanup':
     version: '0.34'
 
