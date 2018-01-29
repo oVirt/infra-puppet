@@ -156,13 +156,6 @@ class ovirt_jenkins_slave::base {
           fail("Unsupported ${::operatingsystem}-${::operatingsystemrelease}")
         }
       }
-
-      # Common to all CentOS
-      include epel
-
-      Package {
-        require => Class['epel'],
-      }
     }
     # No Fedora nor CentOS
     default: {
