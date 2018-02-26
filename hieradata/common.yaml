@@ -154,13 +154,13 @@ ovirt_jenkins::plugins:
   'flexible-publish':
     version: '0.15.2'
   'generic-webhook-trigger':
-    version: '1.26'
+    version: '1.28'
   'gerrit-trigger':
-    version: '2.27.3'
+    version: '2.27.5'
   'ghprb':
     version: '1.40.0'
   'git':
-    version: '3.7.0'
+    version: '3.8.0'
   'git-client':
     version: '2.7.1'
   'git-server':
@@ -218,7 +218,7 @@ ovirt_jenkins::plugins:
   'junit':
     version: '1.24'
   'ldap':
-    version: '1.19'
+    version: '1.20'
   'mailer':
     version: '1.20'
   'mapdb-api':
@@ -234,7 +234,7 @@ ovirt_jenkins::plugins:
   'maven-plugin':
     version: '3.1'
   'mercurial':
-    version: '2.2'
+    version: '2.3'
   'metrics':
     version: '3.1.2.10'
   'momentjs':
@@ -302,11 +302,11 @@ ovirt_jenkins::plugins:
   'progress-bar-column-plugin':
     version: '1.0'
   'promoted-builds':
-    version: '2.31.1'
+    version: '3.0'
   'publish-over':
     version: '0.21'
   'publish-over-ssh':
-    version: '1.18'
+    version: '1.19'
   'pubsub-light':
     version: '1.12'
   'purge-build-queue-plugin':
@@ -334,13 +334,13 @@ ovirt_jenkins::plugins:
   'ssh-credentials':
     version: '1.13'
   'ssh-slaves':
-    version: '1.25.1'
+    version: '1.26'
   'structs':
     version: '1.14'
   'subversion':
-    version: '2.10.2'
+    version: '2.10.3'
   'swarm':
-    version: '3.9'
+    version: '3.10'
   'tasks':
     version: '4.52'
   'test-results-analyzer':
@@ -368,7 +368,7 @@ ovirt_jenkins::plugins:
   'workflow-aggregator':
     version: '2.5'
   'workflow-api':
-    version: '2.25'
+    version: '2.26'
   'workflow-basic-steps':
     version: '2.6'
   'workflow-cps':
