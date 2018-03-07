@@ -34,7 +34,7 @@ class ovirt_jenkins(
         'value' => "${data_dir}/jenkins"
       },
       'JENKINS_JAVA_OPTIONS' => {
-        'value' => 'server -Djava.awt.headless=true -XX:+AlwaysPreTouch -XX:+UseG1GC -XX:+ExplicitGCInvokesConcurrent -XX:+ParallelRefProcEnabled -XX:+UseStringDeduplication -XX:+UnlockDiagnosticVMOptions -Xmx16G -Xms8G'
+        'value' => '-server -Djava.awt.headless=true -XX:+AlwaysPreTouch -XX:+UseG1GC -XX:+ExplicitGCInvokesConcurrent -XX:+ParallelRefProcEnabled -XX:+UseStringDeduplication -XX:+UnlockDiagnosticVMOptions -Xmx16G -Xms8G'
       },
       'JENKINS_ARGS'         => {
         'value' =>  ' --sessionTimeout=400 --httpKeepAliveTimeout=60000 ',
