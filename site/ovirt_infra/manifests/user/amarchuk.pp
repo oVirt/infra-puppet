@@ -1,7 +1,7 @@
 # The user for Anton Marchukov
 class ovirt_infra::user::amarchuk($password = undef) {
   ovirt_infra::user {'amarchuk':
-    key      => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDAe/So2oWKe8OHGu+5ntdg8MquN+b6JGsgTc8t11ZHgrUUKPjVfEcDnwGokoiGXZ5HQawo3v9zNUVgQIqHr0ChDAbauH8cUghwkziSBRRtgPk/CfiS82+kR0NiMbCeXPhU1e3kh2oGbwQ3eZ/GkSY5CqvSqw3o9ya49pVh94qR7nCh4zBLGFICenNDsJrbsIY8uKK+CZ9iDO+DgFwA6AYNku9FNuzxanwKwccdT4FLhp4xZab8Zi1xK3e9M4IuzCy1UwWq+CahwkHV+FqcvVhBzt1tmxTeZbV+r1XAERx6tk3Ug93nYpNv5U3xv5DL7dgb9Jlk4ZRiiLYCoc6mK3LP',
+    key      => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQC3VJHfmkhOgnu2zAEShdl/zpTJEon94oeWtQd/iNBfuJJOsuXcJEN0QT7s1hEdRNR+jHQ4qaLhtsZYx6pLhjUXiRT5YbY2UyYsGEvLOaa3WpqvxjeOf2rricU1Fcys0Pf2Mvu277oCRlNyfZretf5RcrWGOXlBmM3VRxsz6WB5POtlRhDZCOkqRCRZ/jygQ1A7MWlAfQI7xTQsfXyHIpz/0TT++kRiqQGpZGi0yYEXXmkbkboQlUtVK7g7O9ssQ7B5PFr1yeaf/Vsz/6l/ZgSsIJLFQoQxycMbJbEmIMwAuRol+A/KiHYNFsthaoeivYDJZ4MwsX6IXyz4hEDLKWjT',
     password => $password,
   }
 }
