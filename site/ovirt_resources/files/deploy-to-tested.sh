@@ -41,6 +41,17 @@ push_to_tested() {
             find "$dir" -maxdepth 1 \! -type d -print0 | \
                 xargs -0 -r cp -RPplf -t "$pkg_dst/$dir"
             if [[ -d "$dir/repodata" ]]; then
+                # The command produces 2 FD which contains packages that are
+                # 14+ days older and whitelisted packages of latest version RPM.
+                # the comm command whitelist the 2nd output and produces a new
+                # list containing only the old packages that are safe to remove.
+                comm -23 <(\
+                    find "$pkg_dst/$dir" -name *.rpm -type f -mtime +14 | sort
+                ) \
+                <(
+                    repomanage -k1 --new -c "$pkg_dst/$dir" | sort
+                ) \
+                | xargs -P 8 -r rm -f
                 createrepo_c \
                     --update \
                     --retain-old-md "$PUBLISH_MD_COPIES" \
