@@ -130,8 +130,12 @@ class ovirt_jenkins(
     manage_docroot        => false,
     docroot               => false,
     ssl                   => true,
-    ssl_cert              => "/etc/letsencrypt/live/${ssl_cert_primary_domain}/fullchain.pem",
+    ssl_cert              => "/etc/letsencrypt/live/${ssl_cert_primary_domain}/cert.pem",
     ssl_key               => "/etc/letsencrypt/live/${ssl_cert_primary_domain}/privkey.pem",
+    ssl_chain             => "/etc/letsencrypt/live/${ssl_cert_primary_domain}/chain.pem",
+    ssl_cipher            => 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256',
+    request_headers       => ['set X-Forwarded-Proto https', 'set X-Forwarded-Port 443'],
+    proxy_preserve_host   => true,
     proxy_pass            => [ {
       'path'     => '/',
       'url'      => 'http://localhost:8080/',
