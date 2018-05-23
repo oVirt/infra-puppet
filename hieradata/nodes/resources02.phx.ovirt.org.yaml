@@ -1,0 +1,4 @@
+ovirt_jenkins::ssl_certnames:
+  - resources.ovirt.org
+  - plain.resources.ovirt.org
+  - resources02.phx.ovirt.org
