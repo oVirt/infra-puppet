@@ -1,6 +1,6 @@
 ---
 ovirt_jenkins_slave::swarm_plugin_user: swarm-plugin
-ovirt_jenkins::jenkins_ver: 2.107.3-1.1
+ovirt_jenkins::jenkins_ver: 2.121.1-1.1
 ovirt_jenkins::manage_java: true
 ovirt_jenkins::cli_ssh_key: '/var/lib/data/jenkins/.ssh/id_rsa'
 ovirt_jenkins::icinga_ip: '31.15.26.10'
@@ -20,9 +20,9 @@ ovirt_jenkins::plugins:
   'antisamy-markup-formatter':
     version: '1.5'
   'apache-httpcomponents-client-4-api':
-    version: '4.5.5-2.0'
+    version: '4.5.5-2.1'
   'audit-trail':
-    version: '2.2'
+    version: '2.3'
   'authentication-tokens':
     version: '1.3'
   'badge':
@@ -70,7 +70,7 @@ ovirt_jenkins::plugins:
   'blueocean-web':
     version: '1.5.0'
   'bouncycastle-api':
-    version: '2.16.2'
+    version: '2.16.3'
   'branch-api':
     version: '2.0.20'
   'bugzilla':
@@ -126,9 +126,9 @@ ovirt_jenkins::plugins:
   'docker-build-publish':
     version: '1.3.2'
   'docker-commons':
-    version: '1.12'
+    version: '1.13'
   'docker-workflow':
-    version: '1.16'
+    version: '1.17'
   'durable-task':
     version: '1.22'
   'email-ext':
@@ -146,35 +146,35 @@ ovirt_jenkins::plugins:
   'extra-columns':
     version: '1.18'
   'favorite':
-    version: '2.3.1'
+    version: '2.3.2'
   'findbugs':
     version: '4.72'
   'flexible-publish':
     version: '0.15.2'
   'generic-webhook-trigger':
-    version: '1.35'
+    version: '1.36'
   'gerrit-trigger':
     version: '2.27.5'
   'ghprb':
-    version: '1.40.0'
+    version: '1.42.0'
   'git':
-    version: '3.9.0'
+    version: '3.9.1'
   'git-client':
     version: '2.7.2'
   'git-server':
     version: '1.7'
   'github':
-    version: '1.29.0'
+    version: '1.29.1'
   'github-api':
-    version: '1.90'
+    version: '1.92'
   'github-branch-source':
-    version: '2.3.4'
+    version: '2.3.6'
   'github-organization-folder':
     version: '1.6'
   'global-build-stats':
     version: '1.5'
   'google-login':
-    version: '1.3.1'
+    version: '1.4'
   'greenballs':
     version: '1.15'
   'groovy':
@@ -198,13 +198,15 @@ ovirt_jenkins::plugins:
   'jabber':
     version: '1.36'
   'jackson2-api':
-    version: '2.8.11.2'
+    version: '2.8.11.3'
   'javadoc':
     version: '1.4'
+  'jdk-tool':
+    version: '1.0'
   'jenkins-design-language':
     version: '1.5.0'
   'jira':
-    version: '2.5.2'
+    version: '3.0.0'
   'jobConfigHistory':
     version: '2.18'
   'jquery':
@@ -215,6 +217,10 @@ ovirt_jenkins::plugins:
     version: '0.1.54.2'
   'junit':
     version: '1.24'
+  'kubernetes':
+    version: '1.7.1'
+  'kubernetes-credentials':
+    version: '0.3.1'
   'ldap':
     version: '1.20'
   'mailer':
@@ -222,7 +228,7 @@ ovirt_jenkins::plugins:
   'mapdb-api':
     version: '1.0.9.0'
   'mask-passwords':
-    version: '2.11.0'
+    version: '2.12.0'
   'matrix-auth':
     version: '2.2'
   'matrix-project':
@@ -255,6 +261,12 @@ ovirt_jenkins::plugins:
     version: '2.2'
   'openid4java':
     version: '0.9.8.0'
+  'openshift-client':
+    version: '1.0.12'
+  'openshift-pipeline':
+    version: '1.0.54'
+  'openshift-sync':
+    version: '1.0.19'
   'pam-auth':
     version: '1.3'
   'parameterized-trigger':
@@ -302,7 +314,7 @@ ovirt_jenkins::plugins:
   'progress-bar-column-plugin':
     version: '1.0'
   'promoted-builds':
-    version: '3.1'
+    version: '3.2'
   'publish-over':
     version: '0.22'
   'publish-over-ssh':
@@ -316,7 +328,7 @@ ovirt_jenkins::plugins:
   'resource-disposer':
     version: '0.8'
   'role-strategy':
-    version: '2.7.0'
+    version: '2.8.1'
   'run-condition':
     version: '1.0'
   'scm-api':
@@ -338,7 +350,7 @@ ovirt_jenkins::plugins:
   'structs':
     version: '1.14'
   'subversion':
-    version: '2.10.5'
+    version: '2.10.6'
   'swarm':
     version: '3.12'
   'tasks':
@@ -360,9 +372,9 @@ ovirt_jenkins::plugins:
   'violations':
     version: '0.7.11'
   'warnings':
-    version: '4.66'
+    version: '4.67'
   'whitesource':
-    version: '18.4.1'
+    version: '18.5.1.1'
   'windows-slaves':
     version: '1.3.1'
   'workflow-aggregator':
@@ -380,11 +392,11 @@ ovirt_jenkins::plugins:
   'workflow-job':
     version: '2.21'
   'workflow-multibranch':
-    version: '2.18'
+    version: '2.19'
   'workflow-scm-step':
     version: '2.6'
   'workflow-step-api':
-    version: '2.14'
+    version: '2.15'
   'workflow-support':
     version: '2.18'
   'ws-cleanup':
