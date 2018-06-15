@@ -35,7 +35,7 @@ class ovirt_jenkins(
         'value' => "${data_dir}/jenkins"
       },
       'JENKINS_JAVA_OPTIONS' => {
-        'value' => '-server -Djava.awt.headless=true -XX:+AlwaysPreTouch -XX:+UseG1GC -XX:+ExplicitGCInvokesConcurrent -XX:+ParallelRefProcEnabled -XX:+UseStringDeduplication -XX:+UnlockDiagnosticVMOptions -Xmx16G -Xms8G -Dhudson.model.Run.ArtifactList.treeCutoff=9999 -Dhudson.model.DirectoryBrowserSupport.CSP=\"sandbox allow-scripts; default-src \'self\' https://cdnjs.cloudflare.com; img-src \'self\'; style-src \'self\' https://cdnjs.cloudflare.com;\"'
+        'value' => '-server -Djava.awt.headless=true -XX:+AlwaysPreTouch -XX:+UseG1GC -XX:+ExplicitGCInvokesConcurrent -XX:+ParallelRefProcEnabled -XX:+UseStringDeduplication -XX:+UnlockDiagnosticVMOptions -Xmx16G -Xms8G -Dhudson.model.Run.ArtifactList.listCutoff=1 -Dhudson.model.Run.ArtifactList.treeCutoff=9999 -Dhudson.model.DirectoryBrowserSupport.CSP=\"sandbox allow-scripts; default-src \'self\' https://cdnjs.cloudflare.com; img-src \'self\'; style-src \'self\' https://cdnjs.cloudflare.com;\"'
       },
       'JENKINS_ARGS'         => {
         'value' =>  ' --sessionTimeout=400 --httpKeepAliveTimeout=60000 ',
