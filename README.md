@@ -1,19 +1,26 @@
-= Layout =
+oVirt Infra Puppet
+==================
 
-repo
-├── Gemfile
-├── Makefile
-├── Puppetfile
-├── README.md
-├── modules
-└── site
-    └── ovirt_infra
+This repository contains puppet manifests used for the oVirt infra.
+Please submit patches to https://gerrit.ovirt.org/
+
+Layout
+======
+
+* Gemfile
+* Makefile
+* Puppetfile
+* README.md
+* modules/
+* site/
+ * ovirt_infra/
 
 The modules directory is generated and in .gitignore. It is filled based on the
 Puppetfile. All local modules should be in site. For development convenience,
 there's also a Gemfile and a Makefile.
 
-= Using r10k =
+Using r10k
+==========
 
 Since we need r10k, we can use the Gemfile with bundler:
 
