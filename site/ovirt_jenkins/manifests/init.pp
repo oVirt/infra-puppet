@@ -216,23 +216,6 @@ class ovirt_jenkins(
     recurse       => true,
   }
 
-  @@nagios_hostgroup { "${::fqdn}_hostgroup":
-    hostgroup_name => "${::fqdn}_hostgroup",
-    alias          => "${::fqdn}_hostgroup",
-    tag            => 'monitoring',
-    target         => "/etc/icinga/conf.d/hostgroups/${::fqdn}_hostgroup.cfg",
-  }
-
-  @@nagios_host { $::fqdn:
-    ensure     => present,
-    alias      => $::hostname,
-    address    => $::ipaddress,
-    use        => 'linux-server',
-    hostgroups => "${::fqdn}_hostgroup",
-    target     => "/etc/icinga/conf.d/hosts/${::fqdn}.cfg",
-    tag        => 'monitoring',
-  }
-
   nrpe::command {
     'check_data_disk':
       ensure  => present,
@@ -251,38 +234,6 @@ class ovirt_jenkins(
       command => "check_procs -a '/usr/sbin/httpd' -u apache -c 1:",
     ;
   }
-
-  $service_defaults = {
-    use                 => 'local-service',
-    host_name           => $::fqdn,
-    notification_period => '24x7',
-    target              => "/etc/icinga/conf.d/services/${::fqdn}_services.cfg",
-    hostgroup_name      => "${::fqdn}_hostgroup",
-    tag                 => 'monitoring'
-  }
-  $service_checks = {
-    "check_data_disk_${::fqdn}" => {
-      check_command             =>  'check_nrpe!check_data_disk',
-      service_description => "${::fqdn} ${data_dir} disk",
-    },
-    "check_root_disk_${::fqdn}" => {
-      check_command             => 'check_nrpe!check_root_disk',
-      service_description       => "${::fqdn} root disk",
-    },
-    "check_jenkins_war_${::fqdn}" => {
-      check_command       => 'check_nrpe!check_jenkins_war',
-      service_description => "${::fqdn} jenkins.war",
-    },
-    "check_httpd_${::fqdn}" => {
-      check_command       => 'check_nrpe!check_httpd',
-      service_description => "${::fqdn} httpd",
-    },
-    "check_ping_${::fqdn}" => {
-      check_command       => 'check_ping!200.0,20%!500.0,60%',
-      service_description => "${::fqdn} ping",
-    }
-  }
-  create_resources('@@nagios_service', $service_checks, $service_defaults)
 
   firewalld_rich_rule { 'NRPE port':
     ensure => present,
