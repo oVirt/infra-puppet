@@ -46,12 +46,13 @@ push_to_tested() {
                 # the comm command whitelist the 2nd output and produces a new
                 # list containing only the old packages that are safe to remove.
                 comm -23 <(\
-                    find "$pkg_dst/$dir" -name *.rpm -type f -mtime +14 | sort
+                    find "$pkg_dst/${dir#./}" \
+                    -name *.rpm -type f -mtime +14 | sort
                 ) \
-                <(
+                <(\
                     repomanage -k1 --new -c "$pkg_dst/$dir" | sort
                 ) \
-                | xargs -P 8 -r rm -f
+                | xargs -L 1 -P 8 -r rm -f
                 createrepo_c \
                     --update \
                     --retain-old-md "$PUBLISH_MD_COPIES" \
