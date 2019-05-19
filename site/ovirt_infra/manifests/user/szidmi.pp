@@ -1,7 +1,7 @@
 # The user for Shlomi Zidmi
 class ovirt_infra::user::szidmi($password = undef) {
   ovirt_infra::user {'szidmi':
-    key      => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCd9R3JkVrtp4obsjKFR621AGpPSyWbC5iu2hjQ0stWU3BRNECqSP6yQOiCsUKDdgBfE8GqEAvtry8A5OkijdWb2007Ly7mrv3OJrDmDaa8NPXApVOANjDhSyZNOLk5bu5Ap1vLGAQScjiG/75LUNzA0+P9/E5liTbGvJnT+lOwHwWI5MLIVSG/Utq+nVCLmvJyJBVY1AYpsXdvE5mtOSzDT/bYD6XpcmbEP+a9wODvyOQCpVkyjHdMTQna7O5P34Ud6M4gOdfkAO0n5f8GCo+u9qZZ1ooanaBOOcR+yfWOpqUgrz6c1tFLXEZek6hkl1vpvZbk5jcKCDN30f5jBOxL',
+    key      => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDNTrgWpi5d8HXZvF3kObOKmp/ShsYRBKLd0nerZLKMUoL6+KCBKYznIXJtUytE3qd/loDAOaYzA1bqLQMVYYpuCKBfIn4bG0c5vN+4bcoSbwCsELnuC+RShnyJmk/Oqe05fdFEhirnt4Xrm9YexnALWbbbiIIzfK+KUeJEMQ9KV8qksCKoM23K87PTSsi/6elqaxDhlpDNb7YArXCnbxmuWjLV7FvWMAziVydaJHWnnLa5mf1LyiNpkFNZG/w+2bymRUFWKWDG4PQK93cXFf13kHhWCjGxwGRF72JSTJ54K7Mygk79omd0yqqdTxJWScrrF5lzKpyQVyXLyL0HAst1',
     password => $password,
   }
 }
