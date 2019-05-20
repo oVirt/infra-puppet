@@ -5,7 +5,7 @@ class ovirt_backup::server(
   $home_base      = '/export',
   $backup_home    = '/export/backup',
   $backup_group   = 'backup',
-  $backup_pv      = '/dev/vdb',
+  $backup_pv      = '/dev/sdb',
   $mk_backup_pv   = true,
   $backup_vg      = 'backupvg',
   $mk_backup_vg   = true,
