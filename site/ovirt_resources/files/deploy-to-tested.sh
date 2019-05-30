@@ -34,6 +34,8 @@ push_to_tested() {
     local pkg_src="${1:?}"
     local pkg_dst="${2:?}"
 
+    # cleaning ISOs
+    iso_cleanup "$pkg_dst"
     (
         cd "$pkg_src"
         find . -type d \! -name 'repodata' | tac | while read dir; do
@@ -61,6 +63,68 @@ push_to_tested() {
             fi
         done
     )
+}
+
+iso_cleanup() {
+    local max_file_age=8
+    local minimal_files_allowed=3
+    # find all non-hidden sub directories under the given path(for example: master, 4.2, 4.3)
+    list_of_sub_dirs=$(find ${1} -mindepth 1 -maxdepth 1 -type d ! -name ".*")
+
+    # if no sub-dirs were found - return
+    if test -z "$list_of_sub_dirs"; then
+        echo "no sub dirs under ${1}"
+        return
+    fi
+
+    # looping through dirs that may contain iso files
+    for dir in ${list_of_sub_dirs[@]}; do
+        # creating the absolute path
+        full_path="$dir/iso/ovirt-node-ng-installer"
+        # avoiding non-existing dirs
+        if [ ! -d $full_path ]; then
+            echo "following path does not exist: ${full_path}"
+            continue
+        fi
+        isos_matching_policy=($(find ${full_path} -type f -name "*.iso" -mtime +${max_file_age}))
+
+        # if there are no files matching the policy (no further work is needed) - continue
+        if test -z "$isos_matching_policy"; then
+            echo "no iso files matching policy under ${dir}"
+            continue
+        fi
+
+        # finding all ISOs under the given directory
+        all_isos=($(find ${full_path} -type f -name "*.iso"))
+
+        if [ ${#all_isos[@]} -lt $minimal_files_allowed ]; then
+            echo "there are less than ${minimal_files_allowed} isos  under ${full_path}"
+            continue
+        fi
+
+        #checking if the contents of the two arrays is equal
+        isos_for_deletion_str=${isos_matching_policy[@]}
+        all_isos_str=${all_isos[@]}
+        # string comparison
+        if [ "$isos_for_deletion_str" == "$all_isos_str" ]; then
+            # sorting the array lexicographically
+            IFS=$'\n' sorted=($(sort <<<"${isos_matching_policy[*]}"))
+            unset IFS
+            # whitelist the two latest images
+            unset 'sorted[${#sorted[@]}-1]'
+            unset 'sorted[${#sorted[@]}-1]'
+            to_be_deleted=("${sorted[@]}")
+        else
+            # arrays are not equal, so old isos can be deleted normally
+            to_be_deleted=("${isos_matching_policy[@]}")
+        fi
+        # removing files
+        for file in ${to_be_deleted[@]}; do
+            rm $file
+        done
+        # deleting the remaining empty dirs
+        find "$full_path" -type d -empty -delete
+    done
 }
 
 main "$@"
