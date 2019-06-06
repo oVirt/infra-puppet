@@ -3,7 +3,7 @@ class ovirt_resources::publish(
   $resources_dir = '/srv/resources',
   $incoming_dir  = '/home/jenkins/artifacts',
 ) {
-  $releng_git  = 'git://gerrit.ovirt.org/releng-tools'
+  $releng_git  = 'https://gerrit.ovirt.org/releng-tools'
   $releng_path = '/usr/local/libexec/releng-tools'
 
   include ovirt_infra::user::system::jenkins
