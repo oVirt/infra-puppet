@@ -1,4 +1,4 @@
-http://resources.ovirt.org/pub/ovirt-@VERSION@/rpm/@DIST@/
+https://resources.ovirt.org/pub/ovirt-@VERSION@/rpm/@DIST@/
 http://mirror.linux.duke.edu/ovirt/pub/ovirt-@VERSION@/rpm/@DIST@/
 http://mirrors.ibiblio.org/ovirt/pub/ovirt-@VERSION@/rpm/@DIST@/
 http://mirror.isoc.org.il/pub/ovirt/ovirt-@VERSION@/rpm/@DIST@/
