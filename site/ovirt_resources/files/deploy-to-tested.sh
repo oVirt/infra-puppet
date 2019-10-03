@@ -58,6 +58,7 @@ push_to_tested() {
                 createrepo_c \
                     --update \
                     --retain-old-md "$PUBLISH_MD_COPIES" \
+                    --compatibility \
                     --workers 8 \
                     "$pkg_dst/$dir"
             fi
