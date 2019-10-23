@@ -15,7 +15,7 @@ GEM
       json_pure
     json_pure (1.8.3)
     log4r (1.1.10)
-    minitar (0.5.4)
+    minitar (0.9)
     multi_json (1.12.1)
     multipart-post (2.0.0)
     puppet (3.8.7)
