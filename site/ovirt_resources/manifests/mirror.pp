@@ -264,4 +264,17 @@ class ovirt_resources::mirror(
     user    => $mirror_user,
   }
 
+  ssh_authorized_key { 'mirroradmin@rackspace.com':
+    ensure  => present,
+    name    => 'Mirror http://mirror.rackspace.com/ovirt/ - mirroradmin@rackspace.com',
+    key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABgQDWcQoDeK5Y4yQRRgEnMr68qv6HN0plTP3L5uCpDH8Ji0UdyUU85MT6VjaAwePq4tMW9EjP/I2BK7L6qVhWrvh76SKfnNYBwWntQ5cr3hhWTkAPwkKe6ceOqmO6F2EBiCSnXBSGM2gLaFEoZoExtRwQL3ID+VSF/oOaDuqBaZg9kvMWv2+G+AGItY7OTvoycPHqFNdqdGIUEOEIjAyTLo8F3UWmYyGeR/JNYpPJYlWMBEPUbpv6M/KU2HMT9H21yM//fAgqxgG5PsrHwTjhRbecbhG0YDHjWsRx2S6Z1+Rii6xM1ikD9NZGHTqK0e7US20iN6eZhmamUkw1og2/WBC7xDAoET5s8E3IMUw+SVGVv89JCVijqZHO6K+qGIa1JGUPV+5jD0XwBrzfjPBEqw4y6bh2cxrx5C0HvSpr1poyQQXE62l4w7WD9UoTSnAEnNk7P3ttkVbPpy37eIVKBAu4Rgq1+DBsR2b8+BpBpzHWyoe2wL1m3NThFZENeBvboxE=',
+    options => ["command=\"${rsynclog} mirror.rackspace.com/ovirt --server --sender -vrltH . ${mirror_path}pub/\"",
+                'no-port-forwarding',
+                'no-X11-forwarding',
+                'no-agent-forwarding',
+                'no-pty'],
+    type    => 'ssh-rsa',
+    user    => $mirror_user,
+  }
+
 }
