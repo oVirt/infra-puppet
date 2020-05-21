@@ -136,7 +136,7 @@ class ovirt_resources::mirror(
   ssh_authorized_key { 'maarten@vlaai':
     ensure  => present,
     name    => '"Maarten Aertsen" <maarten@snt.utwente.nl> - ftpcom@snt.utwente.nl',
-    key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDerIFETYL1uFrRjCVyy61LgQOM2GWH2xPrRIeoUe7ekgFgCo2qjlkBtELmi+2kNGqC7rcXRcQTffIfG/4LLbqcS+7GAdBjqjzkX29xkCwfxIu0B0R3XNt0UUh+C7E22e3GSmI6/C2myBfaNpbdKDuk79SDQl/OOKVpPhe88peLUc0rXcRD93vi9aphDcEhgliH3ykAqi8VubZjPZXDETDY+QCKYcFEXibh68UBkLhHb5jYxGH3qd4dPBRBLAB/hCF9B/f1fFHmDpqtFYMTQUFqwco/OIGJf68v0DWGLFJ9ABAZRCxEa3zTX3rcz2YztTwdTKvJ46GZsEcSBUv54PUL',
+    key     => 'AAAAB3NzaC1yc2EAAAADAQABAAACAQDcEujUQ3DLIGiuOCg0ZlLqZhQY/uHFw2O9cMY6SrlG11tZ0oiwk6+x8dZsBN0kAN7zd1IIOo4+E0cMYUrkiwj6dzVc/oKY9RtTCOKhmqq1tnPxKSpOXY+CZxm7e63uVx8CpVjhj/lOMnfL3jzyBbNfURsSgY+6edSkDGzy3ptaXBDlrVI4F5+2rjKI3VgflshjUUZo1Di22snnZ5zoB8tT/Q8MBMjnMtQcPqjPL/VgfbgKwFfgLOnZtXzTnAjMK14IA5XLN9PCrPtEajRM8mtesqkYSMoZ1KqKPGwZspIijKrnoYNeKjkZxZAq9xijboj4GboHxsKRxckaw686qrfpPdPHNrgtKZZNxO5RB+/tgNLBM1l0g/9rEAN2Pvytg2Ifahk20oEodCzW1qsCBWl6+4NwV8iW87rgN+AgibNg/QmEd2SKNHAhOldEPFpHQqDRHo6ZJY5XbOEepK/ti3UOzV/mQ4u1PnKpZBoqWmM9MWBOEMZP7Ems4DHR5vdAvYs8TrzgTasoOe/MkFZ9FZ31XRL4loyPU9gid06ENA+Yc9xyRssUtjNsQfCNV+enSzbMBr4FvWmSoJNoVbQyi3tj13emflBqP+rROpeG7mgol+aP49z3RW56wOS0dhFqg8AXRyp1QLld/rJXzb3UH5l7WTXhX7DCuySezxhEyi1lGw==',
     options => ["command=\"${rsynclog} snt.utwente.nl --server --sender -vrltH . ${mirror_path}pub/\"",
                 'no-port-forwarding',
                 'no-X11-forwarding',
