@@ -1,7 +1,7 @@
 # The user for Evgheni
 class ovirt_infra::user::ederevea($password = undef) {
   ovirt_infra::user { 'ederevea':
-    key      => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCkvKo7+VPy++WsFOosPNyZu6MxRTak2juGVu+xOLbsUEJruVTouDSB0cIM35lA0cT9Zx3yC3U2hzOA12B6IULQpZNeqg4xM66PlEt+Y996hWbxK5G0xlHROyP4sYBK9j4nZVXmykII90h475JUXEEAZ0JjnTwCcdUp4P89KMcsxoZNj7k+f5A8/a0817xb9Af13oWaxc+dTis/IfBabH4ozY4Z8guFmOIrlgQ1faleAo3LrTsYWrcI4hV2jjKGTQr0V3CVmYKfNTs6/i3IYfq8TvvPxoq5Pt2K9cOdq8QiaF5Qv+S9fS3bkDQc6ObBHr0x7YMBvXRkzc+30QYKw5DR',
+    key      => 'AAAAB3NzaC1yc2EAAAADAQABAAABgQDuIRn6Kw6orQQGeXgqa2JGZIvVWWzk+lnpmzZpRi0GZdKECFpuy1+LRdeUy86OGDm9MN0BIyS/Tdkg17GCDPFquDw2tyi40ZARLo6osDvnsYk6xNeFNh4i0NpHdUlsD62Sfnwbjoi3HWcTtVcB4FadQG0I8o4WYfeKoEwRZ9pxuXQkXVYg8slG8Aj3OvR/E60abcq4GWFqYM8cWsRqou3FegoCX+8aPI6ytRnhxm/GuFL0PVvXC/7zEEW+EsTmImxpULhxAkikAKNrSrxIJSiEMBBcWFZjTgvA4U0WSEiIZ0CFOwD73M5jhKDtOaHOqxvWHZIG4blI1Gn00fOAcYEbRaDYDECMI39IY+ic6cTiz4lRQa/HkjHmt3e89S6rqAeJ3JlEC4TeFLlIjUr84d/avPS6OT6JWYH31lKOuxiEqhZkoZZtmA+0OGule6hrYsOvFLGmXPYSQk7dVHaCSZyjQD7K1l/wqh4S2XOTwv6XDvkLEeHtXQci7pCj/2uantc=',
     password => $password,
   }
 }
