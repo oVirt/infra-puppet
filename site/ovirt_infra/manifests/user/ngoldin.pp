@@ -1,7 +1,6 @@
 # The user for Nadav Goldin
 class ovirt_infra::user::ngoldin($password = undef) {
   ovirt_infra::user {'ngoldin':
-    key      => 'AAAAB3NzaC1yc2EAAAADAQABAAACAQDGSfSJoMnmGtgpgTQqRtEiJOufDgtYkDobKHzN7OqA84WoKPuI0t0P2apGoAhqxdeK1QmnnoI58UUwmnjIDAaC/tSFW4MBYsHP7HUg4OO49YRSaoY3XzzE3dVqKR/pwcM3ss5rx1RYK/KZicVdRmxL5XMXYjlMNJ+xaoWy6CoLXlPF4yufj6+2iWZDol0zjzrvUujvkNOI44KIZU223hiCUxy5RH22HEFWC9IL95Hyh9l5Kxbz5syTAg7c3tJSEeJ4JXDPRp1HR1PESlXwhRFm5A4QlcHqPzj5dP8EqqEXMFclskN6YaRBRvFkwbHczwRp+dKdrpzgPDDZzTH+FiHyDJpO5rReZSsVhBccWwAZ49Q8/Jyu/JnA8r1P+g9xwbGZxGZotnbFa2WUUrcFzr7ymZxdfflvljmCd0y6cjTUrfOMu+TLj1u7VgWhaB/CEGPk4DwPw4W+MRCELFO+1gOyE9lj9OpkN8fp5dbcgWrAKl+f542DpoB1X421nDaWxV6WTbGCLnA7b2H2TB/xsaUyetSbHQ0Id5Q9YzurhGrBSk15b/jfOCNO5317IE10vWQ2296ov678mgYSmpww3BcZgtkluD9oeRRva4/fy15rNwmL8SqupgFmVV8j9MvivwWWOevEJrocwP55Lz/q6A5EkeIJuoFE1G+ZS4y2snFZiQ==',
-    password => $password,
+    ensure => absent,
   }
 }
