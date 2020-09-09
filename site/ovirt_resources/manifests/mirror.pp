@@ -277,4 +277,17 @@ class ovirt_resources::mirror(
     user    => $mirror_user,
   }
 
+  ssh_authorized_key { 'zhao_jda@massclouds.com':
+    ensure  => present,
+    name    => 'Mirror http://mirror.massclouds.com/ovirt/ - zhao_jda@massclouds.com',
+    key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDZ6qvjWVmrVbzJXbZ8+mSHfFZB30IFQRNNtJh7Sa2MUxez6YKgrG2+5QuEN/5tuCOPj1U88z4xP6xgPk/hNV/UyNVAj45LmvHxbTE+OR1GgIXJVAXE61QhYFRPPcuvZ9YOpYq3wWzPcG24X3H48TpEKgLf2Ve8AWnMVE85EeuuOX1wBhRKpANAZR85GtOv3888WQaCEbiPcJN9MO9g+PXGJ00R9u8p7FJoNF6ea1GDyxdBDUuvdhjcCfNfxxZgDJEWrECUjaD0nsSFIS/EnEUH+/BaiYk4UbJP+Vlrk8IoD7iQ8n+rryI7WJHTNL+DiTsjVG4e8hB7G7v1PGbfDz9B',
+    options => ["command=\"${rsynclog} mirror.massclouds.com --server --sender -vrltH . ${mirror_path}pub/\"",
+                'no-port-forwarding',
+                'no-X11-forwarding',
+                'no-agent-forwarding',
+                'no-pty'],
+    type    => 'ssh-rsa'.
+    user    => $mirror_user,
+  }
+
 }
