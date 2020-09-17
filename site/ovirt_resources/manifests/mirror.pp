@@ -286,7 +286,7 @@ class ovirt_resources::mirror(
                 'no-X11-forwarding',
                 'no-agent-forwarding',
                 'no-pty'],
-    type    => 'ssh-rsa'.
+    type    => 'ssh-rsa',
     user    => $mirror_user,
   }
 
