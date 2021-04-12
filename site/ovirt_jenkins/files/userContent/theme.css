@@ -1,5 +1,5 @@
 #header {
-    background-color: #030;
+    background-color: #025081;
 }
 #jenkins-head-icon {
   display: block;
@@ -7,7 +7,7 @@
   box-sizing: border-box;
   background: url(/userContent/oVirt-logo.png) no-repeat;
   width: 112px;
-  height: 28px;
+  height: 29px;
   padding-left: 80px;
   bottom: 7px;
 }
