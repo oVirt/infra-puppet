@@ -93,18 +93,10 @@ class ovirt_jenkins(
     port                  => '80',
     manage_docroot        => false,
     docroot               => false,
-    proxy_pass            => [ {
-      'path'     => '/',
-      'url'      => 'http://localhost:8080/',
-      'keywords' => ['nocanon'],
-      'params'   => {
-        'connectiontimeout' => '2400',
-        'timeout'           => '2400',
-      },
-    }, ],
-    allow_encoded_slashes => 'on',
-
+    redirect_status       => 'permanent',
+    redirect_dest         => "https://${::fqdn}",
   }
+
   firewalld_service { 'Allow HTTP':
     ensure  => 'present',
     service => 'http',
