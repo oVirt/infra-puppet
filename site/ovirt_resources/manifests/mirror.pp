@@ -290,4 +290,17 @@ class ovirt_resources::mirror(
     user    => $mirror_user,
   }
 
+  ssh_authorized_key { 'mirror-support@garr.it':
+    ensure  => present,
+    name    => 'Mirror http://ovirt.mirror.garr.it/ - mirror-support@garr.it',
+    key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDQKRbeYo066WB/JJ46Oq3wzn2dLEh0HaL6Eqh7AO7kI/KEZtF+Sly969bwHum89HOan9SgdLW2HSGQdcYqGfoQZ4+BTeRvKqg4jkCjMg63KtQacpAcj53+J+76ia7X/zUbAFuh8mH/rrNDaOL92f7x+DL65U0hcJhCNC7UoFbzmr2dgKL3e62My30GuQjfKzZTnakr12pEkE9OA6sjee+KH+TcHlmIjnzv7Dx0JNbI5fUZzm+ZIugpeeN8J0BbRrxhHUBb1xWCQ4fdrONSN4HDu6hT9sOvOfYPxoIFVb/Pt/4Z9WJOGg9p8fOBOXVeQwkscaiB6gG+CReH9JeC47sb',
+    options => ["command=\"${rsynclog} mirror.massclouds.com --server --sender -vrltH . ${mirror_path}pub/\"",
+                'no-port-forwarding',
+                'no-X11-forwarding',
+                'no-agent-forwarding',
+                'no-pty'],
+    type    => 'ssh-rsa',
+    user    => $mirror_user,
+  }
+
 }
