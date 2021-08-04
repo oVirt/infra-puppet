@@ -27,6 +27,9 @@ class ovirt_resources::apache(
   class { '::letsencrypt':
     configure_epel      => false,
     unsafe_registration => true,
+    config              => {
+      server => 'https://acme-v02.api.letsencrypt.org/directory',
+    }
   }
   package { ['python2-certbot-apache']:
     ensure => installed,
