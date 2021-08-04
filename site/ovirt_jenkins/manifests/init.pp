@@ -114,7 +114,9 @@ class ovirt_jenkins(
   class { '::letsencrypt':
     configure_epel      => false,
     unsafe_registration => true,
-    server              => 'https://acme-v02.api.letsencrypt.org/directory',
+    config              => {
+      server => 'https://acme-v02.api.letsencrypt.org/directory',
+    }
   }
   package { ['python2-certbot-apache']:
     ensure => installed,
