@@ -6,7 +6,7 @@ class ovirt_backup::rsync::client(
   $rsync_group  = 'root',
   $remote_directory = '/export/backup',
   $local_directory = '/var/backup_mirror',
-  $backup_server = 'backup.phx.ovirt.org',
+  $backup_server = 'backup-wdc.ovirt.org',
   $backup_owner  = 'rsync-backup',
 ) {
   ensure_resource('file', "${local_directory}/", {

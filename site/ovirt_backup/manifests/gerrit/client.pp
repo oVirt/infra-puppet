@@ -5,7 +5,7 @@ class ovirt_backup::gerrit::client(
   $gerrit_user   = 'gerrit2',
   $gerrit_group  = 'gerrit2',
   $gerrit_home   = '/home/gerrit2',
-  $backup_server = 'backup.phx.ovirt.org',
+  $backup_server = 'backup-wdc.ovirt.org',
   $backup_owner  = 'gerrit-backup',
 ) {
   ensure_resource('file', "${gerrit_home}/bin", {

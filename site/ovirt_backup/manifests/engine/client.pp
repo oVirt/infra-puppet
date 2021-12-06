@@ -5,7 +5,7 @@ class ovirt_backup::engine::client(
   $engine_user   = 'root',
   $engine_group  = 'root',
   $engine_backups = '/var/backups',
-  $backup_server = 'backup.phx.ovirt.org',
+  $backup_server = 'backup-wdc.ovirt.org',
   $backup_owner  = 'engine-backup',
 ) {
   ensure_resource('file', "${engine_backups}/", {
